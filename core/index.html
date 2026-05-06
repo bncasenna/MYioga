@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYioga - Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="{% url 'home' %}" class="{% if request.path == '/' %}ativo{% endif %}">Início</a>
+    <span>·</span>
+    <a href="{% url 'dashboard' %}" class="{% if request.path == '/dashboard/' %}ativo{% endif %}">Login</a>
+    <span>·</span>
+    <a href="{% url 'dashboard_aluno' %}" class="{% if request.path == '/dashboard/aluno/' %}ativo{% endif %}">Alunos</a>
+    <span>·</span>
+    <a href="{% url 'dashboard_prof' %}" class="{% if request.path == '/dashboard/prof/' %}ativo{% endif %}">Professores</a>
+    <span>·</span>
+    <a href="#" class="{% if request.path == '/quem-somos/' %}ativo{% endif %}">Quem Somos</a>
+    <span>·</span>
+    <a href="#" class="{% if request.path == '/contato/' %}ativo{% endif %}">Contato</a>
+</nav>
+
+    <main class="container">
+        <h1>Bem-vindo ao MYioga</h1>
+        <p>Escolha o tipo de acesso para entrar no seu painel.</p>
+
+        <div class="botoes-acesso">
+            <button class="botao-principal" id="btnAluno">Entrar como Aluno</button>
+            <button class="botao-principal" id="btnProf">Entrar como Professor</button>
+        </div>
+    </main>
+
+    <!-- FUNDO ESCURO -->
+    <div class="modal-overlay" id="modalOverlay">
+
+        <!-- CAIXA DO MODAL -->
+        <div class="modal-box">
+            <button class="fechar-modal" id="fecharModal">&times;</button>
+
+            <h2 id="tituloModal">Login</h2>
+
+            <form id="formLogin">
+                <label for="usuario">Usuário ou E-mail</label>
+                <input type="text" id="usuario" name="usuario" placeholder="Digite seu usuário" required>
+
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+
+                <button type="submit" class="botao-entrar">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

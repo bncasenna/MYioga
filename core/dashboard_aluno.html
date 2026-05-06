@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Aluno</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard_aluno.css' %}">
+</head>
+
+<body>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="{% url 'home' %}" class="{% if request.path == '/' %}ativo{% endif %}">Início</a>
+    <span>·</span>
+    <a href="{% url 'dashboard' %}" class="{% if request.path == '/dashboard/' %}ativo{% endif %}">Login</a>
+    <span>·</span>
+    <a href="{% url 'dashboard_aluno' %}" class="{% if request.path == '/dashboard/aluno/' %}ativo{% endif %}">Alunos</a>
+    <span>·</span>
+    <a href="{% url 'dashboard_prof' %}" class="{% if request.path == '/dashboard/prof/' %}ativo{% endif %}">Professores</a>
+    <span>·</span>
+    <a href="#" class="{% if request.path == '/quem-somos/' %}ativo{% endif %}">Quem Somos</a>
+    <span>·</span>
+    <a href="#" class="{% if request.path == '/contato/' %}ativo{% endif %}">Contato</a>
+</nav>
+
+    <div class="container">
+        <h1>Bem-vindo à área do aluno.</h1>
+
+        <a href="{% url 'dashboard' %}?tipo=aluno" class="botao-login">Fazer login</a>
+    </div>
+</body>
+</html>
