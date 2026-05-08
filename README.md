@@ -52,14 +52,13 @@ Criar uma plataforma própria para disponibilização de aulas online, fortalece
 
 ---
 
-<table border="0">
-  <tr>
-    <td align="center">
-      <img src="https://github.com/bncasenna.png" width="100px;" style="border-radius: 50%;" alt="Bianca Senna"/><br>
-      <b>Bianca Senna</b>
-    </td>
-    <td>
-      • Instrutora de Yoga<br>
-      • Desenvolvedora em formação
-    </td>
-  </tr>
+  <p align="center">
+ <img src="https://github.com/bncasenna.png" width="100px;" style="border-radius: 50%;" alt="Bianca Senna"/>
+</p>
+
+<h2 align="center">𝔅𝔦𝔞𝔫𝔠𝔞 𝔖𝔢𝔫𝔫𝔞</h2>
+<p align="center"><i>Desenvolvedora em formação</i></p>
+
+<p align="center">
+<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+</p>
