@@ -2,9 +2,9 @@
 <p align="center"><i>My Yoga Class - Full Stack application for online yoga classes</i></p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django">
-  <img src="https://img.shields.io/badge/SQL-CC2927?style=for-the-badge&logo=postgresql&logoColor=white" alt="SQL">
+  <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular">
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
 </p>
 
 ---
@@ -36,10 +36,9 @@ O sistema foi criado para centralizar:
 
 A stack principal escolhida para garantir estabilidade e escalabilidade:
 
-* **Linguagem:** Python
-* **Framework:** Django
-* **Dados:** Banco de Dados SQL
-* **Frontend:** HTML / CSS / JavaScript
+* **Frontend:** Angular v20 & TypeScript
+* **Ambiente de Execução:** Node.js
+* **Estilização & Estrutura:** HTML5 e CSS3
 
 ---
 
