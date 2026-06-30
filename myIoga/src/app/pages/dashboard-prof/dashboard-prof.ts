@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../../shared/components/header/header';
 
 @Component({
   selector: 'app-dashboard-prof',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './dashboard-prof.html',
-  styleUrl: './dashboard-prof.css',
+  styleUrls: ['./dashboard-prof.css']
 })
-export class DashboardProf {
-
-}
+export class DashboardProfComponent { }
