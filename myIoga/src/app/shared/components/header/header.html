@@ -1,14 +1,25 @@
-<app-header />
 <nav class="navbar">
-    <a routerLink="/" routerLinkActive="ativo" [routerLinkActiveOptions]="{exact: true}">Início</a>
-    <span>·</span>
-    <a routerLink="/" routerLinkActive="ativo" [routerLinkActiveOptions]="{exact: true}">Login</a>
-    <span>·</span>
-    <a routerLink="/dashboard-aluno" routerLinkActive="ativo">Alunos</a>
-    <span>·</span>
-    <a routerLink="/dashboard-prof" routerLinkActive="ativo">Professores</a>
-    <span>·</span>
-    <a routerLink="#">Quem Somos</a>
-    <span>·</span>
-    <a routerLink="#">Contato</a>
+    <div class="navLeft">
+        <a href="javascript:void(0)" class="btnLogin" (click)="abrirModalLogin()">Login</a>
+    </div>
+
+    <div class="navMid">
+        <a routerLink="/" routerLinkActive="ativo" [routerLinkActiveOptions]="{exact: true}">Início</a>
+        <span>·</span>
+        <a routerLink="#">Quem Somos</a>
+        <span>·</span>
+        <a routerLink="#">Contato</a>
+    </div>
+
+    <div class="navRight">
+        <label class="theme-switch">
+            <input type="checkbox" [checked]="isDarkMode" (change)="alternarModoNoturno()">
+            <span class="slider">
+                <span class="iconSun">☀️</span>
+                <span class="iconMoon">🌙</span>
+            </span>
+        </label>
+    </div>
 </nav>
+
+<app-login *ngIf="mostrarLogin" (fecharModal)="mostrarLogin = false"></app-login>

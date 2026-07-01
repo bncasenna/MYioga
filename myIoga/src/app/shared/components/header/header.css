@@ -1,36 +1,159 @@
 .navbar {
-    background-color: var(--corSuave);
-    padding: 18px;
-    text-align: center;
-    border-top: 4px double var(--corPrincipal);
-    border-bottom: 4px double var(--corPrincipal);
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    background-color: var(--smooth);
+    padding: 12px 24px; 
+    border-top: 4px double var(--caramelo);
+    border-bottom: 4px double var(--caramelo);
+    width: 100%;
 }
 
-.navbar a.ativo {
-    border-bottom: 2px solid #fff;
-    color: #fff;
-    padding-bottom: 3px;
+
+.navLeft {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start; 
 }
 
-.navbar a,
-.navbar .nav-btn {
-    color: var(--corPrincipal);
+.navRight {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navMid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.navMid a {
+    color: var(--caramelo);
     text-decoration: none;
     font-weight: bold;
     font-size: 1rem;
-    margin: 0 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
+    margin: 0 5px;
     transition: 0.3s ease;
 }
 
-.navbar a:hover,
-.navbar .nav-btn:hover {
-    color: var(--corBranca);
+.navMid a:hover {
+    color: var(--sand);
 }
 
-.navbar span {
-    color: var(--corHover);
+.navMid a.ativo {
+    border-bottom: 2px solid var(--caramelo);
+    color: var(--sand);
+    padding-bottom: 3px;
+}
+
+.navMid span {
+    color: var(--sand);
     font-weight: bold;
+}
+
+.btnLogin {
+    color: var(--branco) !important;
+    background-color: var(--caramelo);
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btnLogin:hover {
+    background-color: var(--green);
+    transform: translateY(-1px);
+}
+
+.btnDark {
+    background-color: var(--branco);
+    border: 1.7px solid var(--caramelo);
+    color: var(--caramelo);
+    font-size: 1.2rem;
+    padding: 6px 12px;
+    border-radius: 50%; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btnDark:hover {
+    background-color: var(--caramelo);
+    color: var(--branco);
+    transform: scale(1.08);
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 74px;
+    height: 36px;
+    user-select: none;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: var(--caramelo);
+    border: 1.7px solid var(--queimado);
+    border-radius: 34px;
+    transition: 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    overflow: hidden;
+}
+
+.theme-switch .slider::before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 3px;
+    bottom: 3.5px;
+    background-color: var(--sand);
+    border-radius: 50%;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--sombra);
+    z-index: 2;
+}
+
+
+.theme-switch input:checked + .slider {
+    background-color: var(--caramelo);
+}
+
+.theme-switch input:checked + .slider::before {
+    transform: translateX(38px);
+}
+
+.theme-switch .icon-sun, 
+.theme-switch .icon-moon {
+    font-size: 1.1rem;
+    z-index: 1;
+    transition: 0.3s;
+}
+
+
+.theme-switch input:checked + .slider .icon-sun {
+    opacity: 0.2;
+}
+.theme-switch input:not(:checked) + .slider .icon-moon {
+    opacity: 0.2;
 }

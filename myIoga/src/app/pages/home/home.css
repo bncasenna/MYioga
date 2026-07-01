@@ -1,153 +1,138 @@
-.container {
-    max-width: 900px;
-    margin: 80px auto;
+.topoSite {
     text-align: center;
-    padding: 20px;
+    padding: 30px 20px;
+    background-color: var(--light);
 }
 
-.container h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: var(--corTexto);
+.topoSite h1 {
+    font-size: 3rem;
+    color: var(--caramelo);
+    letter-spacing: 4px;
 }
 
-.container p {
+.subtextoSite {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.subtextoSite h3 {
+    font-size: 1.6rem;
+    color: var(--sand);
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.subtextoSite p {
     font-size: 1.1rem;
-    margin-bottom: 35px;
-    color: #555;
+    color: var(--graf);
 }
 
-.botoes-acesso {
+.areaCadastro {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 60px;
+    background: linear-gradient(105deg, var(--queimado), var(--sand), var(--caramelo));
+    padding: 80px 20px;
+    flex-wrap: wrap; 
 }
 
-.botao-principal {
-    background-color: var(--corPrincipal);
-    color: var(--corBranca);
-    border: none;
-    padding: 14px 28px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s ease;
-    box-shadow: var(--sombra);
-}
-
-.botao-principal:hover {
-    background-color: var(--corVerde);
-    transform: translateY(-3px);
-}
-
-/* MODAL */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.55);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    z-index: 999;
-}
-
-.modal-overlay.ativo {
-    display: flex;
-}
-
-.modal-box {
-    background-color: var(--corBranca);
-    width: 100%;
-    max-width: 420px;
+.cadastroBox {
+    background-color: var(--light);
+    padding: 35px 30px;
     border-radius: 14px;
-    padding: 30px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
-    position: relative;
-    animation: aparecer 0.25s ease;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: var(--sombra);
+    transition: 0.3s ease;
 }
 
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(-15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.cadastroBox:hover {
+    transform: translateY(-4px);
 }
 
-.fechar-modal {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    font-size: 1.8rem;
-    border: none;
-    background: none;
-    cursor: pointer;
-    color: #777;
-}
-
-.fechar-modal:hover {
-    color: #000;
-}
-
-.modal-box h2 {
-    text-align: center;
+.cadastroBox h2 {
     margin-bottom: 25px;
-    color: var(--corPrincipal);
+    color: var(--caramelo);
+    text-align: center;
+    font-size: 1.9rem;
 }
 
-.modal-box form {
-    display: flex;
-    flex-direction: column;
-}
-
-.modal-box label {
+.cadastroBox label {
+    display: block;
     margin-bottom: 6px;
     font-weight: bold;
-    color: var(--corHover);
+    color: var(--sand);
 }
 
-.modal-box input {
-    padding: 12px;
+.cadastroBox input {
+    width: 100%;
+    padding: 13px;
     margin-bottom: 18px;
-    border: 1px solid #d1b398;
+    border: 1px solid var(--smooth);
     border-radius: 8px;
-    font-size: 1rem;
     outline: none;
+    font-size: 1rem;
+    transition: 0.3s ease;
+    background-color: #fffdfb;
 }
 
-.modal-box input:focus {
-    border-color: var(--corVerde);
+.cadastroBox input:focus {
+    border-color: var(--green);
     box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
 }
 
-.botao-entrar {
-    background-color: var(--corPrincipal);
-    color: var(--corBranca);
-    border: none;
+.cadastroBox button {
+    width: 100%;
     padding: 14px;
+    background-color: var(--caramelo);
+    color: var(--branco);
+    border: none;
     border-radius: 8px;
-    font-size: 1rem;
     font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.cadastroBox button:hover {
+    background-color: var(--green);
+    transform: translateY(-2px);
+}
+
+.freeClass {
+    width: 100%;
+    max-width: 450px;
+    color: var(--branco);
+}
+
+.freeClass h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--branco);
+}
+
+.freeClass p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.btn-agendar {
+    padding: 14px 30px;
+    background-color: var(--branco);
+    color: var(--caramelo);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
     cursor: pointer;
     transition: 0.3s ease;
 }
 
-.botao-entrar:hover {
-    background-color: var(--corVerde);
-}
-
-@media (max-width: 600px) {
-    .container h1 {
-        font-size: 2rem;
-    }
-
-    .modal-box {
-        padding: 25px 20px;
-    }
+.btn-agendar:hover {
+    background-color: var(--smooth);
+    color: var(--green);
 }
