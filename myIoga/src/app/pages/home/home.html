@@ -11,21 +11,25 @@
 </section>
 
 <section class="areaCadastro">
+    <div class="Box">
+        <div class="loginBox">
+            <button class="btnLogin" (click)="abrirModalLogin()">Faça Login</button> ou,
+        </div>
+        <div class="cadastroBox">
+            <h2>Cadastre-se</h2>
+            <form>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
 
-    <div class="cadastroBox">
-        <h2>Cadastre-se</h2>
-        <form>
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+                <label for="sobrenome">Sobrenome:</label>
+                <input type="text" id="sobrenome" name="sobrenome" placeholder="Seu sobrenome" required>
 
-            <label for="sobrenome">Sobrenome:</label>
-            <input type="text" id="sobrenome" name="sobrenome" placeholder="Seu sobrenome" required>
+                <label for="data-nascimento">Data de Nascimento:</label>
+                <input type="date" id="data-nascimento" name="data-nascimento">
 
-            <label for="data-nascimento">Data de Nascimento:</label>
-            <input type="date" id="data-nascimento" name="data-nascimento">
-
-            <button type="submit">Enviar Cadastro</button>
-        </form>
+                <button type="submit">Enviar Cadastro</button>
+            </form>
+        </div>
     </div>
 
     <div class="freeClass">
@@ -43,3 +47,4 @@
     </div>
 
 </section>
+<app-login *ngIf="mostrarLogin" (fecharModal)="mostrarLogin = false"></app-login>
