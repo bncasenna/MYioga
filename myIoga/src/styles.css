@@ -3,6 +3,7 @@ html, :root {
     --light: #fffaf5;
     --smooth: #dfc3a8;
     --queimado: #cea683;
+    --peaches: #d09254;
     --caramelo: #CD853F;
     --sand: #a96c2f;
     --graf: #333333;
@@ -16,8 +17,9 @@ html.dark-theme {
     --smooth: #24292e;
     --branco: #2b3036;
     --caramelo: #a96c2ff8;
-    --queimado: #CD853F;
-    --sand: #dfc3a8;
+    --queimado: #d09254;
+    --peaches: #CD853F;
+    --sand: #e0bd9c;
     --green: #2d6a4f;
 }
 
@@ -31,4 +33,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: var(--light);
     color: var(--graf);
+}
+html {
+    scroll-behavior: smooth !important;
 }

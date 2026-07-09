@@ -10,8 +10,13 @@ import { CommonModule } from '@angular/common';
 })
 export class Login {
   @Output() fecharModal = new EventEmitter<void>();
+  @Output() alternarParaCadastro = new EventEmitter<void>(); // 👈 Adicionado este Output
 
   fechar() {
     this.fecharModal.emit();
+  }
+
+  irParaCadastro() {
+    this.alternarParaCadastro.emit(); 
   }
 }

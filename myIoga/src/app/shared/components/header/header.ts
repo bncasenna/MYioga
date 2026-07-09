@@ -8,16 +8,20 @@ import { Login } from '../login/login';
   standalone: true,
   imports: [CommonModule, RouterModule, Login],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrls: ['./header.css']
 })
 export class Header {
   mostrarLogin = false;
-  isDarkMode = false; 
+  isDarkMode = true; 
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
+      
+      if (savedTheme === 'light') {
+        this.isDarkMode = false;
+        document.documentElement.classList.remove('dark-theme');
+      } else {
         this.isDarkMode = true;
         document.documentElement.classList.add('dark-theme');
       }
@@ -34,7 +38,7 @@ export class Header {
     if (isPlatformBrowser(this.platformId)) {
       if (this.isDarkMode) {
         document.documentElement.classList.add('dark-theme');
-        localStorage.setItem('theme', 'dark'); // Salva a escolha do usuário
+        localStorage.setItem('theme', 'dark');
       } else {
         document.documentElement.classList.remove('dark-theme');
         localStorage.setItem('theme', 'light');

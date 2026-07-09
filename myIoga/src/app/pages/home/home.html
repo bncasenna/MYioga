@@ -5,6 +5,25 @@
 </header>
 
 <section class="subtextoSite">
+    <section class="carrossel-container">
+        <div class="carrossel-slides">
+            <div class="slide" *ngFor="let img of imagensCarrossel; let i = index" [class.ativo]="i === slideAtual">
+                <img [src]="img" alt="Prática de Yoga - MYioga">
+            </div>
+        </div>
+
+        <button class="seta esquerda" (click)="slideAnterior()">&#10094;</button>
+        <button class="seta direita" (click)="proximoSlide()">&#10095;</button>
+
+        <div class="indicadores">
+            <span *ngFor="let img of imagensCarrossel; let i = index" 
+                class="ponto" 
+                [class.ponto-ativo]="i === slideAtual"
+                (click)="irParaSlide(i)">
+            </span>
+        </div>
+    </section>
+    
     <h3>
         Faça Yoga em casa com aulas online e desbloqueie video-aulas para sua jornada conosco!
     </h3>
@@ -13,7 +32,7 @@
 <section class="areaCadastro">
     <div class="Box">
         <div class="loginBox">
-            <button class="btnLogin" (click)="abrirModalLogin()">Faça Login</button> ou,
+            <button class="btnLogin" (click)="abrirModalLogin()">Faça Login</button><span> ou, </span>
         </div>
         <div class="cadastroBox">
             <h2>Cadastre-se</h2>
@@ -27,7 +46,7 @@
                 <label for="data-nascimento">Data de Nascimento:</label>
                 <input type="date" id="data-nascimento" name="data-nascimento">
 
-                <button type="submit">Enviar Cadastro</button>
+                <button type="button" (click)="abrirModalCadastro()">Enviar Cadastro</button>
             </form>
         </div>
     </div>
@@ -45,6 +64,26 @@
         </p>
         <button type="button" class="btn-agendar">Agendar</button>
     </div>
-
 </section>
-<app-login *ngIf="mostrarLogin" (fecharModal)="mostrarLogin = false"></app-login>
+
+<div id="about"> 
+    <app-about></app-about>
+</div>
+
+<div id="contato">
+    <app-contato></app-contato>
+</div>
+
+<app-footer></app-footer>
+
+<app-login 
+  *ngIf="mostrarLogin" 
+  (fecharModal)="fecharModais()" 
+  (alternarParaCadastro)="abrirModalCadastro()">
+</app-login>
+
+<app-cadastro 
+  *ngIf="mostrarCadastro" 
+  (fecharModal)="fecharModais()" 
+  (alternarParaLogin)="abrirModalLogin()">
+</app-cadastro>
