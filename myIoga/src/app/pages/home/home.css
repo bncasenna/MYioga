@@ -29,68 +29,43 @@
     color: var(--graf);
 }
 
-.Box {
-    flex-direction: column;
+.loginCadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    gap: 15px;
+    width: 100%;
+    padding-bottom: 20px;
 }
 
-.areaCadastro {
+.loginCadastro p {
+    margin: 0;
+    color: var(--green); 
+    font-size: 1.1rem;
+}
+
+.areaAgendamento {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 150px;
+    gap: 50px;
     background: linear-gradient(115deg,  var(--caramelo), var(--sand), 
     var(--queimado),var(--peaches), var(--sand), var(--caramelo));
     padding: 80px 20px;
     flex-wrap: wrap;
 }
 
-.cadastroBox {
-    background-color: var(--light);
-    padding: 35px 30px;
-    border-radius: 14px;
+.areaAgendamento span {
+    color: var(--branco);
+    font-size: 1.1rem;
+    margin: 0 10px;
+}
+
+
+.btnCadastro {
     width: 100%;
-    max-width: 360px;
-    box-shadow: var(--sombra);
-    transition: 0.3s ease;
-}
+    max-width: 140px;
 
-.cadastroBox:hover {
-    transform: translateY(-4px);
-}
-
-.cadastroBox h2 {
-    margin-bottom: 25px;
-    color: var(--caramelo);
-    text-align: center;
-    font-size: 1.9rem;
-}
-
-.cadastroBox label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: bold;
-    color: var(--sand);
-}
-
-.cadastroBox input {
-    width: 100%;
-    padding: 13px;
-    margin-bottom: 18px;
-    border: 1px solid var(--smooth);
-    border-radius: 8px;
-    outline: none;
-    font-size: 1rem;
-    transition: 0.3s ease;
-    background-color: var(--light);
-}
-
-.cadastroBox input:focus {
-    border-color: var(--green);
-    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
-}
-
-.cadastroBox button {
-    width: 100%;
     padding: 14px;
     background-color: var(--caramelo);
     color: var(--branco);
@@ -102,20 +77,16 @@
     transition: 0.4s ease;
 }
 
-.cadastroBox button:hover {
+.btnCadastro:hover {
     background-color: var(--green);
     transform: translateY(-2px);
 }
 
-.loginBox {
-    margin-bottom: 20px;
-    color: var(--branco);
-    text-align: center;
-}
-
-.btnLogin {
+.btnLogin { 
     width: 100%;
-    padding: 14px;
+    max-width: 140px;
+
+    padding: 14px 25px;
     background-color: var(--caramelo);
     color: var(--branco);
     border: none;
@@ -124,6 +95,7 @@
     font-size: 1rem;
     cursor: pointer;
     transition: 0.4s ease;
+    gap: 10px;
 }
 
 .btnLogin:hover {
@@ -131,25 +103,10 @@
     transform: translateY(-2px);
 }
 
-.freeClass {
-    width: 100%;
-    max-width: 450px;
-    color: var(--branco);
-}
-
-.freeClass h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: var(--branco);
-}
-
-.freeClass p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
 .btn-agendar {
+    width: 100%;
+    max-width: 200px;
+
     padding: 14px 30px;
     background-color: var(--branco);
     color: var(--caramelo);
@@ -158,13 +115,46 @@
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: 0.4s ease;
 }
 
 .btn-agendar:hover {
     background-color: var(--smooth);
     color: var(--green);
+    transform: translateY(-2px);
 }
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.freeClass {
+    width: 100%;
+    max-width: 500px;
+    color: var(--branco);
+    gap: 5px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.freeClass h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--branco);
+    
+}
+
+.freeClass p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
 
 .carrossel-container {
     position: relative;
@@ -247,4 +237,39 @@
 .ponto:hover, .ponto-ativo {
     background-color: var(--caramelo);
     transform: scale(1.2);
+}
+
+.btn-voltar-topo {
+    
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--caramelo);
+    color: var(--light);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    box-shadow: var(--sombra);
+    z-index: 99;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.btn-voltar-topo.visivel {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.btn-voltar-topo:hover {
+    background-color: var(--green);
+    transform: scale(1.1);
 }

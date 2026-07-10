@@ -1,1 +1,111 @@
-<app-header />
+
+<div class="dash-container">
+  <aside class="dash-sidebar">
+    <div class="logo-area">
+      <h2>MYIOGA <span>Prof</span></h2>
+    </div>
+    <nav class="side-menu">
+      <button [class.ativo]="abaAtiva === 'agenda'" (click)="mudarAba('agenda')">📅 Agenda de Aulas</button>
+      <button [class.ativo]="abaAtiva === 'upload'" (click)="mudarAba('upload')">📹 Upload de Aulas</button>
+      <button [class.ativo]="abaAtiva === 'recados'" (click)="mudarAba('recados')">📢 Postar Recados</button>
+      <button [class.ativo]="abaAtiva === 'mensagens'" (click)="mudarAba('mensagens')">✉️ Mail-Box</button>
+      <button [class.ativo]="abaAtiva === 'perfil'" (click)="mudarAba('perfil')">👤 Editar Perfil</button>
+    </nav>
+    <button class="btn-sair" (click)="sair()">Sair</button>
+  </aside>
+
+  <main class="dash-content">
+    
+    <section *ngIf="abaAtiva === 'agenda'" class="fade-in">
+      <h3>Aulas Agendadas por Alunos</h3>
+      <div class="grid-cards">
+        <div class="card-agenda" *ngFor="let aula of aulasAgendadas">
+          <div class="status-badge">Confirmado</div>
+          <h4>{{aula.aluno}}</h4>
+          <p><strong>📅 Data:</strong> {{aula.data}}</p>
+          <p><strong>⏰ Horário:</strong> {{aula.horario}}</p>
+          <p><strong>🧘 Estilo:</strong> {{aula.estilo}}</p>
+        </div>
+      </div>
+    </section>
+
+    <section *ngIf="abaAtiva === 'upload'" class="fade-in">
+      <h3>Disponibilizar Nova Video-Aula</h3>
+      <div class="form-box">
+        <label>Título da Aula:</label>
+        <input type="text" #tituloVideo placeholder="Ex: Yoga para Iniciantes - Respiração">
+        
+        <label>Link do Vídeo (Embed / YouTube / Vimeo):</label>
+        <input type="text" #urlVideo placeholder="Ex: https://www.youtube.com/embed/...">
+        
+        <button class="btn-acao" (click)="postarVideo(tituloVideo.value, urlVideo.value); tituloVideo.value=''; urlVideo.value=''">
+          Publicar Aula para os Alunos
+        </button>
+      </div>
+
+      <h4 class="sub-titulo">Aulas Publicadas</h4>
+      <div class="lista-itens">
+        <div class="item-postado" *ngFor="let v of videosPostados">
+          <span>📹 <strong>{{v.titulo}}</strong> ({{v.data}})</span>
+        </div>
+      </div>
+    </section>
+
+    <section *ngIf="abaAtiva === 'recados'" class="fade-in">
+      <h3>Mural de Recados da Turma</h3>
+      <div class="form-box">
+        <label>Mensagem / Aviso Importante:</label>
+        <textarea #textoRecado placeholder="Digite o aviso que aparecerá no mural dos alunos..."></textarea>
+        
+        <button class="btn-acao" (click)="postarRecado(textoRecado.value); textoRecado.value=''">
+          Postar no Mural
+        </button>
+      </div>
+
+      <h4 class="sub-titulo">Recados Recentes</h4>
+      <div class="lista-itens">
+        <div class="item-postado" *ngFor="let r of recadosPostados">
+          <p>{{r.texto}} <br><small>🕒 {{r.data}}</small></p>
+        </div>
+      </div>
+    </section>
+
+    <section *ngIf="abaAtiva === 'mensagens'" class="fade-in">
+      <h3>Mensagens Privadas</h3>
+      <div class="mailbox-container">
+        <div class="lista-alunos-chat">
+          <div class="aluno-chat-item active">👤 Mariana Silva</div>
+          <div class="aluno-chat-item">👤 Carlos Eduardo</div>
+        </div>
+        <div class="janela-chat">
+          <div class="historico-chat">
+            <div class="msg recebida">Professor, tive dúvidas na postura do guerreiro II.</div>
+            <div class="msg enviada">Olá Mariana! Na próxima aula focaremos no alinhamento do seu quadril para ajudar.</div>
+          </div>
+          <div class="input-chat-box">
+            <input type="text" placeholder="Escreva uma mensagem privada...">
+            <button>Enviar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section *ngIf="abaAtiva === 'perfil'" class="fade-in">
+      <h3>Meu Perfil Profissional</h3>
+      <div class="form-box perfil-grid">
+        <div>
+          <label>Nome Completo:</label>
+          <input type="text" value="Professora Renata Caramelo">
+          <label>E-mail de Contato:</label>
+          <input type="email" value="prof@myioga.com">
+        </div>
+        <div>
+          <label>Especialidades / Bio:</label>
+          <textarea style="height: 115px;">Instrutora de Hatha Yoga e Vinyasa Flow. Apaixonada por alinhar corpo, mente e espírito.</textarea>
+        </div>
+      </div>
+      <button class="btn-acao" style="max-width: 200px;">Salvar Alterações</button>
+    </section>
+
+  </main>
+</div>

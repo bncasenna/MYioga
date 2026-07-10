@@ -32,6 +32,8 @@
 .modal-box h1 a {
     text-decoration: none;
     color: var(--green);
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .modal-box h2 {
@@ -117,6 +119,7 @@
 .fechar-modal:hover {
     color: var(--caramelo);
 }
+
 
 @keyframes aparecer {
     from {

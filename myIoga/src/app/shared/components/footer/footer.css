@@ -18,3 +18,17 @@
 .footer a:hover {
     color: var(--smooth);
 }
+
+.assinatura {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 5px;
+    font-size: 0.8rem;
+}
+
+.assinatura img {
+    width: 4%; 
+    height: auto; 
+}

@@ -12,12 +12,40 @@
             <label for="sobrenome">Sobrenome:</label>
             <input type="text" id="sobrenome" name="sobrenome" placeholder="Seu sobrenome" required>
 
+            <label for="CPF">CPF:</label>
+            <input type="number" id="CPF" name="CPF" placeholder="Seu CPF" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Seu email" required>
+
             <label for="data-nascimento">Data de Nascimento:</label>
             <input type="date" id="data-nascimento" name="data-nascimento">
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" placeholder="Sua senha" required>
+
+            <label class="titulo-grupo"></label>
+            <div class="radio-group">
+                <label class="radio-label">
+                    <input type="radio" id="perfil-aluno" name="perfil" value="aluno" required>
+                    <span>Aluno</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" id="perfil-prof" name="perfil" value="professor" required>
+                    <span>Professor</span>
+                </label>
+            </div>
+
+            <div class="lgpd-group">
+                <input type="checkbox" id="lgpd-check" name="aceitaLGPD" required>
+                <label for="lgpd-check">
+                    Estou ciente e concordo com o processamento dos meus dados para fins de cadastro na plataforma MYIOGA, em conformidade com a <strong>LGPD</strong>.
+                </label>
+            </div>
 
             <button type="submit" class="botao-entrar">Enviar Cadastro</button>
         </form>
 
-        <h1>Já tem uma conta? <a href="javascript:void(0)" (click)="irParaLogin()">Faça Login</a>.</h1>
+        <h1>Já tem uma conta? <a (click)="irParaLogin()">Faça Login</a>.</h1>
     </div>
 </div>

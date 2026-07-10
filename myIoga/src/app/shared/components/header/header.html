@@ -1,6 +1,8 @@
 <nav class="navbar">
     <div class="navLeft">
-        <a href="javascript:void(0)" class="btnLogin" (click)="abrirModalLogin()">Login</a>
+        <a class="btnLogin" (click)="abrirModalLogin()">
+            Login
+        </a>
     </div>
 
     <div class="navMid">
@@ -22,4 +24,14 @@
     </div>
 </nav>
 
-<app-login *ngIf="mostrarLogin" (fecharModal)="mostrarLogin = false"></app-login>
+<app-login 
+  *ngIf="mostrarLogin" 
+  (fecharModal)="fecharModais()" 
+  (alternarParaCadastro)="abrirModalCadastro()">
+</app-login>
+
+<app-cadastro 
+  *ngIf="mostrarCadastro" 
+  (fecharModal)="fecharModais()" 
+  (alternarParaLogin)="abrirModalLogin()">
+</app-cadastro>

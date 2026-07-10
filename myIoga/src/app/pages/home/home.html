@@ -29,40 +29,39 @@
     </h3>
 </section>
 
-<section class="areaCadastro">
-    <div class="Box">
-        <div class="loginBox">
-            <button class="btnLogin" (click)="abrirModalLogin()">Faça Login</button><span> ou, </span>
-        </div>
-        <div class="cadastroBox">
-            <h2>Cadastre-se</h2>
-            <form>
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
-
-                <label for="sobrenome">Sobrenome:</label>
-                <input type="text" id="sobrenome" name="sobrenome" placeholder="Seu sobrenome" required>
-
-                <label for="data-nascimento">Data de Nascimento:</label>
-                <input type="date" id="data-nascimento" name="data-nascimento">
-
-                <button type="button" (click)="abrirModalCadastro()">Enviar Cadastro</button>
-            </form>
-        </div>
+<section class="areaLoginCadastro">
+    <div class="loginCadastro">
+        <button class="btnLogin" (click)="abrirModalLogin()">
+                Faça Login
+            </button>
+            <p>
+                ou
+            </p>
+        <button class="btnCadastro" (click)="abrirModalCadastro()">
+            Cadastre-se
+        </button>
     </div>
+</section>
 
+<section class="areaAgendamento">
     <div class="freeClass">
-        <h2>Agende sua Aula Gratuita</h2>
+        <h2>Agende sua Aula Experimental!</h2>
+        <p>
+            A sua primeira aula de Yoga é gratuita! Experimente e descubra 
+            como a Yoga pode transformar sua rotina. 
+        </p>
         <p>
             A prática da Yoga melhora a flexibilidade, reduz o estresse
             e fortalece o corpo e a mente. Mesmo poucos minutos por dia
             ajudam a melhorar a respiração, postura e foco.
         </p>
-        <p>
-            Experimente uma aula gratuita conosco e descubra
-            como a Yoga pode transformar sua rotina.
-        </p>
-        <button type="button" class="btn-agendar">Agendar</button>
+
+        <section class="btn">
+            <button type="button" class="btn-agendar">
+                Agendar
+            </button>
+        </section>
+        
     </div>
 </section>
 
@@ -74,7 +73,9 @@
     <app-contato></app-contato>
 </div>
 
-<app-footer></app-footer>
+<a href="#" class="btn-voltar-topo" [class.visivel]="mostrarSeta">
+  ▲
+</a>
 
 <app-login 
   *ngIf="mostrarLogin" 
@@ -87,3 +88,5 @@
   (fecharModal)="fecharModais()" 
   (alternarParaLogin)="abrirModalLogin()">
 </app-cadastro>
+
+<app-footer></app-footer>

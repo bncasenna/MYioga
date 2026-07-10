@@ -1,1 +1,93 @@
-<app-header />
+<div class="dash-container">
+  <aside class="dash-sidebar">
+    <div class="logo-area">
+      <h2>MYIOGA <span>Aluno</span></h2>
+    </div>
+    <nav class="side-menu">
+      <button [class.ativo]="abaAtiva === 'mural'" (click)="mudarAba('mural')">📢 Mural de Recados</button>
+      <button [class.ativo]="abaAtiva === 'aulas'" (click)="mudarAba('aulas')">📹 Video-Aulas</button>
+      <button [class.ativo]="abaAtiva === 'agendar'" (click)="mudarAba('agendar')">📅 Agendar Aula</button>
+      <button [class.ativo]="abaAtiva === 'mensagens'" (click)="mudarAba('mensagens')">✉️ Conversar com Prof</button>
+    </nav>
+    <button class="btn-sair" (click)="sair()">Sair</button>
+  </aside>
+
+  <main class="dash-content">
+    
+    <section *ngIf="abaAtiva === 'mural'" class="fade-in">
+      <h3>Mural de Avisos da Turma</h3>
+      
+      <div class="lista-itens" *ngIf="recados.length > 0; else semRecados">
+        <div class="card-recado" *ngFor="let r of recados">
+          <div class="autor-badge">Professora</div>
+          <p class="texto-recado">{{r.texto}}</p>
+          <small class="data-postagem">🕒 Postado em {{r.data}}</small>
+        </div>
+      </div>
+      <ng-template #semRecados>
+        <p class="aviso-vazio">Nenhum recado importante no mural por enquanto. Namastê!</p>
+      </ng-template>
+    </section>
+
+    <section *ngIf="abaAtiva === 'aulas'" class="fade-in">
+      <h3>Suas Video-Aulas Práticas</h3>
+      
+      <div class="grid-videos" *ngIf="videos.length > 0; else semVideos">
+        <div class="card-video" *ngFor="let v of videos">
+          <div class="video-placeholder">
+            <span>📹 Vídeo Disponível</span>
+            </div>
+          <div class="video-info">
+            <h4>{{v.titulo}}</h4>
+            <small>Liberado em: {{v.data}}</small>
+            <button class="btn-assistir">Assistir Aula</button>
+          </div>
+        </div>
+      </div>
+      <ng-template #semVideos>
+        <p class="aviso-vazio">Nenhuma video-aula publicada pelo professor ainda.</p>
+      </ng-template>
+    </section>
+
+    <section *ngIf="abaAtiva === 'agendar'" class="fade-in">
+      <h3>Agendar Nova Aula Individual</h3>
+      <div class="form-box">
+        <label for="data-aula">Escolha a Data:</label>
+        <input type="date" id="data-aula" #dataAula>
+        
+        <label for="hora-aula">Escolha o Horário:</label>
+        <select id="hora-aula" #horaAula>
+          <option value="07:00">07:00 - Manhã Energética</option>
+          <option value="08:00">08:00 - Vinyasa Flow</option>
+          <option value="18:00">18:00 - Hatha Relaxamento</option>
+          <option value="19:30">19:30 - Meditação e Respiração</option>
+        </select>
+
+        <label for="estilo-yoga">Estilo de Preferência:</label>
+        <input type="text" id="estilo-yoga" #estiloYoga placeholder="Ex: Hatha, Vinyasa, Yin Yoga">
+        
+        <button class="btn-acao" (click)="solicitarAgendamento(dataAula.value, horaAula.value, estiloYoga.value)">
+          Confirmar Agendamento com o Professor
+        </button>
+      </div>
+    </section>
+
+    <section *ngIf="abaAtiva === 'mensagens'" class="fade-in">
+      <h3>Mensagem Direta com o Professor</h3>
+      <div class="mailbox-container">
+        <div class="janela-chat">
+          <div class="historico-chat">
+            <div class="msg recebida">Olá! Use este espaço para tirar dúvidas sobre posturas ou relatar dificuldades.</div>
+            <div class="msg enviada">Professor, tive dúvidas na postura do guerreiro II.</div>
+            <div class="msg recebida">Olá Mariana! Na próxima aula focaremos no alinhamento do seu quadril para ajudar.</div>
+          </div>
+          <div class="input-chat-box">
+            <input type="text" placeholder="Escreva sua dúvida em privado para o instrutor...">
+            <button>Enviar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
