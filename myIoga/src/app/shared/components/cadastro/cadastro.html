@@ -12,9 +12,10 @@
             <label for="sobrenome">Sobrenome:</label>
             <input type="text" id="sobrenome" name="sobrenome" placeholder="Seu sobrenome" required>
 
-            <label for="CPF">CPF:</label>
-            <input type="number" id="CPF" name="CPF" placeholder="Seu CPF" required>
-
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" formControlName="cpf" placeholder="Seu CPF" maxlength="11" 
+            inputmode="numeric" (keydown)="bloquearLetras($event)" (input)="filtrarApenasNumeros($event)" required>
+            
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" placeholder="Seu email" required>
 
@@ -28,11 +29,11 @@
             <div class="radio-group">
                 <label class="radio-label">
                     <input type="radio" id="perfil-aluno" name="perfil" value="aluno" required>
-                    <span>Aluno</span>
+                    <span> Aluno</span>
                 </label>
                 <label class="radio-label">
                     <input type="radio" id="perfil-prof" name="perfil" value="professor" required>
-                    <span>Professor</span>
+                    <span> Professor</span>
                 </label>
             </div>
 

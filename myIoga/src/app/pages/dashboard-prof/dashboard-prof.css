@@ -1,40 +1,105 @@
 .dash-container {
     display: flex;
     min-height: 100vh;
-    background-color: var(--light);
+    background-color: var(--graf); 
     font-family: sans-serif;
+    transition: background-color 0.3s ease;
 }
 
 /* --- SIDEBAR --- */
 .dash-sidebar {
     width: 260px;
-    background-color: var(--graf);
+    background-color: var(--sand); 
     color: var(--branco);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 30px 20px;
     box-shadow: var(--sombra);
+    flex-shrink: 0;
+    
+    position: fixed;
+    left: -260px;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+    transition: left 0.3s ease-in-out;
+    
+}
+
+.dash-sidebar.active {
+    left: 0;
+}
+
+.sidebar-topo {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 25px;
+    margin-top: 40px;
+}
+
+.logo-sidebar {
+    width: 60px;
+    height: auto;
 }
 
 .logo-area h2 {
-    color: var(--caramelo);
-    font-size: 1.8rem;
+    color: var(--graf);
+    font-size: 1.6rem;
     text-align: center;
-    margin-bottom: 40px;
+    margin: 0;
 }
 
 .logo-area h2 span {
-    color: var(--light);
-    font-size: 1rem;
+    color: var(--smooth);
+    font-size: 0.9rem;
     display: block;
+}
+
+/* --- ÁREA DO PERFIL --- */
+.profile-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 20px;
+}
+
+.avatar-container {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--caramelo);
+    margin-bottom: 10px;
+    background-color: var(--light);
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.prof-name {
+    color: var(--graf);
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-align: center;
 }
 
 .side-menu {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    flex-grow: 1;
 }
 
 .side-menu button {
@@ -51,33 +116,51 @@
 
 .side-menu button:hover, .side-menu button.ativo {
     background-color: var(--caramelo);
-    color: var(--light);
+    color: var(--branco);
     font-weight: bold;
 }
 
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ⚠️ MODIFICADO: Removido o antigo .wrapper-switch que ficava dentro do rodapé da sidebar */
+
 .btn-sair {
-    background-color: #d9534f;
-    color: white;
+    width: 100%;
+    max-width: 140px;
+
+    padding: 14px;
+    background-color: var(--caramelo);
+    color: var(--branco);
     border: none;
-    padding: 12px;
     border-radius: 8px;
-    cursor: pointer;
     font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.btn-sair:hover {
+    background-color: var(--green);
+    transform: translateY(-2px);
 }
 
 /* --- ÁREA DE CONTEÚDO --- */
 .dash-content {
     flex-grow: 1;
-    padding: 40px;
+    padding: 40px 40px 40px 80px; 
     overflow-y: auto;
-    color: var(--graf);
+    color: var(--branco); 
 }
 
 .dash-content h3 {
     font-size: 2rem;
     color: var(--caramelo);
     margin-bottom: 30px;
-    border-bottom: 2px solid var(--smooth);
+    border-bottom: 2px solid var(--queimado);
     padding-bottom: 10px;
 }
 
@@ -89,13 +172,13 @@
 }
 
 .card-agenda {
-    background-color: var(--branco);
-    border: 1px solid var(--smooth);
+    background-color: var(--caramelo); 
+    border: 1px solid var(--queimado);
     border-radius: 12px;
     padding: 20px;
     width: 280px;
     position: relative;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
 }
 
 .status-badge {
@@ -103,7 +186,7 @@
     top: 15px;
     right: 15px;
     background-color: var(--green);
-    color: var(--light);
+    color: var(--branco);
     font-size: 0.75rem;
     padding: 4px 8px;
     border-radius: 20px;
@@ -119,14 +202,15 @@
 .card-agenda p { 
     margin: 6px 0; 
     font-size: 0.95rem; 
+    color: var(--smooth);
 }
 
 .form-box {
-    background-color: var(--branco);
+    background-color: var(--queimado);
     padding: 25px;
     border-radius: 12px;
-    border: 1px solid var(--smooth);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid var(--sand);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
 }
 
 .form-box label { 
@@ -140,16 +224,16 @@
     width: 100%; 
     padding: 12px; 
     margin-bottom: 18px;
-    border: 1px solid var(--smooth); 
+    border: 1px solid var(--sand); 
     border-radius: 8px; 
     outline: none;
-    background-color: var(--light); 
-    color: var(--graf);
+    background-color: var(--graf); 
+    color: var(--branco);
 }
 
 .btn-acao {
     background-color: var(--caramelo); 
-    color: var(--light);
+    color: var(--branco);
     border: none; 
     padding: 14px 20px; 
     font-weight: bold;
@@ -175,38 +259,41 @@
 }
 
 .item-postado { 
-    background: var(--branco); 
+    background: var(--queimado); 
     padding: 15px; 
     border-radius: 8px; 
     border-left: 5px solid var(--green); 
+    color: var(--branco);
 }
 
 /* --- MAILBOX --- */
 .mailbox-container { 
     display: flex; 
     height: 400px; 
-    background: var(--branco); 
+    background: var(--caramelo); 
     border-radius: 12px; 
-    border: 1px solid var(--smooth); 
-    overflow: hidden; 
+    border: 1px solid var(--sand); 
+    overflow: hidden;
 }
 
 .lista-alunos-chat { 
     width: 200px; 
-    border-right: 1px solid var(--smooth); 
-    background: var(--light); 
+    border-right: 1px solid var(--sand); 
+    background: var(--graf); 
 }
 
 .aluno-chat-item { 
     padding: 15px; 
-    border-bottom: 1px solid var(--smooth); 
+    border-bottom: 1px solid var(--sand); 
     cursor: pointer; 
+    color: var(--smooth);
 }
 
 .aluno-chat-item.active { 
-    background: var(--branco); 
+    background: var(--queimado); 
     border-left: 4px solid var(--caramelo); 
     font-weight: bold; 
+    color: var(--branco);
 }
 
 .janela-chat { 
@@ -233,13 +320,14 @@
 }
 
 .msg.recebida { 
-    background: var(--light); 
+    background: var(--graf); 
+    color: var(--branco);
     align-self: flex-start; 
 }
 
 .msg.enviada { 
     background: var(--caramelo); 
-    color: var(--light); 
+    color: var(--branco); 
     align-self: flex-end; 
 }
 
@@ -253,7 +341,9 @@
     flex-grow: 1; 
     padding: 12px; 
     border-radius: 8px; 
-    border: 1px solid var(--smooth); 
+    border: 1px solid var(--sand); 
+    background-color: var(--graf);
+    color: var(--branco);
 }
 
 .input-chat-box button { 
@@ -271,9 +361,169 @@
     gap: 20px; 
 }
 
-/* Animação de transição */
-.fade-in { animation: fadeIn 0.3s ease; }
-@keyframes fadeIn { from { opacity: 0; 
-    transform: translateY(10px); } 
-        to { opacity: 1; transform: translateY(0); } 
+/* --- MENU HAMBURGUER (ESTÁVEL EM QUALQUER TELA) --- */
+.menu-hamburger {
+    display: flex; 
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 42px;
+    height: 42px;
+    background-color: var(--graf);
+    border: 1px solid var(--caramelo);
+    border-radius: 8px;
+    z-index: 1000;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+}
+
+.menu-hamburger span {
+    width: 24px;
+    height: 3px;
+    background-color: var(--caramelo);
+    transition: 0.3s ease;
+    border-radius: 2px;
+}
+
+.menu-hamburger.aberto span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.menu-hamburger.aberto span:nth-child(2) {
+    opacity: 0;
+}
+.menu-hamburger.aberto span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- ⚠️ ATUALIZADO: Removido fundos e bordas extras para o switch ficar idêntico ao do Header --- */
+.wrapper-switch-fixo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001; /* Mantém acima de tudo na tela */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Removido padding, background-color e box-shadow extras daqui */
+}
+
+/* --- ⚠️ ATUALIZADO: Removido também o override de cor de fundo do modo claro --- */
+html.light-theme .wrapper-switch-fixo {
+    /* Deixado vazio para não criar blocos ou bordas indesejadas ao redor do switch */
+}
+
+/* --- SEU SWITCH ORIGINAL (Mantido 100% intacto, igual ao do Header) --- */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    user-select: none;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: var(--graf); 
+    border: 1.7px solid var(--queimado);
+    border-radius: 34px;
+    transition: 0.4s ease;
+}
+
+.theme-switch .slider::before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3.5px;
+    bottom: 2.5px;
+    background-color: var(--sand);
+    border-radius: 50%;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--sombra);
+}
+
+.theme-switch input:checked + .slider {
+    background-color: var(--caramelo);
+}
+
+.theme-switch input:checked + .slider::before {
+    transform: translateX(30px);
+    background-color: var(--light);
+}
+
+/* --- CHAVEAMENTO DO MODO CLARO (INVERSÃO COMPLETA) --- */
+html.light-theme .dash-container {
+    background-color: var(--light);
+}
+
+/* 🆕 ADICIONADO: Ajuste do fundo do container fixo do switch quando o modo claro estiver ativo */
+html.light-theme .wrapper-switch-fixo {
+    background-color: var(--branco);
+    border: 1px solid var(--smooth);
+}
+
+html.light-theme .dash-content {
+    color: var(--graf);
+}
+
+html.light-theme .form-box,
+html.light-theme .card-agenda,
+html.light-theme .item-postado,
+html.light-theme .mailbox-container {
+    background-color: var(--branco);
+    border-color: var(--smooth);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+html.light-theme .card-agenda h4 {
+    color: var(--caramelo);
+}
+
+html.light-theme .card-agenda p {
+    color: var(--graf);
+}
+
+html.light-theme .form-box input,
+html.light-theme .form-box textarea,
+html.light-theme .lista-alunos-chat,
+html.light-theme .input-chat-box input,
+html.light-theme .msg.recebida {
+    background-color: var(--light);
+    color: var(--graf);
+    border-color: var(--smooth);
+}
+
+html.light-theme .aluno-chat-item {
+    color: var(--graf);
+    border-bottom-color: var(--smooth);
+}
+
+html.light-theme .aluno-chat-item.active {
+    background: var(--branco);
+    color: var(--caramelo);
+}
+
+html.light-theme .menu-hamburger {
+    background-color: var(--branco);
+}
+
+/* Animação */
+.fade-in { 
+    animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
 }

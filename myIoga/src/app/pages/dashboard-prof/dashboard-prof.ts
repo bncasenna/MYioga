@@ -11,12 +11,21 @@ import { Router } from '@angular/router';
 })
 export class DashboardProf implements OnInit {
   abaAtiva: string = 'agenda';
+  sidebarAtiva: boolean = false;
+  modoClaro: boolean = false;
 
-  // Banco de dados simulado para a agenda do professor
+  professorLogado = {
+    nome: 'Indra Carvalho',
+    foto: '/img/indra.png' // 
+  };
+
   aulasAgendadas = [
-    { aluno: 'Mariana Silva', data: '14/07/2026', horario: '08:00', estilo: 'Vinyasa Flow' },
-    { aluno: 'Carlos Eduardo', data: '15/07/2026', horario: '19:30', estilo: 'Hatha Yoga' },
-    { aluno: 'Beatriz Costa', data: '17/07/2026', horario: '07:00', estilo: 'Yoga Meditação' }
+    { aluno: 'Marcelo Dias', data: '14/07/2026', horario: '08:00', estilo: 'Vinyasa Flow' },
+    { aluno: 'Coaty', data: '15/07/2026', horario: '19:30', estilo: 'Hatha Yoga' },
+    { aluno: 'Nicholas', data: '17/07/2026', horario: '07:00', estilo: 'Vinyasa Flow' },
+    { aluno: 'Luan Estrela', data: '17/07/2026', horario: '07:00', estilo: 'Yoga Meditação' },
+    { aluno: 'Gabriel Beer', data: '17/07/2026', horario: '07:00', estilo: 'Hatha Yoga' },
+    { aluno: 'Ayran Bufalo', data: '17/07/2026', horario: '07:00', estilo: 'Yoga Meditação' }
   ];
 
   videosPostados: any[] = [];
@@ -26,36 +35,65 @@ export class DashboardProf implements OnInit {
 
   ngOnInit() {
     this.carregarDados();
+    this.inicializarTemaApropriado();
+  }
+
+  inicializarTemaApropriado() {
+    const temaSalvo = localStorage.getItem('theme');
+    if (temaSalvo === 'light') {
+      this.modoClaro = true;
+      document.documentElement.classList.remove('light-theme');
+      document.documentElement.classList.add('dark-theme');
+    } else {
+      this.modoClaro = false;
+      document.documentElement.classList.add('light-theme');
+      document.documentElement.classList.remove('dark-theme');
+    }
+  }
+
+  atualizarParaAvatarPadrao() {
+    const caminhoFallback = '/img/indra.png'; 
+    if (this.professorLogado.foto !== caminhoFallback) {
+      this.professorLogado.foto = caminhoFallback;
+    }
   }
 
   mudarAba(aba: string) {
     this.abaAtiva = aba;
+    this.sidebarAtiva = false;
   }
 
-  // Publica a aula e envia o sinal para o "banco de dados" compartilhado
+  toggleSidebar() {
+    this.sidebarAtiva = !this.sidebarAtiva;
+  }
+
+  toggleTema() {
+    this.modoClaro = !this.modoClaro;
+    if (this.modoClaro) {
+      document.documentElement.classList.remove('dark-theme');
+      document.documentElement.classList.add('light-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.classList.remove('light-theme');
+      document.documentElement.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
   postarVideo(titulo: string, url: string) {
     if (!titulo || !url) return alert('Preencha todos os campos do vídeo!');
-    
-    const novoVideo = {
-      titulo: titulo,
-      url: url,
-      data: new Date().toLocaleDateString('pt-BR')
-    };
-
+    const novoVideo = { titulo, url, data: new Date().toLocaleDateString('pt-BR') };
     this.videosPostados.unshift(novoVideo);
     localStorage.setItem('@myioga:videos', JSON.stringify(this.videosPostados));
     alert('Sucesso! Vídeo-aula disponibilizada no painel dos alunos.');
   }
 
-  //  mural de recados compartilhado
   postarRecado(texto: string) {
     if (!texto) return alert('Digite alguma mensagem antes de postar!');
-
     const novoRecado = {
-      texto: texto,
+      texto,
       data: new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})
     };
-
     this.recadosPostados.unshift(novoRecado);
     localStorage.setItem('@myioga:recados', JSON.stringify(this.recadosPostados));
     alert('Sucesso! Recado publicado no Mural do Aluno.');
@@ -64,7 +102,6 @@ export class DashboardProf implements OnInit {
   carregarDados() {
     const vSalvos = localStorage.getItem('@myioga:videos');
     const rSalvos = localStorage.getItem('@myioga:recados');
-    
     if (vSalvos) this.videosPostados = JSON.parse(vSalvos);
     if (rSalvos) this.recadosPostados = JSON.parse(rSalvos);
   }

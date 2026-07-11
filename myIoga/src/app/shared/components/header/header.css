@@ -9,7 +9,6 @@
     width: 100%;
 }
 
-
 .navLeft {
     flex: 1;
     display: flex;
@@ -91,6 +90,8 @@
     transform: scale(1.08);
 }
 
+/* --- APENAS ESTA PARTE ABAIXO FOI ALTERADA PARA PADRONIZAR AS CORES --- */
+
 .theme-switch {
     position: relative;
     display: inline-block;
@@ -109,7 +110,7 @@
     position: absolute;
     cursor: pointer;
     inset: 0;
-    background-color: var(--caramelo);
+    background-color: var(--graf); /* 🔄 MODIFICADO: Cor alterada de var(--caramelo) para var(--graf) */
     border: 1.7px solid var(--queimado);
     border-radius: 34px;
     transition: 0.4s ease;
@@ -134,22 +135,21 @@
     z-index: 2;
 }
 
-
 .theme-switch input:checked + .slider {
     background-color: var(--caramelo);
 }
 
 .theme-switch input:checked + .slider::before {
     transform: translateX(30px);
+    background-color: var(--light); /* 🔄 MODIFICADO: Adicionado para a bolinha interna ficar clara ao marcar */
 }
 
 .theme-switch .icon-sun, 
 .theme-switch .icon-moon {
-    font-size: 0.9rem;
+    font-size: 0.5rem;
     z-index: 1;
     transition: 0.3s;
 }
-
 
 .theme-switch input:checked + .slider .icon-sun {
     opacity: 0.2;

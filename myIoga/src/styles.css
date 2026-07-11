@@ -36,4 +36,28 @@ body {
 }
 html {
     scroll-behavior: smooth !important;
+    scrollbar-color: var(--caramelo) transparent;
+    scrollbar-width: thin;
+}
+
+/* ==========================================================================
+   BARRA DE ROLAGEM 
+   ========================================================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--caramelo);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--queimado);
 }

@@ -273,3 +273,11 @@
     background-color: var(--green);
     transform: scale(1.1);
 }
+
+.logo {
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    margin: 0 auto;
+    right: 10%;
+}
