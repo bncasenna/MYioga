@@ -3,6 +3,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Login } from '../login/login';
 import { Cadastro } from "../cadastro/cadastro";
+import { ThemeSwitch } from '../theme-switch/theme-switch'; // Ajuste o caminho se necessário
 
 @Component({
   selector: 'app-header',
@@ -12,21 +13,18 @@ import { Cadastro } from "../cadastro/cadastro";
   styleUrls: ['./header.css']
 })
 export class Header {
+alternarModoNoturno() {
+throw new Error('Method not implemented.');
+}
   mostrarLogin = false;
+  mostrarCadastro = false;
   isDarkMode = true; 
-mostrarCadastro: any;
 
-constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       const savedTheme = localStorage.getItem('theme');
-      
-      if (savedTheme === 'light') {
-        this.isDarkMode = false;
-        document.documentElement.classList.remove('dark-theme');
-      } else {
-        this.isDarkMode = true;
-        document.documentElement.classList.add('dark-theme');
-      }
+      this.isDarkMode = savedTheme !== 'light';
+      this.atualizarClasseTema();
     }
   }
 
@@ -45,17 +43,21 @@ constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.mostrarCadastro = false;
   }
 
-  alternarModoNoturno() {
-    this.isDarkMode = !this.isDarkMode;
-
+  receberAlternanciaTema(switchModoClaro: boolean) {
+    this.isDarkMode = !switchModoClaro;
     if (isPlatformBrowser(this.platformId)) {
-      if (this.isDarkMode) {
-        document.documentElement.classList.add('dark-theme');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.documentElement.classList.remove('dark-theme');
-        localStorage.setItem('theme', 'light');
-      }
+      localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
+      this.atualizarClasseTema();
+    }
+  }
+
+  private atualizarClasseTema() {
+    if (this.isDarkMode) {
+      document.documentElement.classList.add('dark-theme');
+      document.documentElement.classList.remove('light-theme');
+    } else {
+      document.documentElement.classList.add('light-theme');
+      document.documentElement.classList.remove('dark-theme');
     }
   }
 }

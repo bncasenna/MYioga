@@ -4,36 +4,48 @@
     background-color: var(--graf); 
     font-family: sans-serif;
     transition: background-color 0.3s ease;
+    overflow-x: hidden;
 }
 
 /* --- SIDEBAR --- */
 .dash-sidebar {
-    width: 260px;
+    width: 0;
     background-color: var(--sand); 
     color: var(--branco);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 30px 20px;
+    padding: 30px 0;
     box-shadow: var(--sombra);
     flex-shrink: 0;
-    
-    position: fixed;
-    left: -260px;
-    top: 0;
-    bottom: 0;
+    overflow: hidden;
     z-index: 999;
-    transition: left 0.3s ease-in-out;
+    transition: left 0.3s ease-in-out, 
+    padding 0.3s ease-in-out;
     
 }
 
 .dash-sidebar.active {
-    left: 0;
+    width: 260px;
+    padding: 30px 20px;
+    box-shadow: var(--sombra);
+}
+
+.linha-divisoria {
+    width: 100%;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 5px 0 15px 0;
+}
+
+html.light-theme .linha-divisoria {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-topo {
     display: flex;
     flex-direction: column;
+    width: 220px;
 }
 
 .logo-area {
@@ -68,7 +80,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px 0 20px 0;
+    padding: 0 0 20px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     margin-bottom: 20px;
 }
@@ -124,13 +136,13 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 220px;
 }
 
-/* ⚠️ MODIFICADO: Removido o antigo .wrapper-switch que ficava dentro do rodapé da sidebar */
 
 .btn-sair {
     width: 100%;
-    max-width: 140px;
+    max-width: 220px;
 
     padding: 14px;
     background-color: var(--caramelo);
@@ -153,7 +165,8 @@
     flex-grow: 1;
     padding: 40px 40px 40px 80px; 
     overflow-y: auto;
-    color: var(--branco); 
+    color: var(--branco);
+    transition: padding 0.3s ease;
 }
 
 .dash-content h3 {
@@ -179,6 +192,8 @@
     width: 280px;
     position: relative;
     box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease;
 }
 
 .status-badge {
@@ -211,6 +226,8 @@
     border-radius: 12px;
     border: 1px solid var(--sand);
     box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease;
 }
 
 .form-box label { 
@@ -264,6 +281,7 @@
     border-radius: 8px; 
     border-left: 5px solid var(--green); 
     color: var(--branco);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* --- MAILBOX --- */
@@ -274,6 +292,8 @@
     border-radius: 12px; 
     border: 1px solid var(--sand); 
     overflow: hidden;
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease;
 }
 
 .lista-alunos-chat { 
@@ -361,7 +381,7 @@
     gap: 20px; 
 }
 
-/* --- MENU HAMBURGUER (ESTÁVEL EM QUALQUER TELA) --- */
+/* --- MENU HAMBURGUER --- */
 .menu-hamburger {
     display: flex; 
     position: fixed;
@@ -399,24 +419,17 @@
     transform: translateY(-8px) rotate(-45deg);
 }
 
-/* --- ⚠️ ATUALIZADO: Removido fundos e bordas extras para o switch ficar idêntico ao do Header --- */
 .wrapper-switch-fixo {
     position: fixed;
     top: 20px;
-    right: 20px;
-    z-index: 1001; /* Mantém acima de tudo na tela */
+    right: 50px;
+    z-index: 1001; 
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Removido padding, background-color e box-shadow extras daqui */
 }
 
-/* --- ⚠️ ATUALIZADO: Removido também o override de cor de fundo do modo claro --- */
-html.light-theme .wrapper-switch-fixo {
-    /* Deixado vazio para não criar blocos ou bordas indesejadas ao redor do switch */
-}
 
-/* --- SEU SWITCH ORIGINAL (Mantido 100% intacto, igual ao do Header) --- */
 .theme-switch {
     position: relative;
     display: inline-block;
@@ -463,12 +476,11 @@ html.light-theme .wrapper-switch-fixo {
     background-color: var(--light);
 }
 
-/* --- CHAVEAMENTO DO MODO CLARO (INVERSÃO COMPLETA) --- */
+/* --- CHAVEAMENTO DO MODO CLARO --- */
 html.light-theme .dash-container {
     background-color: var(--light);
 }
 
-/* 🆕 ADICIONADO: Ajuste do fundo do container fixo do switch quando o modo claro estiver ativo */
 html.light-theme .wrapper-switch-fixo {
     background-color: var(--branco);
     border: 1px solid var(--smooth);
@@ -503,6 +515,8 @@ html.light-theme .msg.recebida {
     background-color: var(--light);
     color: var(--graf);
     border-color: var(--smooth);
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease, color 0.3s ease;
 }
 
 html.light-theme .aluno-chat-item {

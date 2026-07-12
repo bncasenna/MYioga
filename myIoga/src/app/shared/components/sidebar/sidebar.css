@@ -1,0 +1,149 @@
+:host {
+    width: 0; /* Começa zerada */
+    padding: 30px 0; /* Sem padding lateral inicial */
+    background-color: var(--sand); 
+    color: var(--branco);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: none;
+    flex-shrink: 0;
+    overflow: hidden; /* Esconde o conteúdo interno quando fechada */
+    z-index: 999;
+    transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+/* --- Quando a propriedade [class.active] for verdadeira no componente pai --- */
+:host(.active) {
+    width: 260px;
+    padding: 30px 20px;
+    box-shadow: var(--sombra);
+}
+
+/* --- LINHA DIVISÓRIA ACIMA DA FOTO --- */
+.linha-divisoria {
+    width: 100%;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 5px 0 15px 0;
+}
+
+html.light-theme .linha-divisoria {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* --- CONTEÚDO INTERNO DA SIDEBAR --- */
+.sidebar-topo {
+    display: flex;
+    flex-direction: column;
+    width: 220px; /* Mantém os itens firmes durante a animação */
+}
+
+.logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 25px;
+    margin-top: 40px;
+}
+
+.logo-sidebar {
+    width: 60px;
+    height: auto;
+}
+
+.logo-area h2 {
+    color: var(--graf);
+    font-size: 1.6rem;
+    text-align: center;
+    margin: 0;
+}
+
+/* --- ÁREA DO PERFIL --- */
+.profile-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 20px;
+}
+
+.avatar-container {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--caramelo);
+    margin-bottom: 10px;
+    background-color: var(--light);
+}
+
+.avatar-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.prof-name {
+    color: var(--graf);
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* --- MENU DE BOTÕES --- */
+.side-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Aplica o estilo diretamente nos botões passados pelo pai */
+.side-menu ::ng-deep button {
+    background: none;
+    border: none;
+    color: var(--smooth);
+    text-align: left;
+    padding: 14px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    width: 100%;
+}
+
+.side-menu ::ng-deep button:hover, 
+.side-menu ::ng-deep button.ativo {
+    background-color: var(--caramelo);
+    color: var(--branco);
+    font-weight: bold;
+}
+
+/* --- RODAPÉ --- */
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 220px;
+}
+
+.btn-sair {
+    width: 100%;
+    max-width: 140px;
+    padding: 14px;
+    background-color: var(--caramelo);
+    color: var(--branco);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.btn-sair:hover {
+    background-color: var(--green);
+    transform: translateY(-2px);
+}

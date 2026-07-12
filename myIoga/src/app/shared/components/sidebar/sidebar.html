@@ -1,0 +1,23 @@
+<div class="sidebar-topo">
+  <div class="logo-area">
+    <img class="logo-sidebar" src="img/logomarca.svg" alt="MYIOGA Logo">
+    <h2>MYIOGA</h2>
+  </div>
+
+  <hr class="linha-divisoria">
+
+  <div class="profile-area">
+    <div class="avatar-container">
+      <img [src]="usuario?.foto" alt="Foto de Perfil" (error)="avatarPadrao()">
+    </div>
+    <span class="prof-name">{{ prefixo }} {{ usuario?.nome }}</span>
+  </div>
+
+  <nav class="side-menu">
+    <ng-content select="[menu-itens]"></ng-content>
+  </nav>
+</div>
+
+<div class="sidebar-footer">
+  <button class="btn-sair" (click)="aoSair.emit()">Sair</button>
+</div>

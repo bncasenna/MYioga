@@ -5,46 +5,45 @@
 
         <h2>Cadastre-se</h2>
 
-        <form id="formCadastro">
+        <form [formGroup]="cadastroForm" (ngSubmit)="submeterCadastro()" id="formCadastro">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+            <input type="text" id="nome" formControlName="nome" placeholder="Seu nome">
 
             <label for="sobrenome">Sobrenome:</label>
-            <input type="text" id="sobrenome" name="sobrenome" placeholder="Seu sobrenome" required>
+            <input type="text" id="sobrenome" formControlName="sobrenome" placeholder="Seu sobrenome">
 
             <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" formControlName="cpf" placeholder="Seu CPF" maxlength="11" 
-            inputmode="numeric" (keydown)="bloquearLetras($event)" (input)="filtrarApenasNumeros($event)" required>
+            <input type="text" id="cpf" formControlName="cpf" placeholder="Seu CPF (somente números)" maxlength="11" 
+                   inputmode="numeric" (keydown)="bloquearLetras($event)" (input)="filtrarApenasNumeros($event)">
             
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Seu email" required>
+            <input type="email" id="email" formControlName="email" placeholder="Seu email">
 
             <label for="data-nascimento">Data de Nascimento:</label>
-            <input type="date" id="data-nascimento" name="data-nascimento">
+            <input type="date" id="data-nascimento" formControlName="dataNascimento">
 
             <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" placeholder="Sua senha" required>
+            <input type="password" id="senha" formControlName="senha" placeholder="Sua senha">
 
-            <label class="titulo-grupo"></label>
             <div class="radio-group">
                 <label class="radio-label">
-                    <input type="radio" id="perfil-aluno" name="perfil" value="aluno" required>
+                    <input type="radio" id="perfil-aluno" formControlName="perfil" value="aluno">
                     <span> Aluno</span>
                 </label>
                 <label class="radio-label">
-                    <input type="radio" id="perfil-prof" name="perfil" value="professor" required>
+                    <input type="radio" id="perfil-prof" formControlName="perfil" value="professor">
                     <span> Professor</span>
                 </label>
             </div>
 
             <div class="lgpd-group">
-                <input type="checkbox" id="lgpd-check" name="aceitaLGPD" required>
+                <input type="checkbox" id="lgpd-check" formControlName="aceitaLGPD">
                 <label for="lgpd-check">
                     Estou ciente e concordo com o processamento dos meus dados para fins de cadastro na plataforma MYIOGA, em conformidade com a <strong>LGPD</strong>.
                 </label>
             </div>
 
-            <button type="submit" class="botao-entrar">Enviar Cadastro</button>
+            <button type="submit" class="botao-entrar" [disabled]="cadastroForm.invalid">Enviar Cadastro</button>
         </form>
 
         <h1>Já tem uma conta? <a (click)="irParaLogin()">Faça Login</a>.</h1>

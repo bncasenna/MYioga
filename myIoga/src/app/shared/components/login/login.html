@@ -6,33 +6,44 @@
         <h2>Login</h2>
 
         <form id="formLogin" [formGroup]="loginForm" (ngSubmit)="submeterLogin()">
-            <label for="usuario">
-                Usuário ou E-mail
-            </label>
+            <label for="usuario">Usuário ou E-mail</label>
+            <input 
+                type="text" 
+                id="usuario" 
+                formControlName="email" 
+                placeholder="Digite seu e-mail (ex: aluno@myioga.com)" 
+                required>
             
-            <input type="text" id="usuario" name="usuario" formControlName="email" placeholder="Digite seu usuário" required>
+            <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="erro-validacao">
+                <small *ngIf="loginForm.get('email')?.errors?.['required']">O e-mail é obrigatório.</small>
+                <small *ngIf="loginForm.get('email')?.errors?.['email']">Insira um e-mail válido.</small>
+            </div>
 
-            <label for="senha">
-                Senha
-            </label>
+            <label for="senha">Senha</label>
+            <input 
+                type="password" 
+                id="senha" 
+                formControlName="senha" 
+                placeholder="Digite sua senha" 
+                required>
             
-            <input type="password" id="senha" name="senha" formControlName="senha" placeholder="Digite sua senha" required>
+            <div *ngIf="loginForm.get('senha')?.touched && loginForm.get('senha')?.invalid" class="erro-validacao">
+                <small *ngIf="loginForm.get('senha')?.errors?.['required']">A senha é obrigatória.</small>
+                <small *ngIf="loginForm.get('senha')?.errors?.['minlength']">A senha deve ter no mínimo 6 caracteres.</small>
+            </div>
 
-            <button type="submit" class="botao-entrar">
+            <button type="submit" class="botao-entrar" [disabled]="loginForm.invalid">
                 Entrar
             </button>
         </form>
         
         <h1>
             Não tem uma conta? 
-            <a (click)="irParaCadastro()">
-                Cadastre-se
-            </a>.
+            <a (click)="irParaCadastro()">Cadastre-se</a>.
         </h1>
 
-        <button class="recuperar">
-            esqueceu sua senha
+        <button type="button" class="recuperar" (click)="alert('Funcionalidade de recuperação em desenvolvimento.')">
+            Esqueceu sua senha?
         </button>
-
     </div>
 </div>

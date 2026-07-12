@@ -1,276 +1,414 @@
-.dash-container {
+/* --- COMPONENTIZAÇÃO DA SIDEBAR NO CONTAINER --- */
+app-sidebar {
     display: flex;
-    min-height: 100vh;
-    background-color: var(--light);
-    font-family: sans-serif;
+    flex-shrink: 0;
+    transition: all 0.3s ease-in-out;
 }
 
-/* --- SIDEBAR --- */
-.dash-sidebar {
-    width: 260px;
+/* --- MENU HAMBURGUER (Idêntico ao do Professor) --- */
+.menu-hamburger {
+    display: flex; 
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 42px;
+    height: 42px;
     background-color: var(--graf);
-    color: var(--branco);
-    display: flex;
+    border: 1px solid var(--caramelo);
+    border-radius: 8px;
+    z-index: 1000;
+    cursor: pointer;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 30px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu-hamburger span {
+    width: 24px;
+    height: 3px;
+    background-color: var(--caramelo);
+    transition: 0.3s ease;
+    border-radius: 2px;
+}
+
+.menu-hamburger.aberto span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+.menu-hamburger.aberto span:nth-child(2) {
+    opacity: 0;
+}
+.menu-hamburger.aberto span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- SWITCH DE TEMA FLUTUANTE (Mapeado do Professor) --- */
+.wrapper-switch-fixo {
+    position: fixed;
+    top: 20px;
+    right: 50px;
+    z-index: 1001; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    user-select: none;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-switch .slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: var(--graf); 
+    border: 1.7px solid var(--queimado);
+    border-radius: 34px;
+    transition: 0.4s ease;
+}
+
+.theme-switch .slider::before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3.5px;
+    bottom: 2.5px;
+    background-color: var(--sand);
+    border-radius: 50%;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: var(--sombra);
 }
 
-.logo-area h2 {
-    color: var(--caramelo);
-    font-size: 1.8rem;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.logo-area h2 span {
-    color: var(--light);
-    font-size: 1rem;
-    display: block;
-}
-
-.side-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex-grow: 1;
-}
-
-.side-menu button {
-    background: none;
-    border: none;
-    color: var(--smooth);
-    text-align: left;
-    padding: 14px 18px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: 0.3s ease;
-}
-
-.side-menu button:hover, .side-menu button.ativo {
+.theme-switch input:checked + .slider {
     background-color: var(--caramelo);
-    color: var(--light);
-    font-weight: bold;
 }
 
-.btn-sair {
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
+.theme-switch input:checked + .slider::before {
+    transform: translateX(30px);
+    background-color: var(--light);
 }
 
-/* --- ÁREA DE CONTEÚDO --- */
+/* --- CONTAINER E CONTEÚDO BASE --- */
+.dash-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--graf); 
+    font-family: sans-serif;
+    transition: background-color 0.3s ease;
+    overflow-x: hidden;
+}
+
 .dash-content {
     flex-grow: 1;
-    padding: 40px;
+    padding: 40px 40px 40px 80px; 
     overflow-y: auto;
-    color: var(--graf);
+    color: var(--branco); 
+    transition: padding 0.3s ease, background-color 0.3s ease;
 }
 
 .dash-content h3 {
     font-size: 2rem;
     color: var(--caramelo);
     margin-bottom: 30px;
-    border-bottom: 2px solid var(--smooth);
+    border-bottom: 2px solid var(--queimado);
     padding-bottom: 10px;
 }
 
-/* --- MURAL E RECADOS --- */
+/* --- MURAL DE RECADOS --- */
 .card-recado {
-    background-color: var(--branco);
-    padding: 20px;
+    background-color: var(--caramelo);
+    border: 1px solid var(--queimado);
     border-radius: 12px;
-    border-left: 5px solid var(--caramelo);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    padding: 20px;
     margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
     position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .autor-badge {
     position: absolute;
     top: 15px;
-    right: 15px;
-    background-color: var(--sand);
+    right: 20px;
+    background-color: var(--green);
     color: var(--branco);
     font-size: 0.75rem;
-    padding: 3px 8px;
-    border-radius: 10px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
 }
 
-.texto-recado { font-size: 1.1rem; 
-    line-height: 1.5; 
-    margin: 0 0 10px 0; 
+.texto-recado {
+    margin: 10px 0;
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
-.data-postagem { color: var(--sand); 
+.data-postagem {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    transition: color 0.3s ease;
 }
 
-.aviso-vazio { color: var(--sand); 
-    font-style: italic; 
-    font-size: 1.1rem; 
-}
-
-.grid-videos { display: flex; 
-    gap: 20px; 
-    flex-wrap: wrap; 
+/* --- GRID DE VÍDEOS --- */
+.grid-videos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .card-video {
-    background: var(--branco); 
-    border-radius: 12px; 
+    background-color: var(--queimado);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
     overflow: hidden;
-    width: 280px; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
-    border: 1px solid var(--smooth);
-}
-.video-placeholder {
-    height: 160px; 
-    background-color: var(--graf); 
-    color: var(--light);
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    font-weight: bold;
-}
-.video-info { padding: 15px; }
-.video-info h4 { 
-    margin: 0 0 5px 0; 
-    color: var(--graf); 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.video-info small { 
-    color: var(--sand); 
-    display: block; 
-    margin-bottom: 15px; 
+.video-placeholder {
+    background-color: var(--graf);
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sand);
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.video-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.video-info h4 {
+    margin: 0;
+    color: var(--branco);
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.video-info small {
+    color: var(--smooth);
+    transition: color 0.3s ease;
 }
 
 .btn-assistir {
-    background-color: var(--green); 
-    color: white; 
+    background-color: var(--caramelo);
+    color: var(--branco);
     border: none;
-    padding: 10px; 
-    width: 100%; 
-    border-radius: 6px; 
-    font-weight: bold; 
-    cursor: pointer; 
-    transition: 0.3s;
-}
-.btn-assistir:hover { 
-    background-color: var(--caramelo); 
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
+.btn-assistir:hover {
+    background-color: var(--green);
+}
 
+/* --- FORMULÁRIO DE AGENDAMENTO --- */
 .form-box {
-    background-color: var(--branco); 
-    padding: 25px; 
+    background-color: var(--queimado);
+    padding: 25px;
     border-radius: 12px;
-    border: 1px solid var(--smooth); 
+    border: 1px solid var(--sand);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
     max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
-.form-box label { 
-    display: block; 
-    font-weight: bold; 
-    margin-bottom: 8px; 
-    color: var(--sand); }
+
+.form-box label {
+    font-weight: bold;
+    color: var(--sand);
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
 .form-box input, .form-box select {
-    width: 100%; 
-    padding: 12px; 
-    margin-bottom: 18px;
-    border: 1px solid var(--smooth); 
-    border-radius: 8px; 
+    background-color: var(--graf);
+    border: 1px solid var(--sand);
+    color: var(--branco);
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
     outline: none;
-    background-color: var(--light); 
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-acao {
+    background-color: var(--caramelo);
+    color: var(--branco);
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-acao:hover {
+    background-color: var(--green);
+}
+
+/* --- MAILBOX / CHAT DIRETO --- */
+.mailbox-container {
+    display: flex;
+    height: 400px;
+    background: var(--queimado);
+    border-radius: 12px;
+    border: 1px solid var(--sand);
+    overflow: hidden;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.janela-chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.historico-chat {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.msg {
+    max-width: 70%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.msg.recebida {
+    background-color: var(--graf);
+    color: var(--branco);
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.msg.enviada {
+    background-color: var(--caramelo);
+    color: var(--branco);
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+.input-chat-box {
+    display: flex;
+    padding: 15px;
+    background-color: var(--queimado);
+    border-top: 1px solid var(--sand);
+    gap: 10px;
+    transition: background-color 0.3s ease, border-top-color 0.3s ease;
+}
+
+.input-chat-box input {
+    flex: 1;
+    background-color: var(--graf);
+    border: 1px solid var(--sand);
+    color: var(--branco);
+    padding: 12px;
+    border-radius: 6px;
+    outline: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.input-chat-box button {
+    background-color: var(--green);
+    color: var(--branco);
+    border: none;
+    padding: 0 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* --- ANIMAÇÃO E AVISOS --- */
+.fade-in { animation: fadeIn 0.3s ease; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.aviso-vazio { color: var(--smooth); font-style: italic; margin-top: 20px; }
+
+
+/* ==========================================================================
+   🆕 INCREMENTADO: CHAVEAMENTO COMPLETO DO MODO CLARO DO ALUNO 
+   ========================================================================== */
+html.light-theme .dash-container {
+    background-color: var(--light);
+}
+
+html.light-theme .dash-content {
     color: var(--graf);
 }
-.btn-acao {
-    background-color: var(--caramelo); 
-    color: var(--light); 
-    border: none;
-    padding: 14px 20px; 
-    font-weight: bold; 
-    border-radius: 8px; 
-    cursor: pointer; 
-    width: 100%;
-}
-.btn-acao:hover { 
-    background-color: var(--green); 
+
+html.light-theme .menu-hamburger {
+    background-color: var(--branco);
 }
 
-
-.mailbox-container { 
-    display: flex; 
-    height: 400px; 
-    background: var(--branco); 
-    border-radius: 12px; 
-    border: 1px solid var(--smooth); 
-    overflow: hidden; 
+/* Transiciona todos os blocos internos criados para o aluno */
+html.light-theme .card-recado,
+html.light-theme .card-video,
+html.light-theme .form-box,
+html.light-theme .mailbox-container,
+html.light-theme .input-chat-box {
+    background-color: var(--branco);
+    border-color: var(--smooth);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.janela-chat { 
-    flex-grow: 1; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between; 
-    padding: 20px; 
+html.light-theme .video-placeholder {
+    background-color: var(--light);
+    color: var(--caramelo);
 }
 
-.historico-chat { 
-    flex-grow: 1; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 10px; 
-    overflow-y: auto; 
+html.light-theme .video-info h4,
+html.light-theme .form-box label {
+    color: var(--graf);
 }
 
-.msg { 
-    padding: 10px 14px; 
-    border-radius: 12px; 
-    max-width: 70%; 
-    font-size: 0.95rem; 
+html.light-theme .video-info small,
+html.light-theme .data-postagem {
+    color: var(--smooth);
 }
 
-.msg.recebida { 
-    background: var(--light); 
-    align-self: flex-start; 
+html.light-theme .form-box input, 
+html.light-theme .form-box select,
+html.light-theme .input-chat-box input,
+html.light-theme .msg.recebida {
+    background-color: var(--light);
+    color: var(--graf);
+    border-color: var(--smooth);
 }
-
-.msg.enviada { 
-    background: var(--caramelo); 
-    color: var(--light); 
-    align-self: flex-end; 
-}
-
-.input-chat-box { 
-    display: flex; 
-    gap: 10px; 
-    margin-top: 15px; 
-}
-
-.input-chat-box input { 
-    flex-grow: 1; 
-    padding: 12px; 
-    border-radius: 8px; 
-    border: 1px solid var(--smooth); 
-}
-
-.input-chat-box button { 
-    background: var(--green); 
-    color: white; 
-    border: none; 
-    padding: 0 20px; 
-    border-radius: 8px; 
-    cursor: pointer; 
-}
-
-.fade-in { 
-    animation: fadeIn 0.3s ease; 
-}
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } 
-    to { opacity: 1; transform: translateY(0); } }

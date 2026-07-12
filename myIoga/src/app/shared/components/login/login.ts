@@ -11,9 +11,13 @@ import { Router } from '@angular/router';
   styleUrl: './login.css'
 })
 export class Login {
+alert(arg0: string) {
+throw new Error('Method not implemented.');
+}
   @Output() fecharModal = new EventEmitter<void>();
   @Output() alternarParaCadastro = new EventEmitter<void>();
 
+  // Formulário Reativo estruturado e validado de acordo com as boas práticas do Angular
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', [Validators.required, Validators.minLength(6)])
@@ -21,35 +25,33 @@ export class Login {
 
   constructor(private router: Router) {}
 
-  fechar() {
+  fechar(): void {
     this.fecharModal.emit();
   }
 
-  irParaCadastro() {
+  irParaCadastro(): void {
     this.alternarParaCadastro.emit();
   }
 
-  submeterLogin() {
+  submeterLogin(): void {
     if (this.loginForm.valid) {
       const emailDigitado = this.loginForm.value.email;
       const senhaDigitada = this.loginForm.value.senha;
       
+      // Credenciais mockadas para a simulação de escopo do projeto
       if (emailDigitado === 'aluno@myioga.com' && senhaDigitada === '123456') {
         this.fechar(); 
         this.router.navigate(['/dashboard-aluno']); 
       } 
-      
       else if (emailDigitado === 'prof@myioga.com' && senhaDigitada === '123456') {
         this.fechar(); 
         this.router.navigate(['/dashboard-prof']); 
       } 
-      
       else {
-        alert('Credenciais inválidas! \n\nPara Aluno use: aluno@myioga.com \nPara Professor use: prof@myioga.com \nSenha padrão: 123456');
+        alert('Credenciais inválidas! Use aluno@myioga.com ou prof@myioga.com com a senha 123456.');
       }
-
     } else {
-      alert('Por favor, preencha os campos corretamente antes de enviar.');
+      this.loginForm.markAllAsTouched(); // Exibe os erros visualmente caso o usuário force o envio
     }
   }
 }

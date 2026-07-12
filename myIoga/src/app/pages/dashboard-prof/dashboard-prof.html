@@ -1,39 +1,24 @@
-<button class="menu-hamburger" (click)="toggleSidebar()" 
-[class.aberto]="sidebarAtiva">
+<button class="menu-hamburger" (click)="toggleSidebar()" [class.aberto]="sidebarAtiva">
   <span></span>
   <span></span>
   <span></span>
 </button>
 
 <div class="dash-container">
-  <aside class="dash-sidebar" [class.active]="sidebarAtiva">
+  
+  <app-sidebar 
+    [class.active]="sidebarAtiva" 
+    [usuario]="professorLogado" 
+    prefixo="Prof." 
+    (aoSair)="sair()">
     
-    <div class="sidebar-topo">
-      <div class="logo-area">
-        <img class="logo-sidebar" src="/img/logomarca.svg" alt="MYIOGA Logo">
-        <h2>MYIOGA</h2>
-      </div>
-
-      <div class="profile-area">
-        <div class="avatar-container">
-          <img [src]="professorLogado.foto" alt="Foto de Perfil" (error)="atualizarParaAvatarPadrao()">
-        </div>
-        <span class="prof-name">Prof. {{ professorLogado.nome }}</span>
-      </div>
-
-      <nav class="side-menu">
-        <button [class.ativo]="abaAtiva === 'perfil'" (click)="mudarAba('perfil')">Meu Perfil</button>
-        <button [class.ativo]="abaAtiva === 'agenda'" (click)="mudarAba('agenda')">Minha Agenda</button>
-        <button [class.ativo]="abaAtiva === 'upload'" (click)="mudarAba('upload')">Upload de Aulas</button>
-        <button [class.ativo]="abaAtiva === 'recados'" (click)="mudarAba('recados')">Postar Recados</button>
-        <button [class.ativo]="abaAtiva === 'mensagens'" (click)="mudarAba('mensagens')">Mail-Box</button>
-      </nav>
+    <div menu-itens>
+      <button [class.ativo]="abaAtiva === 'agenda'" (click)="mudarAba('agenda')">Minha Agenda</button>
+      <button [class.ativo]="abaAtiva === 'upload'" (click)="mudarAba('upload')">Upload de Aulas</button>
+      <button [class.ativo]="abaAtiva === 'recados'" (click)="mudarAba('recados')">Mural de Recados</button>
+      <button [class.ativo]="abaAtiva === 'mensagens'" (click)="mudarAba('mensagens')">Mail-Box</button>
     </div>
-
-    <div class="sidebar-footer">
-      <button class="btn-sair" (click)="sair()">Sair</button>
-    </div>
-  </aside>
+  </app-sidebar>
 
   <main class="dash-content">
     <section *ngIf="abaAtiva === 'agenda'" class="fade-in">
@@ -53,8 +38,8 @@
       <h3>Upload Video-Aula</h3>
       <div class="form-box">
         <label>Título da Aula:</label>
-        <input type="text" #tituloVideo placeholder="Ex: Yoga para Iniciantes - Respiração">
-        <label>Link do Vídeo (Embed / YouTube / Vimeo):</label>
+        <input type="text" #tituloVideo placeholder="Ex: Yoga para Iniciantes">
+        <label>Link do Vídeo:</label>
         <input type="text" #urlVideo placeholder="Ex: https://www.youtube.com/embed/...">
         <button class="btn-acao" (click)="postarVideo(tituloVideo.value, urlVideo.value); tituloVideo.value=''; urlVideo.value=''">
           Publicar
@@ -72,7 +57,7 @@
       <h3>Mural de Recados</h3>
       <div class="form-box">
         <label>Mensagem / Aviso Importante:</label>
-        <textarea #textoRecado placeholder="Digite o aviso que aparecerá no mural dos alunos..."></textarea>
+        <textarea #textoRecado placeholder="Digite o aviso para os alunos..."></textarea>
         <button class="btn-acao" (click)="postarRecado(textoRecado.value); textoRecado.value=''">
           Postar no Mural
         </button>
@@ -90,36 +75,17 @@
       <div class="mailbox-container">
         <div class="lista-alunos-chat">
           <div class="aluno-chat-item active">👤 Marcelo Dias</div>
-          <div class="aluno-chat-item">👤 Coaty</div>
         </div>
         <div class="janela-chat">
           <div class="historico-chat">
-            <div class="msg recebida">Professor, tive dúvidas na postura do guerreiro II.</div>
-            <div class="msg enviada">Olá Mariana! Na próxima aula focaremos no alinhamento do seu quadril para ajudar.</div>
+            <div class="msg recebida">Professor, tive dúvidas na postura.</div>
           </div>
           <div class="input-chat-box">
-            <input type="text" placeholder="Escreva uma mensagem privada...">
+            <input type="text" placeholder="Escreva uma mensagem...">
             <button>Enviar</button>
           </div>
         </div>
       </div>
-    </section>
-
-    <section *ngIf="abaAtiva === 'perfil'" class="fade-in">
-      <h3>Meu Perfil Profissional</h3>
-      <div class="form-box perfil-grid">
-        <div>
-          <label>Nome Completo:</label>
-          <input type="text" [value]="professorLogado.nome">
-          <label>E-mail de Contato:</label>
-          <input type="email" value="prof@myioga.com">
-        </div>
-        <div>
-          <label>Bio:</label>
-          <textarea style="height: 115px;">Instrutor de Hatha Yoga e Vinyasa Flow. Apaixonado por alinhar corpo, mente e espírito.</textarea>
-        </div>
-      </div>
-      <button class="btn-acao" style="max-width: 200px;">Salvar Alterações</button>
     </section>
   </main>
   
@@ -129,5 +95,4 @@
         <span class="slider"></span>
     </label>
   </div>
-
 </div>

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { SidebarSharedComponent } from '../../shared/components/sidebar/sidebar';
 
 @Component({
   selector: 'app-dashboard-prof',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SidebarSharedComponent],
   templateUrl: './dashboard-prof.html',
   styleUrl: './dashboard-prof.css'
 })
@@ -35,10 +36,10 @@ export class DashboardProf implements OnInit {
 
   ngOnInit() {
     this.carregarDados();
-    this.inicializarTemaApropriado();
+    this.inicializarTema();
   }
 
-  inicializarTemaApropriado() {
+  inicializarTema() {
     const temaSalvo = localStorage.getItem('theme');
     if (temaSalvo === 'light') {
       this.modoClaro = true;
