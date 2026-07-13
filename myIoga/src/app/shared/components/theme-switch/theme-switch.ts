@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ThemeService } from '../theme-service/theme-service';
+import { Theme } from '../../service/theme';
 @Component({
   selector: 'app-theme-switch',
   standalone: true,
@@ -9,7 +9,7 @@ import { ThemeService } from '../theme-service/theme-service';
   styleUrls: ['./theme-switch.css']
 })
 export class ThemeSwitch {
-  constructor(public themeService: ThemeService) {}
+  constructor(public themeService: Theme) {}
 
   alterarTema(): void {
     this.themeService.toggleTheme();

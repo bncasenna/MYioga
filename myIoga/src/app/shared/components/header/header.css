@@ -53,7 +53,7 @@
 }
 
 .btnLogin {
-    color: var(--branco) !important;
+    color: var(--base) !important;
     background-color: var(--caramelo);
     padding: 8px 18px;
     border-radius: 20px;
@@ -70,7 +70,7 @@
 }
 
 .btnDark {
-    background-color: var(--branco);
+    background-color: var(--base);
     border: 1.7px solid var(--caramelo);
     color: var(--caramelo);
     font-size: 1.2rem;
@@ -86,7 +86,7 @@
 
 .btnDark:hover {
     background-color: var(--caramelo);
-    color: var(--branco);
+    color: var(--base);
     transform: scale(1.08);
 }
 
@@ -110,7 +110,7 @@
     position: absolute;
     cursor: pointer;
     inset: 0;
-    background-color: var(--graf); /* 🔄 MODIFICADO: Cor alterada de var(--caramelo) para var(--graf) */
+    background-color: var(--graf);
     border: 1.7px solid var(--queimado);
     border-radius: 34px;
     transition: 0.4s ease;
@@ -141,7 +141,7 @@
 
 .theme-switch input:checked + .slider::before {
     transform: translateX(30px);
-    background-color: var(--light); /* 🔄 MODIFICADO: Adicionado para a bolinha interna ficar clara ao marcar */
+    background-color: var(--light); 
 }
 
 .theme-switch .icon-sun, 

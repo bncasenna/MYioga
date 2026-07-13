@@ -1,0 +1,14 @@
+[
+{
+    "id": 1,
+    "email": "aluno@myioga.com",
+    "senha" : "123456",
+    "tipo" :"aluno"
+},
+{
+    "id": 2,
+    "email": "prof@myioga.com",
+    "senha" : "123456",
+    "tipo" :"professor"
+}
+]

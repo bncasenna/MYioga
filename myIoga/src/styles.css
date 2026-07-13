@@ -1,5 +1,17 @@
 html, :root {
-    --branco: #ffffff;
+     --base: #000000;
+    --smooth: #24292e;
+    --graf: #333333;
+    --caramelo: #a96c2ff8;
+    --queimado: #d09254;
+    --peaches: #CD853F;
+    --sand: #e0bd9c;
+    --green: #2d6a4f;
+    --sombra: 0 10px 30px rgba(0, 0, 0, 0.15); 
+}
+
+html.light-theme {
+    --base: #ffffff;
     --light: #fffaf5;
     --smooth: #dfc3a8;
     --queimado: #cea683;
@@ -7,19 +19,6 @@ html, :root {
     --caramelo: #CD853F;
     --sand: #a96c2f;
     --graf: #333333;
-    --green: #2d6a4f;
-    --sombra: 0 10px 30px rgba(0, 0, 0, 0.15); 
-}
-
-html.dark-theme {
-    --light: #1b1e22;
-    --graf: #fffaf5;
-    --smooth: #24292e;
-    --branco: #2b3036;
-    --caramelo: #a96c2ff8;
-    --queimado: #d09254;
-    --peaches: #CD853F;
-    --sand: #e0bd9c;
     --green: #2d6a4f;
 }
 
@@ -31,7 +30,7 @@ html.dark-theme {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: var(--light);
+    background-color: var(--smooth);
     color: var(--graf);
 }
 html {

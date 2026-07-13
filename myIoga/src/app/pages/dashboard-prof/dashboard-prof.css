@@ -1,4 +1,11 @@
+.menu-itens{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .dash-container {
+
     display: flex;
     min-height: 100vh;
     background-color: var(--graf); 
@@ -11,7 +18,7 @@
 .dash-sidebar {
     width: 0;
     background-color: var(--sand); 
-    color: var(--branco);
+    color: var(--base);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -128,7 +135,7 @@ html.light-theme .linha-divisoria {
 
 .side-menu button:hover, .side-menu button.ativo {
     background-color: var(--caramelo);
-    color: var(--branco);
+    color: var(--base);
     font-weight: bold;
 }
 
@@ -146,7 +153,7 @@ html.light-theme .linha-divisoria {
 
     padding: 14px;
     background-color: var(--caramelo);
-    color: var(--branco);
+    color: var(--base);
     border: none;
     border-radius: 8px;
     font-weight: bold;
@@ -165,7 +172,7 @@ html.light-theme .linha-divisoria {
     flex-grow: 1;
     padding: 40px 40px 40px 80px; 
     overflow-y: auto;
-    color: var(--branco);
+    color: var(--base);
     transition: padding 0.3s ease;
 }
 
@@ -201,7 +208,7 @@ html.light-theme .linha-divisoria {
     top: 15px;
     right: 15px;
     background-color: var(--green);
-    color: var(--branco);
+    color: var(--base);
     font-size: 0.75rem;
     padding: 4px 8px;
     border-radius: 20px;
@@ -245,12 +252,12 @@ html.light-theme .linha-divisoria {
     border-radius: 8px; 
     outline: none;
     background-color: var(--graf); 
-    color: var(--branco);
+    color: var(--base);
 }
 
 .btn-acao {
     background-color: var(--caramelo); 
-    color: var(--branco);
+    color: var(--base);
     border: none; 
     padding: 14px 20px; 
     font-weight: bold;
@@ -280,7 +287,7 @@ html.light-theme .linha-divisoria {
     padding: 15px; 
     border-radius: 8px; 
     border-left: 5px solid var(--green); 
-    color: var(--branco);
+    color: var(--base);
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -313,7 +320,7 @@ html.light-theme .linha-divisoria {
     background: var(--queimado); 
     border-left: 4px solid var(--caramelo); 
     font-weight: bold; 
-    color: var(--branco);
+    color: var(--base);
 }
 
 .janela-chat { 
@@ -341,13 +348,13 @@ html.light-theme .linha-divisoria {
 
 .msg.recebida { 
     background: var(--graf); 
-    color: var(--branco);
+    color: var(--base);
     align-self: flex-start; 
 }
 
 .msg.enviada { 
     background: var(--caramelo); 
-    color: var(--branco); 
+    color: var(--base); 
     align-self: flex-end; 
 }
 
@@ -363,7 +370,7 @@ html.light-theme .linha-divisoria {
     border-radius: 8px; 
     border: 1px solid var(--sand); 
     background-color: var(--graf);
-    color: var(--branco);
+    color: var(--base);
 }
 
 .input-chat-box button { 
@@ -482,7 +489,7 @@ html.light-theme .dash-container {
 }
 
 html.light-theme .wrapper-switch-fixo {
-    background-color: var(--branco);
+    background-color: var(--base);
     border: 1px solid var(--smooth);
 }
 
@@ -494,7 +501,7 @@ html.light-theme .form-box,
 html.light-theme .card-agenda,
 html.light-theme .item-postado,
 html.light-theme .mailbox-container {
-    background-color: var(--branco);
+    background-color: var(--base);
     border-color: var(--smooth);
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
@@ -525,12 +532,12 @@ html.light-theme .aluno-chat-item {
 }
 
 html.light-theme .aluno-chat-item.active {
-    background: var(--branco);
+    background: var(--base);
     color: var(--caramelo);
 }
 
 html.light-theme .menu-hamburger {
-    background-color: var(--branco);
+    background-color: var(--base);
 }
 
 /* Animação */

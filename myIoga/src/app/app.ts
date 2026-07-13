@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router'; 
-import { ThemeService } from '../../src/app/shared/components/theme-service/theme-service';
+import { Theme } from './shared/service/theme';
+
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import { ThemeService } from '../../src/app/shared/components/theme-service/them
 
 export class App implements OnInit{ 
 
-  constructor(private themeService: ThemeService) {}
+  constructor(private themeService: Theme) {}
 
   ngOnInit() {}
 }

@@ -1,5 +1,5 @@
 .wrapper-switch-fixo {
-    position: fixed;
+    position: absolute;
     top: 20px;
     right: 50px;
     z-index: 1001;
@@ -40,16 +40,17 @@
     left: 3.5px;
     bottom: 2.5px;
     border-radius: 50%;
-    background-color: var(--sand);
+    background-color: var(--peaches);
     box-shadow: var(--sombra);
     transition: .3s;
 }
 
 .theme-switch input:checked + .slider {
     background-color: var(--caramelo);
+    
 }
 
 .theme-switch input:checked + .slider::before {
     transform: translateX(30px);
-    background-color: var(--light);
+    background-color: var(--base);
 }

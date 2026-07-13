@@ -10,7 +10,7 @@
 }
 
 .modal-box {
-    background-color: var(--branco);
+    background-color: var(--base);
     width: 100%;
     max-width: 420px;
     max-height: 95vh;
@@ -133,7 +133,7 @@
     width: 100%;
     padding: 14px;
     background-color: var(--caramelo);
-    color: var(--branco);
+    color: var(--base);
     border: none;
     border-radius: 8px;
     font-weight: bold;

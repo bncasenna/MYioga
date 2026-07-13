@@ -1,10 +1,10 @@
-import { Injectable, Inject, PLATFORM_ID, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root' 
+  providedIn: 'root',
 })
-export class ThemeService {
+export class Theme {
   isDarkMode = signal<boolean>(true); 
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {

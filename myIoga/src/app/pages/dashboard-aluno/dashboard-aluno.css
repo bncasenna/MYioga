@@ -1,11 +1,14 @@
-/* --- COMPONENTIZAÇÃO DA SIDEBAR NO CONTAINER --- */
 app-sidebar {
     display: flex;
     flex-shrink: 0;
     transition: all 0.3s ease-in-out;
 }
+.menu-itens{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
-/* --- MENU HAMBURGUER (Idêntico ao do Professor) --- */
 .menu-hamburger {
     display: flex; 
     position: fixed;
@@ -44,7 +47,6 @@ app-sidebar {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-/* --- SWITCH DE TEMA FLUTUANTE (Mapeado do Professor) --- */
 .wrapper-switch-fixo {
     position: fixed;
     top: 20px;
@@ -105,7 +107,7 @@ app-sidebar {
 .dash-container {
     display: flex;
     min-height: 100vh;
-    background-color: var(--graf); 
+    background-color: var(--smooth); 
     font-family: sans-serif;
     transition: background-color 0.3s ease;
     overflow-x: hidden;
@@ -115,7 +117,7 @@ app-sidebar {
     flex-grow: 1;
     padding: 40px 40px 40px 80px; 
     overflow-y: auto;
-    color: var(--branco); 
+    color: var(--base); 
     transition: padding 0.3s ease, background-color 0.3s ease;
 }
 
@@ -144,7 +146,7 @@ app-sidebar {
     top: 15px;
     right: 20px;
     background-color: var(--green);
-    color: var(--branco);
+    color: var(--base);
     font-size: 0.75rem;
     font-weight: bold;
     padding: 4px 10px;
@@ -200,7 +202,7 @@ app-sidebar {
 
 .video-info h4 {
     margin: 0;
-    color: var(--branco);
+    color: var(--base);
     font-size: 1.1rem;
     transition: color 0.3s ease;
 }
@@ -212,7 +214,7 @@ app-sidebar {
 
 .btn-assistir {
     background-color: var(--caramelo);
-    color: var(--branco);
+    color: var(--base);
     border: none;
     padding: 10px;
     border-radius: 6px;
@@ -249,7 +251,7 @@ app-sidebar {
 .form-box input, .form-box select {
     background-color: var(--graf);
     border: 1px solid var(--sand);
-    color: var(--branco);
+    color: var(--base);
     padding: 12px;
     border-radius: 6px;
     font-size: 1rem;
@@ -259,7 +261,7 @@ app-sidebar {
 
 .btn-acao {
     background-color: var(--caramelo);
-    color: var(--branco);
+    color: var(--base);
     border: none;
     padding: 14px;
     border-radius: 8px;
@@ -311,7 +313,7 @@ app-sidebar {
 
 .msg.recebida {
     background-color: var(--graf);
-    color: var(--branco);
+    color: var(--sand);
     align-self: flex-start;
     border-bottom-left-radius: 2px;
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -319,7 +321,7 @@ app-sidebar {
 
 .msg.enviada {
     background-color: var(--caramelo);
-    color: var(--branco);
+    color: var(--base);
     align-self: flex-end;
     border-bottom-right-radius: 2px;
 }
@@ -337,16 +339,17 @@ app-sidebar {
     flex: 1;
     background-color: var(--graf);
     border: 1px solid var(--sand);
-    color: var(--branco);
+    color: var(--base);
     padding: 12px;
     border-radius: 6px;
     outline: none;
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease, color 0.3s ease;
 }
 
 .input-chat-box button {
     background-color: var(--green);
-    color: var(--branco);
+    color: var(--base);
     border: none;
     padding: 0 20px;
     border-radius: 6px;
@@ -360,7 +363,10 @@ app-sidebar {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-.aviso-vazio { color: var(--smooth); font-style: italic; margin-top: 20px; }
+.aviso-vazio { 
+    color: var(--sand); 
+    font-style: italic; 
+    margin-top: 20px; }
 
 
 /* ==========================================================================
@@ -375,16 +381,15 @@ html.light-theme .dash-content {
 }
 
 html.light-theme .menu-hamburger {
-    background-color: var(--branco);
+    background-color: var(--base);
 }
 
-/* Transiciona todos os blocos internos criados para o aluno */
 html.light-theme .card-recado,
 html.light-theme .card-video,
 html.light-theme .form-box,
 html.light-theme .mailbox-container,
 html.light-theme .input-chat-box {
-    background-color: var(--branco);
+    background-color: var(--base);
     border-color: var(--smooth);
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }

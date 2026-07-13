@@ -12,7 +12,7 @@
     prefixo="Prof." 
     (aoSair)="sair()">
     
-    <div menu-itens>
+    <div menu-itens class="menu-itens">
       <button [class.ativo]="abaAtiva === 'agenda'" (click)="mudarAba('agenda')">Minha Agenda</button>
       <button [class.ativo]="abaAtiva === 'upload'" (click)="mudarAba('upload')">Upload de Aulas</button>
       <button [class.ativo]="abaAtiva === 'recados'" (click)="mudarAba('recados')">Mural de Recados</button>
@@ -88,11 +88,7 @@
       </div>
     </section>
   </main>
-  
-  <div class="wrapper-switch-fixo">
-    <label class="theme-switch">
-        <input type="checkbox" [checked]="!modoClaro" (change)="toggleTema()">
-        <span class="slider"></span>
-    </label>
+ <div class="wrapper-switch-fixo">
+      <app-theme-switch></app-theme-switch>
   </div>
 </div>

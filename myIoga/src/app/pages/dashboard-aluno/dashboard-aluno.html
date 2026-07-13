@@ -12,7 +12,7 @@
     prefixo="" 
     (aoSair)="sair()">
     
-    <div menu-itens>
+    <div menu-itens class="menu-itens">
       <button [class.ativo]="abaAtiva === 'mural'" (click)="mudarAba('mural')">Mural de Recados</button>
       <button [class.ativo]="abaAtiva === 'agendar'" (click)="mudarAba('agendar')">Minha Agenda</button>
       <button [class.ativo]="abaAtiva === 'aulas'" (click)="mudarAba('aulas')">Minhas Aulas</button>
@@ -26,7 +26,7 @@
       <h3>Mural de Avisos</h3>
       <div class="lista-itens" *ngIf="recados.length > 0; else semRecados">
         <div class="card-recado" *ngFor="let r of recados">
-          <div class="autor-badge">Professora</div>
+          <div class="autor-badge">Prof</div>
           <p class="texto-recado">{{r.texto}}</p>
           <small class="data-postagem">🕒 Postado em {{r.data}}</small>
         </div>
@@ -95,11 +95,7 @@
     </section>
 
   </main>
-
   <div class="wrapper-switch-fixo">
-    <label class="theme-switch">
-        <input type="checkbox" [checked]="!modoClaro" (change)="toggleTema()">
-        <span class="slider"></span>
-    </label>
+      <app-theme-switch></app-theme-switch>
   </div>
 </div>

@@ -1,26 +1,24 @@
 :host {
-    width: 0; /* Começa zerada */
-    padding: 30px 0; /* Sem padding lateral inicial */
-    background-color: var(--sand); 
-    color: var(--branco);
+    width: 0; 
+    padding: 30px 0; 
+    background-color: var(--caramelo); 
+    color: var(--base);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-shadow: none;
     flex-shrink: 0;
-    overflow: hidden; /* Esconde o conteúdo interno quando fechada */
+    overflow: hidden; 
     z-index: 999;
     transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
-/* --- Quando a propriedade [class.active] for verdadeira no componente pai --- */
 :host(.active) {
     width: 260px;
     padding: 30px 20px;
     box-shadow: var(--sombra);
 }
 
-/* --- LINHA DIVISÓRIA ACIMA DA FOTO --- */
 .linha-divisoria {
     width: 100%;
     border: none;
@@ -32,11 +30,11 @@ html.light-theme .linha-divisoria {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-/* --- CONTEÚDO INTERNO DA SIDEBAR --- */
+/* --- SIDEBAR --- */
 .sidebar-topo {
     display: flex;
     flex-direction: column;
-    width: 220px; /* Mantém os itens firmes durante a animação */
+    width: 220px; 
 }
 
 .logo-area {
@@ -75,9 +73,10 @@ html.light-theme .linha-divisoria {
     height: 75px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid var(--caramelo);
+    border: 5px solid var(--graf);
     margin-bottom: 10px;
     background-color: var(--light);
+    
 }
 
 .avatar-container img {
@@ -86,8 +85,8 @@ html.light-theme .linha-divisoria {
     object-fit: cover;
 }
 
-.prof-name {
-    color: var(--graf);
+.name {
+    color: var(--base);
     font-size: 0.95rem;
     font-weight: bold;
     text-align: center;
@@ -97,12 +96,12 @@ html.light-theme .linha-divisoria {
 .side-menu {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 50px;
+    
 }
 
-/* Aplica o estilo diretamente nos botões passados pelo pai */
 .side-menu ::ng-deep button {
-    background: none;
+    background: var(--peaches);
     border: none;
     color: var(--smooth);
     text-align: left;
@@ -116,8 +115,8 @@ html.light-theme .linha-divisoria {
 
 .side-menu ::ng-deep button:hover, 
 .side-menu ::ng-deep button.ativo {
-    background-color: var(--caramelo);
-    color: var(--branco);
+    background-color: var(--queimado);
+    color: var(--base);
     font-weight: bold;
 }
 
@@ -131,10 +130,10 @@ html.light-theme .linha-divisoria {
 
 .btn-sair {
     width: 100%;
-    max-width: 140px;
+    max-width: 200px;
     padding: 14px;
-    background-color: var(--caramelo);
-    color: var(--branco);
+    background-color: var(--graf);
+    color: var(--base);
     border: none;
     border-radius: 8px;
     font-weight: bold;

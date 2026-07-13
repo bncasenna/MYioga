@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
-import { DashboardAluno } from './pages/dashboard-aluno/dashboard-aluno';
-import { DashboardProf } from './pages/dashboard-prof/dashboard-prof';
+import { DashboardAlunoComponent } from './pages/dashboard-aluno/dashboard-aluno';
+import { DashboardProfComponent } from './pages/dashboard-prof/dashboard-prof';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   { path: '', component: Home },
-  { path: 'dashboard-aluno', component: DashboardAluno },
-  { path: 'dashboard-prof', component: DashboardProf },
+  { path: 'dashboard-aluno',canActivate: [authGuard],data: {roles: 'aluno'}, component: DashboardAlunoComponent },
+  { path: 'dashboard-prof', canActivate: [authGuard],data: {roles: 'professor'}, component: DashboardProfComponent },
   { path: '**', redirectTo: '' }
 ];
