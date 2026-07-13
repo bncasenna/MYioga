@@ -2,112 +2,59 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { SidebarSharedComponent } from '../../shared/components/sidebar/sidebar';
+import { ThemeService } from '../../shared/components/theme-service/theme-service'; // Ajuste o caminho
 
 @Component({
-  selector: 'app-dashboard-prof',
+  selector: 'app-dashboard-aluno',
   standalone: true,
   imports: [CommonModule, SidebarSharedComponent],
-  templateUrl: './dashboard-prof.html',
-  styleUrl: './dashboard-prof.css'
+  templateUrls: './dashboard-aluno.html',
+  styleUrls: './dashboard-aluno.css'
 })
-export class DashboardProf implements OnInit {
-  abaAtiva: string = 'agenda';
-  sidebarAtiva: boolean = false;
-  modoClaro: boolean = false;
+export class DashboardAluno implements OnInit {
+  abaAtiva: string = 'mural';
+  sidebarAtiva: boolean = false; 
 
-  professorLogado = {
-    nome: 'Indra Carvalho',
-    foto: '/img/indra.png' // 
+  alunoLogado: any = {
+    nome: 'Mariana Silva', 
+    foto: '' 
   };
+  
+  videos: any[] = [];
+  recados: any[] = [];
 
-  aulasAgendadas = [
-    { aluno: 'Marcelo Dias', data: '14/07/2026', horario: '08:00', estilo: 'Vinyasa Flow' },
-    { aluno: 'Coaty', data: '15/07/2026', horario: '19:30', estilo: 'Hatha Yoga' },
-    { aluno: 'Nicholas', data: '17/07/2026', horario: '07:00', estilo: 'Vinyasa Flow' },
-    { aluno: 'Luan Estrela', data: '17/07/2026', horario: '07:00', estilo: 'Yoga Meditação' },
-    { aluno: 'Gabriel Beer', data: '17/07/2026', horario: '07:00', estilo: 'Hatha Yoga' },
-    { aluno: 'Ayran Bufalo', data: '17/07/2026', horario: '07:00', estilo: 'Yoga Meditação' }
-  ];
-
-  videosPostados: any[] = [];
-  recadosPostados: any[] = [];
-
-  constructor(private router: Router) {}
+  constructor(private router: Router, public themeService: ThemeService) {}
 
   ngOnInit() {
-    this.carregarDados();
-    this.inicializarTema();
+    this.sincronizarComProfessor();
   }
 
-  inicializarTema() {
-    const temaSalvo = localStorage.getItem('theme');
-    if (temaSalvo === 'light') {
-      this.modoClaro = true;
-      document.documentElement.classList.remove('light-theme');
-      document.documentElement.classList.add('dark-theme');
-    } else {
-      this.modoClaro = false;
-      document.documentElement.classList.add('light-theme');
-      document.documentElement.classList.remove('dark-theme');
-    }
-  }
-
-  atualizarParaAvatarPadrao() {
-    const caminhoFallback = '/img/indra.png'; 
-    if (this.professorLogado.foto !== caminhoFallback) {
-      this.professorLogado.foto = caminhoFallback;
-    }
-  }
-
-  mudarAba(aba: string) {
-    this.abaAtiva = aba;
-    this.sidebarAtiva = false;
+  toggleTema() {
+    this.themeService.toggleTheme();
   }
 
   toggleSidebar() {
     this.sidebarAtiva = !this.sidebarAtiva;
   }
 
-  toggleTema() {
-    this.modoClaro = !this.modoClaro;
-    if (this.modoClaro) {
-      document.documentElement.classList.remove('dark-theme');
-      document.documentElement.classList.add('light-theme');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.classList.remove('light-theme');
-      document.documentElement.classList.add('dark-theme');
-      localStorage.setItem('theme', 'dark');
-    }
+  mudarAba(aba: string) {
+    this.abaAtiva = aba;
+    this.sidebarAtiva = false; 
   }
 
-  postarVideo(titulo: string, url: string) {
-    if (!titulo || !url) return alert('Preencha todos os campos do vídeo!');
-    const novoVideo = { titulo, url, data: new Date().toLocaleDateString('pt-BR') };
-    this.videosPostados.unshift(novoVideo);
-    localStorage.setItem('@myioga:videos', JSON.stringify(this.videosPostados));
-    alert('Sucesso! Vídeo-aula disponibilizada no painel dos alunos.');
+  sincronizarComProfessor() {
+    const dadosVideos = localStorage.getItem('@myioga:videos');
+    const dadosRecados = localStorage.getItem('@myioga:recados');
+    if (dadosVideos) this.videos = JSON.parse(dadosVideos);
+    if (dadosRecados) this.recados = JSON.parse(dadosRecados);
   }
 
-  postarRecado(texto: string) {
-    if (!texto) return alert('Digite alguma mensagem antes de postar!');
-    const novoRecado = {
-      texto,
-      data: new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})
-    };
-    this.recadosPostados.unshift(novoRecado);
-    localStorage.setItem('@myioga:recados', JSON.stringify(this.recadosPostados));
-    alert('Sucesso! Recado publicado no Mural do Aluno.');
-  }
-
-  carregarDados() {
-    const vSalvos = localStorage.getItem('@myioga:videos');
-    const rSalvos = localStorage.getItem('@myioga:recados');
-    if (vSalvos) this.videosPostados = JSON.parse(vSalvos);
-    if (rSalvos) this.recadosPostados = JSON.parse(rSalvos);
+  solicitarAgendamento(data: string, hora: string, estilo: string) {
+    if (!data || !estilo) return alert('Por favor, preencha todos os campos do agendamento.');
+    alert(`🧘 Perfeito! Sua aula de "${estilo}" foi agendada para o dia ${data} às ${hora}.\nO professor foi notificado.`);
   }
 
   sair() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/']); 
   }
 }

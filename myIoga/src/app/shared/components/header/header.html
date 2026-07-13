@@ -1,8 +1,6 @@
 <nav class="navbar">
     <div class="navLeft">
-        <a class="btnLogin" (click)="abrirModalLogin()">
-            Login
-        </a>
+        <a class="btnLogin" (click)="abrirModalLogin()">Login</a>
     </div>
 
     <div class="navMid">
@@ -14,11 +12,7 @@
     </div>
 
     <div class="navRight">
-        <label class="theme-switch">
-            <input type="checkbox" [checked]="isDarkMode" (change)="alternarModoNoturno()">
-            <span class="slider">
-            </span>
-        </label>
+        <app-theme-switch></app-theme-switch>
     </div>
 </nav>
 

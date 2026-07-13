@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ThemeService } from '../theme-service/theme-service';
 @Component({
   selector: 'app-theme-switch',
   standalone: true,
@@ -9,12 +9,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./theme-switch.css']
 })
 export class ThemeSwitch {
+  constructor(public themeService: ThemeService) {}
 
-  @Input() modoClaro = false;
-  @Output() aoAlternar = new EventEmitter<boolean>();
-
-  alterarTema(event: Event): void {
-    const checked = (event.target as HTMLInputElement).checked;
-    this.aoAlternar.emit(checked);
+  alterarTema(): void {
+    this.themeService.toggleTheme();
   }
 }

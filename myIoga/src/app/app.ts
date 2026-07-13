@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router'; 
+import { ThemeService } from '../../src/app/shared/components/theme-service/theme-service';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +9,10 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   imports: [CommonModule, RouterModule, RouterOutlet], 
   template: '<router-outlet></router-outlet>'
 })
-export class App implements OnInit{ 
-  ngOnInit() {
-    this.verificarTemaGlobal();
-  }
 
-  verificarTemaGlobal() {
-    const temaSalvo = localStorage.getItem('theme');
-    
-    if (!temaSalvo || temaSalvo === 'dark') {
-      document.documentElement.classList.add('dark-theme');
-      document.documentElement.classList.remove('light-theme');
-      localStorage.setItem('theme', 'dark'); // Garante o registro inicial
-    } else {
-      document.documentElement.classList.add('light-theme');
-      document.documentElement.classList.remove('dark-theme');
-    }
-  }
+export class App implements OnInit{ 
+
+  constructor(private themeService: ThemeService) {}
+
+  ngOnInit() {}
 }

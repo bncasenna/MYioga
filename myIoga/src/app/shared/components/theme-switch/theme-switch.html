@@ -1,12 +1,9 @@
 <div class="wrapper-switch-fixo">
     <label class="theme-switch">
-
         <input
             type="checkbox"
-            [checked]="modoClaro"
-            (change)="alterarTema($event)">
-
+            [checked]="themeService.isDarkMode()"
+            (change)="alterarTema()">
         <span class="slider"></span>
-
     </label>
 </div>
