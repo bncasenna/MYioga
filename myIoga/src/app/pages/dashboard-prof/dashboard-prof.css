@@ -549,22 +549,27 @@ html.light-theme .recado-autor-header {
 }
 
 .msg { 
-    padding: 10px 14px; 
+    padding: 10px 16px; 
     border-radius: 12px; 
     max-width: 70%; 
-    font-size: 0.95rem; 
+    font-size: 0.95rem;
+    line-height: 1.4;
 }
 
 .msg.recebida { 
-    background: var(--graf); 
-    color: var(--base);
-    align-self: flex-start; 
+    background: var(--smooth); 
+    color: var(--sand);
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .msg.enviada { 
-    background: var(--caramelo); 
+    background: var(--green); 
     color: var(--base); 
-    align-self: flex-end; 
+    align-self: flex-end;
+    border-bottom-left-radius: 2px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .input-chat-box { 

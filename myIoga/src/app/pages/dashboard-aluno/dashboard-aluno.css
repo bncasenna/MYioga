@@ -385,7 +385,7 @@ app-sidebar {
 }
 
 .msg.recebida {
-    background-color: var(--graf);
+    background-color: var(--smooth);
     color: var(--sand);
     align-self: flex-start;
     border-bottom-left-radius: 2px;
@@ -393,10 +393,11 @@ app-sidebar {
 }
 
 .msg.enviada {
-    background-color: var(--caramelo);
+    background-color: var(--green);
     color: var(--base);
     align-self: flex-end;
-    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .input-chat-box {
