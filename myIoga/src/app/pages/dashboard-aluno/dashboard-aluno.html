@@ -24,34 +24,93 @@
     
     <section *ngIf="abaAtiva === 'mural'" class="fade-in">
       <h3>Mural de Avisos</h3>
-      <div class="lista-itens" *ngIf="recados.length > 0; else semRecados">
-        <div class="card-recado" *ngFor="let r of recados">
-          <div class="autor-badge">Prof</div>
-          <p class="texto-recado">{{r.texto}}</p>
-          <small class="data-postagem">🕒 Postado em {{r.data}}</small>
+      <div class="lista-itens">
+        
+        <div class="item-postado">
+          <div class="recado-autor-header">
+            <img src="/img/indra.png" alt="Foto de Indra" class="recado-autor-foto">
+            <div class="recado-autor-info">
+              <span class="recado-autor-nome">Indra Carvalho</span>
+              <small class="texto-secundario">🕒 14/07/2026 às 05:30</small>
+            </div>
+          </div>
+          <p class="recado-texto">
+            Olá, pessoal! Lembrem-se de que nossa aulão ao ar livre de alinhamento de chakras será nesta sexta-feira, no Porto da Barra às 06:30. Tragam suas toalhas e garrafas de água! 🧘‍♂️✨
+          </p>
         </div>
+
+        <div class="item-postado">
+          <div class="recado-autor-header">
+            <img src="/img/biancaSenna.jpg" alt="Foto de Bianca" class="recado-autor-foto">
+            <div class="recado-autor-info">
+              <span class="recado-autor-nome">Bianca Senna</span>
+              <small class="texto-secundario">🕒 12/07/2026 às 08:15</small>
+            </div>
+          </div>
+          <p class="recado-texto">
+            Registro da nossa aula de hoje!! O encontro foi incrível, pessoal. Namastê!🧘‍♀️
+          </p>
+          
+          <div class="midia-galeria">
+            <div class="midia-container">
+              <img src="/img/alunos1.svg" alt="Aula Prática 1" class="midia-preview">
+            </div>
+            <div class="midia-container">
+              <img src="/img/alunos2.svg" alt="Aula Prática 2" class="midia-preview">
+            </div>
+          </div>
+        </div>
+
+        <div class="item-postado" *ngFor="let r of recados">
+          <div class="recado-autor-header">
+            <img [src]="r.autor?.foto || '/img/indra.png'" alt="Foto do Autor" class="recado-autor-foto">
+            <div class="recado-autor-info">
+              <span class="recado-autor-nome">{{ r.autor?.nome || 'Professor' }}</span>
+              <small class="texto-secundario">🕒 {{ r.data }}</small>
+            </div>
+          </div>
+
+          <p class="recado-texto">{{ r.texto }}</p>
+          
+          <div *ngIf="r.midiaUrl && r.midiaUrl.length > 0 && r.tipoMidia === 'image'" class="midia-galeria">
+            <div *ngFor="let img of r.midiaUrl" class="midia-container">
+              <img [src]="img" alt="Mídia do recado" class="midia-preview">
+            </div>
+          </div>
+
+          <div *ngIf="r.midiaUrl && r.midiaUrl.length > 0 && r.tipoMidia === 'video'" class="midia-container">
+            <video [src]="r.midiaUrl[0]" controls class="midia-preview"></video>
+          </div>
+        </div>
+
       </div>
-      <ng-template #semRecados>
-        <p class="aviso-vazio">Nenhum recado importante no mural por enquanto. Namastê!</p>
-      </ng-template>
     </section>
 
     <section *ngIf="abaAtiva === 'aulas'" class="fade-in">
-      <h3>Suas Video-Aulas Práticas</h3>
+      <h3>Aulas Práticas</h3>
       <div class="grid-videos" *ngIf="videos.length > 0; else semVideos">
         <div class="card-video" *ngFor="let v of videos">
           <div class="video-placeholder">
             <span>📹 Vídeo Disponível</span>
           </div>
           <div class="video-info">
-            <h4>{{v.titulo}}</h4>
-            <small>Liberado em: {{v.data}}</small>
+            <span class="badge-categoria" 
+                  [ngClass]="{
+                    'badge-iniciante': v.categoria === 'Iniciante',
+                    'badge-intermediario': v.categoria === 'Intermediário',
+                    'badge-avancado': v.categoria === 'Avançado'
+                  }">
+              {{ v.categoria || 'Geral' }}
+            </span>
+            
+            <h4>{{ v.titulo }}</h4>
+            <small class="texto-secundario">Liberado em: {{ v.data }}</small>
             <button class="btn-assistir">Assistir Aula</button>
           </div>
         </div>
       </div>
       <ng-template #semVideos>
-        <p class="aviso-vazio">Nenhuma video-aula publicada pelo professor ainda.</p>
+        <p class="mensagem-vazia">Nenhuma video-aula publicada pelo professor ainda.</p>
       </ng-template>
     </section>
 
@@ -76,6 +135,25 @@
           Confirmar Agendamento com o Professor
         </button>
       </div>
+
+      <h4 class="sub-titulo">Seus Agendamentos Solicitados</h4>
+      <div class="grid-cards" *ngIf="aulasAgendadas && aulasAgendadas.length > 0; else semAgendamentos">
+        <div class="card-agenda" *ngFor="let aula of aulasAgendadas">
+          <span class="status-badge" 
+                [ngClass]="{
+                  'status-confirmado': aula.status === 'confirmado',
+                  'status-cancelado': aula.status === 'cancelado'
+                }">
+            {{ aula.status | titlecase }}
+          </span>
+          <h4>{{ aula.estilo }}</h4>
+          <p><strong>Instrutor:</strong> Prof. Indra</p>
+          <p>🕒 {{ aula.data }} às {{ aula.horario }}</p>
+        </div>
+      </div>
+      <ng-template #semAgendamentos>
+        <p class="mensagem-vazia">Nenhum agendamento solicitado até o momento.</p>
+      </ng-template>
     </section>
 
     <section *ngIf="abaAtiva === 'mensagens'" class="fade-in">
@@ -83,8 +161,8 @@
       <div class="mailbox-container">
         <div class="janela-chat">
           <div class="historico-chat">
-            <div class="msg recebida">Olá! Use este espaço para tirar dúvidas.</div>
-            <div class="msg enviada">Professor, tive dúvidas na postura.</div>
+            <div class="msg recebida">Olá! Use este espaço para tirar dúvidas sobre suas práticas de Yoga.</div>
+            <div class="msg enviada">Professor, tive dúvidas no alinhamento das posturas de ontem.</div>
           </div>
           <div class="input-chat-box">
             <input type="text" placeholder="Escreva sua dúvida...">

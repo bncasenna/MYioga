@@ -19,15 +19,19 @@ export class DashboardAlunoComponent implements OnInit {
 
   alunoLogado = {
     nome: 'Marcello', 
-    sobrenome: 'Dias', // ⚙️ Campo adicionado para a edição
+    sobrenome: 'Dias', 
     foto: '/img/marcelo.svg',
-    bio: '' // ⚙️ Campo adicionado para a edição
+    bio: '' 
   };
   
   videos: any[] = [];
   recados: any[] = [];
+  
+  aulasAgendadas: any[] = [
+    { estilo: 'Vinyasa Flow', data: '14/07/2026', horario: '15:00', status: 'confirmado' },
+    { estilo: 'Meditação Guiada', data: '20/07/2026', horario: '13:00', status: 'cancelado' }
+  ];
 
-  // ⚙️ Controle de exibição do modal de perfil
   mostrarModalPerfil: boolean = false;
 
   constructor(private router: Router, public themeService: Theme) {}
@@ -70,11 +74,10 @@ export class DashboardAlunoComponent implements OnInit {
       foto: dadosAtualizados.foto
     };
 
-    // Salva o estado atualizado do aluno no localStorage temporariamente
     localStorage.setItem('@myioga:aluno', JSON.stringify(this.alunoLogado));
     
     this.fecharModalPerfil();
-    alert('Perfil atualizado com sucesso!');
+    alert('Perfil updated com sucesso!');
   }
 
   /* ==========================================================================
@@ -82,13 +85,16 @@ export class DashboardAlunoComponent implements OnInit {
      ========================================================================== */
 
   carregarDados() {
-    // Sincroniza dados postados pelo professor
     const dadosVideos = localStorage.getItem('@myioga:videos');
     const dadosRecados = localStorage.getItem('@myioga:recados');
     if (dadosVideos) this.videos = JSON.parse(dadosVideos);
     if (dadosRecados) this.recados = JSON.parse(dadosRecados);
 
-    // Carrega dados salvos do próprio aluno
+    const dadosAgendamentos = localStorage.getItem('@myioga:agendamentos-aluno');
+    if (dadosAgendamentos) {
+      this.aulasAgendadas = JSON.parse(dadosAgendamentos);
+    }
+
     const dadosPerfil = localStorage.getItem('@myioga:aluno');
     if (dadosPerfil) {
       this.alunoLogado = JSON.parse(dadosPerfil);
@@ -96,8 +102,23 @@ export class DashboardAlunoComponent implements OnInit {
   }
 
   solicitarAgendamento(data: string, hora: string, estilo: string) {
-    if (!data || !hora || !estilo) return alert('Por favor, preencha todos os campos do agendamento.');
-    alert(`🧘 Perfeito! Sua aula de "${estilo}" foi agendada para o dia ${data} às ${hora}.\nO professor foi notificado.`);
+    if (!data || !hora || !estilo.trim()) {
+      return alert('Por favor, preencha todos os campos do agendamento.');
+    }
+
+    const dataFormatada = data.split('-').reverse().join('/');
+
+    const novoAgendamento = {
+      estilo: estilo,
+      data: dataFormatada,
+      horario: hora,
+      status: 'confirmado' 
+    };
+
+    this.aulasAgendadas.unshift(novoAgendamento);
+    localStorage.setItem('@myioga:agendamentos-aluno', JSON.stringify(this.aulasAgendadas));
+
+    alert(`🧘 Perfeito! Sua aula de "${estilo}" foi agendada para o dia ${dataFormatada} às ${hora}.\nO professor foi notificado.`);
   }
 
   sair() {
