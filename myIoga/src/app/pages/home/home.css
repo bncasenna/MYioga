@@ -1,10 +1,19 @@
+/* ==========================================================================
+   1. ESTRUTURA GERAL DA PÁGINA
+   ========================================================================== */
+
+/* Seletor host ou container geral do componente Home */
 .app-home {
     background-color: var(--smooth);
 }
 
+/* ==========================================================================
+   2. CABEÇALHO DO SITE (HERO SECTION)
+   ========================================================================== */
+
 .topoSite {
     text-align: center;
-    padding: 30px 20px;
+    padding: 40px 20px 20px 20px;
     background-color: var(--smooth);
 }
 
@@ -12,30 +21,44 @@
     font-size: 3rem;
     color: var(--peaches);
     letter-spacing: 4px;
+    margin: 0;
 }
 
+/* Seção de introdução e slogan abaixo do banner */
 .subtextoSite {
     text-align: center;
     max-width: 1850px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .subtextoSite h3 {
     font-size: 1.6rem;
     color: var(--queimado);
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 25px;
+    margin-bottom: 25px;
     line-height: 1.4;
     background-color: var(--smooth);
 }
 
+/* ==========================================================================
+   3. SEÇÃO DE AUTENTICAÇÃO (LOGIN / CADASTRO)
+   ========================================================================== */
+
+/* Container externo que envolve a área de login/cadastro */
+.areaLoginCadastro {
+    background-color: var(--smooth);
+    width: 100%;
+}
+
+/* Alinhamento dos botões e do texto "ou" */
 .loginCadastro {
     display: flex;
     justify-content: center;
     align-items: center; 
     gap: 15px;
     width: 100%;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     background-color: var(--smooth);
 }
 
@@ -43,20 +66,12 @@
     margin: 0;
     color: var(--green); 
     font-size: 1.1rem;
+    font-weight: bold;
 }
 
-.areaAgendamento {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 50px;
-    background: linear-gradient(115deg,  var(--caramelo), var(--sand), 
-    var(--queimado),var(--peaches), var(--sand), var(--caramelo));
-    padding: 80px 20px;
-    flex-wrap: wrap;
-}
-
-.btnCadastro {
+/* Estilo padrão dos botões de autenticação */
+.btnCadastro, 
+.btnLogin {
     width: 100%;
     max-width: 140px;
     padding: 14px;
@@ -67,65 +82,48 @@
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    transition: 0.4s ease;
-}
-
-.btnCadastro:hover {
-    background-color: var(--green);
-    transform: translateY(-2px);
-}
-
-.btnLogin { 
-    width: 100%;
-    max-width: 140px;
-
-    padding: 14px 25px;
-    background-color: var(--caramelo);
-    color: var(--smooth);
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.4s ease;
-    gap: 10px;
-}
-
-.btnLogin:hover {
-    background-color: var(--green);
-    transform: translateY(-2px);
-}
-
-.btn-agendar {
-    width: 100%;
-    max-width: 200px;
-
-    padding: 14px 30px;
-    background-color: var(--smooth);
-    color: var(--caramelo);
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.4s ease;
-}
-
-.btn-agendar:hover {
-    background-color: var(--smooth);
-    color: var(--green);
-    transform: translateY(-2px);
-}
-
-.btn {
+    transition: background-color 0.4s ease, transform 0.4s ease;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
 
+/* Efeito Hover para os botões de ação */
+.btnCadastro:hover, 
+.btnLogin:hover {
+    background-color: var(--green);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   4. SEÇÃO DE AGENDAMENTO E AULA EXPERIMENTAL
+   ========================================================================== */
+
+/* Grid flexível que organiza o Spotify, Texto e Logomarca */
+.areaAgendamento {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    background: linear-gradient(115deg, var(--caramelo), var(--sand), var(--queimado), var(--peaches), var(--sand), var(--caramelo));
+    padding: 80px 20px;
+    flex-wrap: wrap;
+}
+
+/* Colunas de suporte para manter o alinhamento lado a lado */
+.coluna-esquerda,
+.coluna-direita {
+    flex: 1 1 300px;
+    max-width: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Caixa de conteúdo textual sobre a aula gratuita */
 .freeClass {
-    width: 100%;
+    flex: 1 1 400px;
     max-width: 500px;
     color: var(--base);
     gap: 5px;
@@ -134,10 +132,9 @@
 }
 
 .freeClass h2 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 20px;
     color: var(--base);
-    
 }
 
 .freeClass p {
@@ -147,6 +144,71 @@
     text-align: justify;
 }
 
+/* Wrapper do botão interno da aula experimental */
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-agendar {
+    width: 100%;
+    max-width: 220px;
+    padding: 14px 30px;
+    background-color: var(--smooth);
+    color: var(--caramelo);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.btn-agendar:hover {
+    background-color: var(--smooth);
+    color: var(--green);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Logomarca institucional na direita */
+.logo {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+/* ==========================================================================
+   5. COMPONENTE INTEGRADO DO SPOTIFY
+   ========================================================================== */
+
+/* Container externo responsivo do Player */
+.spotify-wrapper {
+    width: 100%;
+    max-width: 380px;
+    border-radius: 12px;
+    overflow: hidden; 
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    background-color: var(--queimado);
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Elemento iframe limpo de bordas nativas */
+.spotify-player {
+    border: none;
+    border-radius: 8px;
+    display: block;
+}
+
+/* ==========================================================================
+   6. CARROSSEL DE IMAGENS (SLIDESHOW)
+   ========================================================================== */
 
 .carrossel-container {
     position: relative;
@@ -155,7 +217,8 @@
     height: 450px; 
     overflow: hidden;
     background-color: var(--smooth);
-
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 .carrossel-slides {
@@ -172,7 +235,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 .slide.ativo {
@@ -186,6 +248,7 @@
     object-fit: cover;
 }
 
+/* Setas de navegação do carrossel (Anterior/Próximo) */
 .seta {
     position: absolute;
     top: 50%;
@@ -198,16 +261,18 @@
     cursor: pointer;
     border-radius: 50%;
     z-index: 10;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .seta:hover {
     background-color: var(--caramelo);
+    transform: translateY(-50%) scale(1.1);
 }
 
 .esquerda { left: 20px; }
 .direita { right: 20px; }
 
+/* Indicadores de bolinhas na parte inferior do carrossel */
 .indicadores {
     position: absolute;
     bottom: 20px;
@@ -224,13 +289,18 @@
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.ponto:hover, .ponto-ativo {
+.ponto:hover, 
+.ponto-ativo {
     background-color: var(--caramelo);
     transform: scale(1.2);
 }
+
+/* ==========================================================================
+   7. INTERFACES DE NAVEGAÇÃO COMPLEMENTAR (BOTÃO VOLTAR AO TOPO)
+   ========================================================================== */
 
 .btn-voltar-topo {
     position: fixed;
@@ -252,7 +322,7 @@
     opacity: 0;
     pointer-events: none;
     transform: translateY(20px);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .btn-voltar-topo.visivel {
@@ -264,12 +334,4 @@
 .btn-voltar-topo:hover {
     background-color: var(--green);
     transform: scale(1.1);
-}
-
-.logo {
-    width: 100%;
-    max-width: 200px;
-    display: flex;
-    margin: 0 auto;
-    right: 10%;
 }

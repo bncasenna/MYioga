@@ -10,12 +10,13 @@
     [class.active]="sidebarAtiva" 
     [usuario]="professorLogado" 
     prefixo="Prof." 
-    (aoSair)="sair()">
+    (aoSair)="sair()"
+    (aoClicarFoto)="abrirModalPerfil()">
     
     <div menu-itens class="menu-itens">
+      <button [class.ativo]="abaAtiva === 'recados'" (click)="mudarAba('recados')">Mural de Recados</button>
       <button [class.ativo]="abaAtiva === 'agenda'" (click)="mudarAba('agenda')">Minha Agenda</button>
       <button [class.ativo]="abaAtiva === 'upload'" (click)="mudarAba('upload')">Upload de Aulas</button>
-      <button [class.ativo]="abaAtiva === 'recados'" (click)="mudarAba('recados')">Mural de Recados</button>
       <button [class.ativo]="abaAtiva === 'mensagens'" (click)="mudarAba('mensagens')">Mail-Box</button>
     </div>
   </app-sidebar>
@@ -39,16 +40,47 @@
       <div class="form-box">
         <label>Título da Aula:</label>
         <input type="text" #tituloVideo placeholder="Ex: Yoga para Iniciantes">
-        <label>Link do Vídeo:</label>
-        <input type="text" #urlVideo placeholder="Ex: https://www.youtube.com/embed/...">
-        <button class="btn-acao" (click)="postarVideo(tituloVideo.value, urlVideo.value); tituloVideo.value=''; urlVideo.value=''">
-          Publicar
+        
+        <label>Nível da Categoria:</label>
+        <select class="categorias" #categoriaVideo>
+          <option value="Iniciante">Iniciante</option>
+          <option value="Intermediário">Intermediário</option>
+          <option value="Avançado">Avançado</option>
+        </select>
+        
+        <label>Selecione o Arquivo de Vídeo:</label>
+        <div class="upload-file-wrapper">
+          <input type="file" #arquivoVideo accept="video/*" class="input-file-hidden" id="file-upload">
+          <label for="file-upload" class="btn-file-custom">
+            <span>📁 Escolher Arquivo</span>
+          </label>
+        </div>
+        <button class="btn-acao" 
+                (click)="postarVideo(tituloVideo.value, categoriaVideo.value, arquivoVideo.files); 
+                         tituloVideo.value=''; categoriaVideo.value='Iniciante'; arquivoVideo.value=''">
+          Publicar Aula
         </button>
       </div>
+
       <h4 class="sub-titulo">Aulas Publicadas</h4>
       <div class="lista-itens">
-        <div class="item-postado" *ngFor="let v of videosPostados">
-          <span>📹 <strong>{{v.titulo}}</strong> ({{v.data}})</span>
+        <div class="item-postado-video" *ngFor="let v of videosPostados">
+          <div class="video-info">
+            <span>📹 <strong>{{v.titulo}}</strong></span>
+            <br>
+            <small class="texto-secundario">Arquivo: {{v.nomeArquivo}} | Postado em: {{v.data}}</small>
+          </div>
+          
+          <span class="badge-categoria" [ngClass]="{
+            'badge-iniciante': v.categoria === 'Iniciante',
+            'badge-intermediario': v.categoria === 'Intermediário',
+            'badge-avancado': v.categoria === 'Avançado'
+          }">
+            {{ v.categoria || 'Iniciante' }}
+          </span>
+        </div>
+        <div *ngIf="videosPostados.length === 0" class="mensagem-vazia">
+          Nenhum vídeo publicado ainda.
         </div>
       </div>
     </section>
@@ -66,6 +98,9 @@
       <div class="lista-itens">
         <div class="item-postado" *ngFor="let r of recadosPostados">
           <p>{{r.texto}} <br><small>🕒 {{r.data}}</small></p>
+        </div>
+        <div *ngIf="recadosPostados.length === 0" class="mensagem-vazia">
+          Nenhum recado publicado.
         </div>
       </div>
     </section>
@@ -88,7 +123,15 @@
       </div>
     </section>
   </main>
- <div class="wrapper-switch-fixo">
+
+  <app-modal-perfil 
+    *ngIf="mostrarModalPerfil" 
+    [usuario]="professorLogado"
+    (aoFechar)="fecharModalPerfil()"
+    (aoSalvar)="salvarPerfil($event)">
+  </app-modal-perfil>
+
+  <div class="wrapper-switch-fixo">
       <app-theme-switch></app-theme-switch>
   </div>
 </div>

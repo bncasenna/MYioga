@@ -6,20 +6,20 @@ export const authGuard: CanActivateFn = (route, state) => {
   const auth = inject(AuthService);
   const router = inject(Router);
 
-  // 1. Verifica se o usuário NÃO está logado
   if (!auth.isLogged()) {
-    return router.createUrlTree(['/home']); // Redireciona para home de forma segura usando UrlTree
+    return router.createUrlTree(['/home']); 
   }
 
-  const expectedRoles = route.data['roles'] as UserRole[]; // Corrigido erro de digitação
-  const userRole = auth.getUserRole();
+  // Captura a role do usuário logado diretamente do AuthService
+  const userRole: UserRole = auth.getUserRole();
 
-  // 2. Se o usuário tem o cargo necessário, permite o acesso
+  const expectedRoles = route.data['roles'] as UserRole[]; 
+
   if (expectedRoles && expectedRoles.includes(userRole)) {
     return true;
   }
 
-  // 3. Se não tem permissão para esta rota específica, redireciona conforme o cargo dele
+  // Redirecionamentos caso o usuário não tenha permissão específica para a rota solicitada
   if (userRole === "professor") {
     return router.createUrlTree(['/dashboard-prof']);
   }
@@ -28,6 +28,5 @@ export const authGuard: CanActivateFn = (route, state) => {
     return router.createUrlTree(['/dashboard-aluno']);
   }
 
-  // 4. Fallback de segurança obrigatório para retornar um booleano/UrlTree
   return router.createUrlTree(['/home']);
 };

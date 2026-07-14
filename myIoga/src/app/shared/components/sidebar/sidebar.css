@@ -119,7 +119,35 @@ html.light-theme .linha-divisoria {
     color: var(--base);
     font-weight: bold;
 }
+/* --- MOLDAL PERFIL --- */
+.avatar-container.clickable {
+    position: relative;
+    cursor: pointer;
+}
 
+.avatar-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+}
+
+.avatar-container.clickable:hover .avatar-overlay {
+    opacity: 1;
+}
+
+.avatar-overlay span {
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 /* --- RODAPÉ --- */
 .sidebar-footer {
     display: flex;
@@ -130,7 +158,7 @@ html.light-theme .linha-divisoria {
 
 .btn-sair {
     width: 100%;
-    max-width: 200px;
+    max-width: 220px;
     padding: 14px;
     background-color: var(--graf);
     color: var(--base);
@@ -140,6 +168,7 @@ html.light-theme .linha-divisoria {
     font-size: 1rem;
     cursor: pointer;
     transition: 0.4s ease;
+    margin-top: 8px;
 }
 
 .btn-sair:hover {

@@ -6,7 +6,19 @@ import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   { path: '', component: Home },
-  { path: 'dashboard-aluno',canActivate: [authGuard],data: {roles: 'aluno'}, component: DashboardAlunoComponent },
-  { path: 'dashboard-prof', canActivate: [authGuard],data: {roles: 'professor'}, component: DashboardProfComponent },
+  
+  { 
+    path: 'dashboard-aluno', 
+    canActivate: [authGuard], 
+    data: { roles: ['aluno'] }, 
+    component: DashboardAlunoComponent 
+  },
+  { 
+    path: 'dashboard-prof', 
+    canActivate: [authGuard], 
+    data: { roles: ['professor'] }, 
+    component: DashboardProfComponent 
+  },
+  
   { path: '**', redirectTo: '' }
 ];

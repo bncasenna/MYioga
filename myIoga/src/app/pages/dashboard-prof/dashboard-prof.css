@@ -1,11 +1,8 @@
-.menu-itens{
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+/* ==========================================================================
+   1. CONFIGURAÇÕES GERAIS E CONTAINER PRINCIPAL
+   ========================================================================== */
 
 .dash-container {
-
     display: flex;
     min-height: 100vh;
     background-color: var(--graf); 
@@ -14,7 +11,10 @@
     overflow-x: hidden;
 }
 
-/* --- SIDEBAR --- */
+/* ==========================================================================
+   2. SIDEBAR E PERFIL (ESTRUTURA E NAVEGAÇÃO)
+   ========================================================================== */
+
 .dash-sidebar {
     width: 0;
     background-color: var(--sand); 
@@ -27,26 +27,13 @@
     flex-shrink: 0;
     overflow: hidden;
     z-index: 999;
-    transition: left 0.3s ease-in-out, 
-    padding 0.3s ease-in-out;
-    
+    transition: left 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
 .dash-sidebar.active {
     width: 260px;
     padding: 30px 20px;
     box-shadow: var(--sombra);
-}
-
-.linha-divisoria {
-    width: 100%;
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    margin: 5px 0 15px 0;
-}
-
-html.light-theme .linha-divisoria {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-topo {
@@ -82,7 +69,6 @@ html.light-theme .linha-divisoria {
     display: block;
 }
 
-/* --- ÁREA DO PERFIL --- */
 .profile-area {
     display: flex;
     flex-direction: column;
@@ -115,6 +101,19 @@ html.light-theme .linha-divisoria {
     text-align: center;
 }
 
+.linha-divisoria {
+    width: 100%;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 5px 0 15px 0;
+}
+
+.menu-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .side-menu {
     display: flex;
     flex-direction: column;
@@ -133,7 +132,8 @@ html.light-theme .linha-divisoria {
     transition: 0.3s ease;
 }
 
-.side-menu button:hover, .side-menu button.ativo {
+.side-menu button:hover, 
+.side-menu button.ativo {
     background-color: var(--caramelo);
     color: var(--base);
     font-weight: bold;
@@ -146,11 +146,9 @@ html.light-theme .linha-divisoria {
     width: 220px;
 }
 
-
 .btn-sair {
     width: 100%;
     max-width: 220px;
-
     padding: 14px;
     background-color: var(--caramelo);
     color: var(--base);
@@ -167,7 +165,10 @@ html.light-theme .linha-divisoria {
     transform: translateY(-2px);
 }
 
-/* --- ÁREA DE CONTEÚDO --- */
+/* ==========================================================================
+   3. ÁREA DE CONTEÚDO PRINCIPAL (DASH-CONTENT)
+   ========================================================================== */
+
 .dash-content {
     flex-grow: 1;
     padding: 40px 40px 40px 80px; 
@@ -184,7 +185,133 @@ html.light-theme .linha-divisoria {
     padding-bottom: 10px;
 }
 
-/* --- COMPONENTES INTERNOS --- */
+.perfil-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+}
+
+/* ==========================================================================
+   4. FORMULÁRIOS, BOTÕES E SELETORES
+   ========================================================================== */
+
+.form-box {
+    background-color: var(--queimado);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid var(--sand);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.form-box label { 
+    display: block; 
+    font-weight: bold; 
+    margin-bottom: 8px; 
+    color: var(--sand); 
+}
+
+.form-box input, 
+.form-box textarea {
+    width: 100%; 
+    padding: 12px; 
+    margin-bottom: 18px;
+    border: 1px solid var(--sand); 
+    border-radius: 8px; 
+    outline: none;
+    background-color: var(--graf); 
+    color: var(--base);
+}
+
+.categorias {
+    width: 100%; 
+    padding: 12px; 
+    margin-bottom: 18px; 
+    border-radius: 8px; 
+    border: 1px solid var(--sand); 
+    background-color: var(--graf); 
+    color: var(--base);
+    outline: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.input-file-video {
+    margin-bottom: 18px;
+    display: block;
+}
+
+.btn-acao {
+    background-color: var(--caramelo); 
+    color: var(--base);
+    border: none; 
+    padding: 14px 20px; 
+    font-weight: bold;
+    border-radius: 8px; 
+    cursor: pointer; 
+    width: 100%; 
+    transition: 0.3s;
+}
+
+.btn-acao:hover { 
+    background-color: var(--green); 
+}
+
+.upload-file-wrapper {
+    position: relative;
+    margin-bottom: 18px;
+    width: 100%;
+}
+
+.input-file-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.btn-file-custom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--graf);
+    color: var(--base);
+    border: 1px dashed var(--sand);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.btn-file-custom:hover {
+    background-color: var(--queimado);
+    border-color: var(--caramelo);
+    color: var(--caramelo);
+}
+
+html.light-theme .btn-file-custom {
+    background-color: var(--light);
+    color: var(--graf);
+    border-color: var(--smooth);
+}
+
+html.light-theme .btn-file-custom:hover {
+    background-color: var(--base);
+    border-color: var(--caramelo);
+    color: var(--caramelo);
+}
+
+/* ==========================================================================
+   5. AGENDAMENTOS, LISTAS E BADGES
+   ========================================================================== */
+
 .grid-cards {
     display: flex;
     gap: 20px;
@@ -199,8 +326,7 @@ html.light-theme .linha-divisoria {
     width: 280px;
     position: relative;
     box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-    transition: background-color 0.3s ease, 
-    border-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .status-badge {
@@ -227,50 +353,6 @@ html.light-theme .linha-divisoria {
     color: var(--smooth);
 }
 
-.form-box {
-    background-color: var(--queimado);
-    padding: 25px;
-    border-radius: 12px;
-    border: 1px solid var(--sand);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-    transition: background-color 0.3s ease, 
-    border-color 0.3s ease;
-}
-
-.form-box label { 
-    display: block; 
-    font-weight: bold; 
-    margin-bottom: 8px; 
-    color: var(--sand); 
-}
-
-.form-box input, .form-box textarea {
-    width: 100%; 
-    padding: 12px; 
-    margin-bottom: 18px;
-    border: 1px solid var(--sand); 
-    border-radius: 8px; 
-    outline: none;
-    background-color: var(--graf); 
-    color: var(--base);
-}
-
-.btn-acao {
-    background-color: var(--caramelo); 
-    color: var(--base);
-    border: none; 
-    padding: 14px 20px; 
-    font-weight: bold;
-    border-radius: 8px; 
-    cursor: pointer; 
-    width: 100%; 
-    transition: 0.3s;
-}
-
-.btn-acao:hover { 
-    background-color: var(--green); 
-}
-
 .sub-titulo { 
     margin-top: 40px; 
     color: var(--sand); 
@@ -291,7 +373,57 @@ html.light-theme .linha-divisoria {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* --- MAILBOX --- */
+.item-postado-video {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px; 
+    background: var(--queimado); 
+    border-radius: 8px; 
+    border-left: 5px solid var(--green); 
+    color: var(--base);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.texto-secundario {
+    color: var(--smooth);
+    font-size: 0.85rem;
+}
+
+.badge-categoria {
+    padding: 4px 10px; 
+    border-radius: 12px; 
+    font-size: 11px; 
+    font-weight: bold;
+}
+
+.badge-iniciante {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.badge-intermediario {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+}
+
+.badge-avancado {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+.mensagem-vazia {
+    padding: 15px; 
+    text-align: center; 
+    color: var(--smooth);
+    font-style: italic;
+}
+
+/* ==========================================================================
+   6. SEÇÃO DE MENSAGENS / MAILBOX
+   ========================================================================== */
+
 .mailbox-container { 
     display: flex; 
     height: 400px; 
@@ -299,8 +431,7 @@ html.light-theme .linha-divisoria {
     border-radius: 12px; 
     border: 1px solid var(--sand); 
     overflow: hidden;
-    transition: background-color 0.3s ease, 
-    border-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .lista-alunos-chat { 
@@ -382,13 +513,10 @@ html.light-theme .linha-divisoria {
     cursor: pointer; 
 }
 
-.perfil-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 20px; 
-}
+/* ==========================================================================
+   7. COMPONENTES DE INTERFACE FIXED (HAMBÚRGUER / TEMA)
+   ========================================================================== */
 
-/* --- MENU HAMBURGUER --- */
 .menu-hamburger {
     display: flex; 
     position: fixed;
@@ -419,9 +547,11 @@ html.light-theme .linha-divisoria {
 .menu-hamburger.aberto span:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
 }
+
 .menu-hamburger.aberto span:nth-child(2) {
     opacity: 0;
 }
+
 .menu-hamburger.aberto span:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
 }
@@ -435,7 +565,6 @@ html.light-theme .linha-divisoria {
     align-items: center;
     justify-content: center;
 }
-
 
 .theme-switch {
     position: relative;
@@ -483,7 +612,10 @@ html.light-theme .linha-divisoria {
     background-color: var(--light);
 }
 
-/* --- CHAVEAMENTO DO MODO CLARO --- */
+/* ==========================================================================
+   8. CHAVEAMENTO DINÂMICO DO MODO CLARO (LIGHT-THEME)
+   ========================================================================== */
+
 html.light-theme .dash-container {
     background-color: var(--light);
 }
@@ -497,9 +629,14 @@ html.light-theme .dash-content {
     color: var(--graf);
 }
 
+html.light-theme .linha-divisoria {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 html.light-theme .form-box,
 html.light-theme .card-agenda,
 html.light-theme .item-postado,
+html.light-theme .item-postado-video,
 html.light-theme .mailbox-container {
     background-color: var(--base);
     border-color: var(--smooth);
@@ -516,14 +653,14 @@ html.light-theme .card-agenda p {
 
 html.light-theme .form-box input,
 html.light-theme .form-box textarea,
+html.light-theme .categorias,
 html.light-theme .lista-alunos-chat,
 html.light-theme .input-chat-box input,
 html.light-theme .msg.recebida {
     background-color: var(--light);
     color: var(--graf);
     border-color: var(--smooth);
-    transition: background-color 0.3s ease, 
-    border-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 html.light-theme .aluno-chat-item {
@@ -540,10 +677,14 @@ html.light-theme .menu-hamburger {
     background-color: var(--base);
 }
 
-/* Animação */
+/* ==========================================================================
+   9. ANIMAÇÕES (FADE-IN)
+   ========================================================================== */
+
 .fade-in { 
     animation: fadeIn 0.3s ease;
 }
+
 @keyframes fadeIn { 
     from { opacity: 0; transform: translateY(10px); } 
     to { opacity: 1; transform: translateY(0); } 

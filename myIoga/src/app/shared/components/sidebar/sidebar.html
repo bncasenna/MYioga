@@ -7,8 +7,11 @@
   <hr class="linha-divisoria">
 
   <div class="profile-area">
-    <div class="avatar-container">
+    <div class="avatar-container clickable" (click)="aoClicarFoto.emit()">
       <img [src]="usuario?.foto" alt="Foto de Perfil" (error)="avatarPadrao()">
+      <div class="avatar-overlay">
+        <span>Editar</span>
+      </div>
     </div>
     <span class="name">{{ prefixo }} {{ usuario?.nome }}</span>
   </div>

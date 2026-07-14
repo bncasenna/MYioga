@@ -1,0 +1,289 @@
+/* ==========================================================================
+   ESTRUTURA DO CONTAINER DO MODAL (OVERLAY)
+   ========================================================================== */
+.modal-perfil-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Garante sobreposição total */
+    animation: fadeIn 0.2s ease-out forwards;
+}
+
+/* CARD CENTRALIZADO */
+.modal-perfil-card {
+    background-color: var(--base);
+    border: 1.5px solid var(--caramelo);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 460px;
+    box-shadow: var(--sombra);
+    overflow: hidden;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.modal-perfil-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--smooth);
+}
+
+.modal-perfil-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--queimado);
+    font-family: var(--font-titulos);
+}
+
+.btn-fechar-modal {
+    background: none;
+    border: none;
+    color: var(--sand);
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.btn-fechar-modal:hover {
+    color: var(--caramelo);
+}
+
+/* ==========================================================================
+   CORPO DO FORMULÁRIO (SCROLLÁVEL)
+   ========================================================================== */
+.modal-perfil-body {
+    padding: 24px;
+    max-height: 65vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* SEÇÃO DA IMAGEM DE PERFIL */
+.edit-avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 12px;
+}
+
+.avatar-preview {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--caramelo);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: var(--smooth);
+}
+
+.avatar-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-upload-foto {
+    background-color: var(--smooth);
+    border: 1px solid var(--sand);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--sand);
+    transition: all 0.25s ease;
+}
+
+.btn-upload-foto:hover {
+    background-color: var(--caramelo);
+    color: var(--base);
+    border-color: var(--caramelo);
+}
+
+.input-file-hidden {
+    display: none !important;
+}
+
+/* GRUPOS DE INPUTS */
+.form-perfil-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-perfil-grupo label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--sand);
+    letter-spacing: 0.5px;
+}
+
+.form-perfil-grupo input,
+.form-perfil-grupo textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1.5px solid var(--smooth);
+    background-color: var(--smooth);
+    color: var(--sand);
+    outline: none;
+    font-family: var(--font-textos);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-perfil-grupo input:focus,
+.form-perfil-grupo textarea:focus {
+    border-color: var(--caramelo);
+    box-shadow: 0 0 0 3px rgba(169, 108, 47, 0.25);
+}
+
+.form-perfil-grupo textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* ==========================================================================
+   RODAPÉ (AÇÕES)
+   ========================================================================== */
+.modal-perfil-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 24px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border-top: 1px solid var(--smooth);
+}
+
+.btn-cancelar {
+    background: none;
+    border: 1px solid var(--sand);
+    color: var(--sand);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.btn-cancelar:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--caramelo);
+    color: var(--caramelo);
+}
+
+.btn-salvar {
+    background-color: var(--green);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-salvar:hover {
+    background-color: #1e4635; /* Variação de verde mais escura */
+}
+
+/* ==========================================================================
+   ANIMAÇÕES DE ENTRADA
+   ========================================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   ADAPTAÇÕES DO TEMA CLARO (.light-theme)
+   ========================================================================== */
+html.light-theme .modal-perfil-card {
+    background-color: var(--light);
+    border-color: var(--smooth);
+}
+
+html.light-theme .modal-perfil-header {
+    border-color: var(--smooth);
+}
+
+html.light-theme .modal-perfil-header h3 {
+    color: var(--sand);
+}
+
+html.light-theme .btn-fechar-modal {
+    color: var(--graf);
+}
+
+html.light-theme .btn-fechar-modal:hover {
+    color: var(--caramelo);
+}
+
+html.light-theme .form-perfil-grupo label {
+    color: var(--graf);
+}
+
+html.light-theme .form-perfil-grupo input,
+html.light-theme .form-perfil-grupo textarea {
+    background-color: var(--base);
+    border-color: var(--smooth);
+    color: var(--graf);
+}
+
+html.light-theme .form-perfil-grupo input:focus,
+html.light-theme .form-perfil-grupo textarea:focus {
+    border-color: var(--caramelo);
+    box-shadow: 0 0 0 3px rgba(205, 133, 63, 0.2);
+}
+
+html.light-theme .btn-upload-foto {
+    background-color: var(--base);
+    border-color: var(--smooth);
+    color: var(--graf);
+}
+
+html.light-theme .btn-upload-foto:hover {
+    background-color: var(--caramelo);
+    color: var(--base);
+    border-color: var(--caramelo);
+}
+
+html.light-theme .modal-perfil-footer {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-color: var(--smooth);
+}
+
+html.light-theme .btn-cancelar {
+    border-color: var(--smooth);
+    color: var(--graf);
+}
+
+html.light-theme .btn-cancelar:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}

@@ -1,7 +1,7 @@
 .wrapper-switch-fixo {
     position: absolute;
-    top: 20px;
-    right: 50px;
+    top: 35px;
+    right: 40px;
     z-index: 1001;
     display: flex;
     align-items: center;
@@ -9,7 +9,7 @@
 }
 
 .theme-switch {
-    position: relative;
+    position: absolute;
     display: inline-block;
     width: 60px;
     height: 30px;

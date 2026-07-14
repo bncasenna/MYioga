@@ -93,8 +93,15 @@
         </div>
       </div>
     </section>
-
   </main>
+
+  <app-modal-perfil 
+    *ngIf="mostrarModalPerfil" 
+    [usuario]="alunoLogado"
+    (aoFechar)="fecharModalPerfil()"
+    (aoSalvar)="salvarPerfil($event)">
+  </app-modal-perfil>
+
   <div class="wrapper-switch-fixo">
       <app-theme-switch></app-theme-switch>
   </div>

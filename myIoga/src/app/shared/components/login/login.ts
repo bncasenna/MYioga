@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; 
 import { AuthService } from '../../service/auth-service';
-import { IUsuario } from '../../interfaces/iusuario';
 
 @Component({
   selector: 'app-login',
@@ -13,19 +12,20 @@ import { IUsuario } from '../../interfaces/iusuario';
   styleUrl: './login.css'
 })
 export class Login {
-
-alert(arg0: string) {
-throw new Error('Method not implemented.');
-}
   @Output() fecharModal = new EventEmitter<void>();
   @Output() alternarParaCadastro = new EventEmitter<void>();
 
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required, Validators.minLength(6)])
+    email: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
+    senha: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(6)] })
   });
 
   constructor(private router: Router, private auth: AuthService) {}
+
+  // Permite que o template HTML chame alert('mensagem') sem quebrar a compilação
+  alert(mensagem: string): void {
+    window.alert(mensagem);
+  }
 
   fechar(): void {
     this.fecharModal.emit();
@@ -38,13 +38,20 @@ throw new Error('Method not implemented.');
   submeterLogin(): void {
     if (this.loginForm.valid) {
       const formData = {
-        email: this.loginForm.value.email,
-        senha: this.loginForm.value.senha
+        email: this.loginForm.getRawValue().email,
+        senha: this.loginForm.getRawValue().senha
       }; 
+
       this.auth.login(formData).subscribe({
-      next: (response)=>{
-        this.router.navigate(["/dashboard-prof"])
-      }
-      })
+        next: (response) => {
+          this.fechar(); // Fecha o modal se o login for bem-sucedido
+          this.router.navigate(["/dashboard-prof"]);
+        },
+        error: (err) => {
+          this.alert('Email ou senha inválidos!');
+          console.error(err);
+        }
+      });
     }
-}}
+  }
+}
