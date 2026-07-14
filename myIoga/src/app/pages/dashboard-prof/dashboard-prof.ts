@@ -30,15 +30,40 @@ export class DashboardProfComponent implements OnInit {
   };
   
   aulasAgendadas = [
-    { aluno: 'Marcello Dias', data: '14/07/2026', horario: '15:00', estilo: 'Vinyasa Flow' },
-    { aluno: 'Coaty', data: '15/07/2026', horario: '07:30', estilo: 'Hatha Yoga' },
-    { aluno: 'Nicholas', data: '20/07/2026', horario: '13:00', estilo: 'Meditação Guiada' }
+    { aluno: 'Marcello Dias', data: '14/07/2026', horario: '15:00', estilo: 'Vinyasa Flow', status: 'confirmado' },
+    { aluno: 'Coaty', data: '15/07/2026', horario: '07:30', estilo: 'Hatha Yoga', status: 'confirmado' },
+    { aluno: 'Nicholas', data: '20/07/2026', horario: '13:00', estilo: 'Meditação Guiada', status: 'cancelado' }
   ];
 
   videosPostados: any[] = [];
-  recadosPostados: any[] = [];
+  
+  recadosPostados: any[] = [
+    {
+      texto: 'Olá, pessoal! Lembrem-se de que nossa aulão ao ar livre de alinhamento de chakras será nesta sexta-feira, no Porto da Barra ás 06:30. Tragam suas toalhas e garrafas de água! 🧘‍♀️✨',
+      data: '14/07/2026 às 05:30',
+      midiaUrl: [],
+      tipoMidia: '',
+      autor: {
+        nome: 'Indra Carvalho',
+        foto: '/img/indra.png'
+      }
+    },
+    {
+      texto: 'Registro da nossa aula de hoje!! O encontro foi incrivel, pessoal. Namastê!🧘🏾‍♀️',
+      data: '12/07/2026 às 08:15',
+      midiaUrl: ['/img/alunos1.svg', '/img/alunos2.svg'],
+      tipoMidia: 'image',
+      autor: {
+        nome: 'Bianca Senna',
+        foto: '/img/biancaSenna.jpg'
+      }
+    }
+  ];
 
   mostrarModalPerfil: boolean = false;
+
+  arquivoUpload: File | null = null;
+  nomeArquivoSelecionado: string = '';
 
   constructor(private router: Router, public themeService: Theme) {}
 
@@ -87,14 +112,48 @@ export class DashboardProfComponent implements OnInit {
     alert(`Sucesso! Vídeo cadastrado na categoria [${categoria}] e disponibilizado.`);
   }
 
-  postarRecado(texto: string) {
-    if (!texto) return alert('Digite alguma mensagem antes de postar!');
+  onArquivoSelecionado(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.arquivoUpload = file;
+      this.nomeArquivoSelecionado = file.name;
+    }
+  }
+
+  postarRecado(textoInput: HTMLTextAreaElement) {
+    const text = textoInput.value.trim();
+
+    if (!text && !this.arquivoUpload) {
+      return alert('Digite alguma mensagem ou anexe um arquivo antes de postar!');
+    }
+
+    //  Correção feita aqui: Declarando a variável 'midias' corretamente como array de strings
+    let midias: string[] = [];
+    let tipoMidia = '';
+
+    if (this.arquivoUpload) {
+      midias.push(URL.createObjectURL(this.arquivoUpload));
+      tipoMidia = this.arquivoUpload.type.split('/')[0];
+    }
+
     const novoRecado = {
-      texto,
-      data: new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})
+      texto: text,
+      data: new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'}),
+      midiaUrl: midias,
+      tipoMidia: tipoMidia,
+      autor: {
+        nome: `${this.professorLogado.nome} ${this.professorLogado.sobrenome}`,
+        foto: this.professorLogado.foto
+      }
     };
+
     this.recadosPostados.unshift(novoRecado);
     localStorage.setItem('@myioga:recados', JSON.stringify(this.recadosPostados));
+
+    textoInput.value = '';
+    this.arquivoUpload = null;
+    this.nomeArquivoSelecionado = '';
+
     alert('Sucesso! Recado publicado no Mural do Aluno.');
   }
 
@@ -135,7 +194,10 @@ export class DashboardProfComponent implements OnInit {
     const dadosPerfil = localStorage.getItem('@myioga:professor');
 
     if (dadosVideos) this.videosPostados = JSON.parse(dadosVideos);
-    if (dadosRecados) this.recadosPostados = JSON.parse(dadosRecados);
+    
+    if (dadosRecados) {
+      this.recadosPostados = JSON.parse(dadosRecados);
+    }
     
     if (dadosPerfil) {
       this.professorLogado = JSON.parse(dadosPerfil);

@@ -1,46 +1,175 @@
-.secao-pagina {
-    padding: 100px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
+/* ==========================================================================
+   SEÇÃO QUEM SOMOS (ABOUT)
+   ========================================================================== */
+
+#about {
+    padding: 10px 20px;
     background-color: var(--smooth); 
-    color: var(--graf);
+    transition: background-color 0.3s ease;
+}
+
+.secao-pagina{
+    margin-bottom: 20px;
 }
 
 .conteudo-about {
-    max-width: 960px;
-    width: 100%;
-    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-.conteudo-about h2 {
+#about h2 {
+    font-size: 2.5rem;
+    font-family: var(--font-titulos);
     color: var(--caramelo);
-    font-size: 2.2rem;
-    margin-bottom: 30px;
-    text-shadow: 5px 5px 5px var(--base);
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+#about h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--queimado);
+    margin: 12px auto 0 auto;
+    border-radius: 2px;
 }
 
 .grid-about {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 40px;
-    text-align: left;
-    flex-wrap: wrap;
+}
+
+.texto-about {
+    max-width: 800px;
+    text-align: center;
 }
 
 .texto-about p {
     font-size: 1.1rem;
     line-height: 1.8;
-    margin-bottom: 15px;
     color: var(--sand);
-    text-shadow: 5px 5px 5px var(--base);
+    margin-bottom: 10px;
+    font-family: var(--font-textos);
     text-align: justify;
 }
 
-.decoracao-about {
-    font-size: 5rem;
-    flex: 1;
+.texto-about p strong {
+    color: var(--caramelo);
+}
+
+/* ==========================================================================
+   SEÇÃO DE PROFESSORES / INSTRUTORES
+   ========================================================================== */
+
+
+.profs-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap; 
+}
+
+/* CARD INDIVIDUAL DO PROFESSOR */
+.card-professor {
+    background-color: var(--base); 
+    border: 1.5px solid var(--sand);
+    border-radius: 16px;
+    width: 250px;
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-professor:hover {
+    transform: translateY(-8px);
+    border-color: var(--caramelo);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* CONTAINER DA FOTO */
+.professor-foto-wrapper {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    background-color: var(--smooth);
+    border-bottom: 2px solid var(--sand);
+}
+
+.professor-foto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card-professor:hover .professor-foto {
+    transform: scale(1.05); 
+}
+
+/* TEXTOS INTERNOS DO CARD */
+.professor-info {
+    padding: 24px;
     text-align: center;
-    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.professor-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.6rem;
+    color: var(--queimado);
+    font-family: var(--font-titulos);
+}
+
+.estilo-yoga {
+    display: inline-block;
+    color: var(--caramelo);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.professor-bio {
+    font-size: 0.95rem;
+    color: var(--graf);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+/* REDES SOCIAIS */
+.professor-redes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    border-top: 1px solid rgba(169, 108, 47, 0.15);
+    padding-top: 15px;
+}
+
+.professor-redes a {
+    color: var(--sand);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.professor-redes a i {
+    font-size: 1.1rem;
+}
+
+.professor-redes a:hover {
+    color: var(--caramelo);
 }

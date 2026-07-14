@@ -22,11 +22,17 @@
   </app-sidebar>
 
   <main class="dash-content">
+    
     <section *ngIf="abaAtiva === 'agenda'" class="fade-in">
       <h3>Minha Agenda</h3>
       <div class="grid-cards">
         <div class="card-agenda" *ngFor="let aula of aulasAgendadas">
-          <div class="status-badge">Confirmado</div>
+          <div class="status-badge" [ngClass]="{
+            'status-confirmado': aula.status === 'confirmado' || !aula.status,
+            'status-cancelado': aula.status === 'cancelado'
+          }">
+            {{ aula.status === 'cancelado' ? 'Cancelado' : 'Confirmado' }}
+          </div>
           <h4>{{aula.aluno}}</h4>
           <p><strong>Data:</strong> {{aula.data}}</p>
           <p><strong>Horário:</strong> {{aula.horario}}</p>
@@ -50,8 +56,8 @@
         
         <label>Selecione o Arquivo de Vídeo:</label>
         <div class="upload-file-wrapper">
-          <input type="file" #arquivoVideo accept="video/*" class="input-file-hidden" id="file-upload">
-          <label for="file-upload" class="btn-file-custom">
+          <input type="file" #arquivoVideo accept="video/*" class="input-file-hidden" id="file-upload-video">
+          <label for="file-upload-video" class="btn-file-custom">
             <span>📁 Escolher Arquivo</span>
           </label>
         </div>
@@ -86,34 +92,67 @@
     </section>
 
     <section *ngIf="abaAtiva === 'recados'" class="fade-in">
-      <h3>Mural de Recados</h3>
-      <div class="form-box">
-        <label>Mensagem / Aviso Importante:</label>
-        <textarea #textoRecado placeholder="Digite o aviso para os alunos..."></textarea>
-        <button class="btn-acao" (click)="postarRecado(textoRecado.value); textoRecado.value=''">
-          Postar no Mural
-        </button>
-      </div>
-      <h4 class="sub-titulo">Recados Recentes</h4>
-      <div class="lista-itens">
-        <div class="item-postado" *ngFor="let r of recadosPostados">
-          <p>{{r.texto}} <br><small>🕒 {{r.data}}</small></p>
+  <h3>Mural de Recados</h3>
+  <div class="form-box">
+    <label>Mensagem / Aviso Importante:</label>
+    <textarea #textoRecado placeholder="Digite o aviso para os alunos..."></textarea>
+    
+    <div class="upload-file-wrapper">
+      <input type="file" #arquivoMídia accept="video/*,image/*" class="input-file-hidden" id="file-upload-recado" (change)="onArquivoSelecionado($event)">
+      <label for="file-upload-recado" class="btn-file-custom">
+        <i class="fas fa-paperclip"></i> {{ nomeArquivoSelecionado || 'Anexar Imagem ou Vídeo' }}
+      </label>
+    </div>
+
+    <button class="btn-acao" (click)="postarRecado(textoRecado)">
+      Postar no Mural
+    </button>
+  </div>
+
+  <h4 class="sub-titulo">Recados Recentes</h4>
+  <div class="lista-itens">
+    <div class="item-postado" *ngFor="let r of recadosPostados">
+      
+      <div class="recado-autor-header">
+        <img [src]="r.autor?.foto || '/img/indra.png'" alt="Foto do Professor" class="recado-autor-foto">
+        <div class="recado-autor-info">
+          <span class="recado-autor-nome">{{ r.autor?.nome || 'Professor' }}</span>
+          <small class="texto-secundario">🕒 {{ r.data }}</small>
         </div>
-        <div *ngIf="recadosPostados.length === 0" class="mensagem-vazia">
-          Nenhum recado publicado.
+      </div>
+
+      <p class="recado-texto">{{ r.texto }}</p>
+      
+      <div *ngIf="r.midiaUrl && r.midiaUrl.length > 0 && r.tipoMidia === 'image'" class="midia-galeria">
+        <div *ngFor="let img of r.midiaUrl" class="midia-container">
+          <img [src]="img" alt="Mídia do recado" class="midia-preview">
         </div>
       </div>
-    </section>
+
+      <div *ngIf="r.midiaUrl && r.midiaUrl.length > 0 && r.tipoMidia === 'video'" class="midia-container">
+        <video [src]="r.midiaUrl[0]" controls class="midia-preview"></video>
+      </div>
+    </div>
+    
+    <div *ngIf="recadosPostados.length === 0" class="mensagem-vazia">
+      Nenhum recado publicado.
+    </div>
+  </div>
+</section>
 
     <section *ngIf="abaAtiva === 'mensagens'" class="fade-in">
       <h3>Mensagens Privadas</h3>
       <div class="mailbox-container">
         <div class="lista-alunos-chat">
-          <div class="aluno-chat-item active">👤 Marcelo Dias</div>
+          <div class="aluno-chat-item active">Nicholas O.</div>
+          <div class="aluno-chat-item active">Marcello Dias</div>
+          <div class="aluno-chat-item active">Gabriel Beer</div>
+          <div class="aluno-chat-item active">Coaty</div>
         </div>
         <div class="janela-chat">
           <div class="historico-chat">
-            <div class="msg recebida">Professor, tive dúvidas na postura.</div>
+            <div class="msg recebida">Professor, Tenho compromisso e vou precisar desmarcar nosso encontro.</div>
+            <div class="msg enviada">Tranquilo Nicholas! Quando podemos remarcar nosso encontro? </div>
           </div>
           <div class="input-chat-box">
             <input type="text" placeholder="Escreva uma mensagem...">

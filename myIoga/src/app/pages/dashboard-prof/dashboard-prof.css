@@ -5,7 +5,7 @@
 .dash-container {
     display: flex;
     min-height: 100vh;
-    background-color: var(--graf); 
+    background-color: var(--smooth); 
     font-family: sans-serif;
     transition: background-color 0.3s ease;
     overflow-x: hidden;
@@ -296,18 +296,6 @@
     color: var(--caramelo);
 }
 
-html.light-theme .btn-file-custom {
-    background-color: var(--light);
-    color: var(--graf);
-    border-color: var(--smooth);
-}
-
-html.light-theme .btn-file-custom:hover {
-    background-color: var(--base);
-    border-color: var(--caramelo);
-    color: var(--caramelo);
-}
-
 /* ==========================================================================
    5. AGENDAMENTOS, LISTAS E BADGES
    ========================================================================== */
@@ -329,16 +317,29 @@ html.light-theme .btn-file-custom:hover {
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/* Status Badge Dinâmico Geral */
 .status-badge {
     position: absolute;
     top: 15px;
     right: 15px;
-    background-color: var(--green);
-    color: var(--base);
     font-size: 0.75rem;
-    padding: 4px 8px;
+    padding: 4px 10px;
     border-radius: 20px;
     font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 🟢 Estilo Confirmado */
+.status-badge.status-confirmado {
+    background-color: var(--green) !important;
+    color: var(--base) !important;
+}
+
+/* 🔴 Estilo Cancelado */
+.status-badge.status-cancelado {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.4);
 }
 
 .card-agenda h4 { 
@@ -364,13 +365,88 @@ html.light-theme .btn-file-custom:hover {
     gap: 10px; 
 }
 
+/* ==========================================================================
+   5.1 MURAL DE RECADOS (Comportamentos e Layout Avançado)
+   ========================================================================== */
+
 .item-postado { 
     background: var(--queimado); 
-    padding: 15px; 
-    border-radius: 8px; 
-    border-left: 5px solid var(--green); 
+    padding: 20px; 
+    border-radius: 12px; 
+    border-left: 5px solid var(--caramelo); 
     color: var(--base);
     transition: background-color 0.3s ease, color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Cabeçalho do Autor no Recado */
+.recado-autor-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 10px;
+}
+
+html.light-theme .recado-autor-header {
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+.recado-autor-foto {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--caramelo);
+}
+
+.recado-autor-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.recado-autor-nome {
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: var(--caramelo);
+}
+
+.recado-texto {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--base);
+}
+
+/* Suporte para múltiplas imagens em Galeria/Grid */
+.midia-galeria {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    width: 70%;
+}
+
+.midia-galeria .midia-container {
+    flex: 1 1 calc(50% - 16px); 
+    min-width: 250px; 
+    max-width: calc(50% - 8px); 
+    margin-top: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Contêiner e Preview de Mídia */
+
+.midia-preview {
+    width: 100%;
+    height: 250px;
+    object-fit: cover; 
+    display: block;
 }
 
 .item-postado-video {
@@ -384,6 +460,8 @@ html.light-theme .btn-file-custom:hover {
     color: var(--base);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: background-color 0.3s ease, color 0.3s ease;
+
+
 }
 
 .texto-secundario {
@@ -514,7 +592,7 @@ html.light-theme .btn-file-custom:hover {
 }
 
 /* ==========================================================================
-   7. COMPONENTES DE INTERFACE FIXED (HAMBÚRGUER / TEMA)
+   7. COMPONENTES DE INTERFACE 
    ========================================================================== */
 
 .menu-hamburger {
@@ -556,129 +634,9 @@ html.light-theme .btn-file-custom:hover {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-.wrapper-switch-fixo {
-    position: fixed;
-    top: 20px;
-    right: 50px;
-    z-index: 1001; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.theme-switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 30px;
-    user-select: none;
-}
-
-.theme-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.theme-switch .slider {
-    position: absolute;
-    cursor: pointer;
-    inset: 0;
-    background-color: var(--graf); 
-    border: 1.7px solid var(--queimado);
-    border-radius: 34px;
-    transition: 0.4s ease;
-}
-
-.theme-switch .slider::before {
-    position: absolute;
-    content: "";
-    height: 22px;
-    width: 22px;
-    left: 3.5px;
-    bottom: 2.5px;
-    background-color: var(--sand);
-    border-radius: 50%;
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: var(--sombra);
-}
-
-.theme-switch input:checked + .slider {
-    background-color: var(--caramelo);
-}
-
-.theme-switch input:checked + .slider::before {
-    transform: translateX(30px);
-    background-color: var(--light);
-}
 
 /* ==========================================================================
-   8. CHAVEAMENTO DINÂMICO DO MODO CLARO (LIGHT-THEME)
-   ========================================================================== */
-
-html.light-theme .dash-container {
-    background-color: var(--light);
-}
-
-html.light-theme .wrapper-switch-fixo {
-    background-color: var(--base);
-    border: 1px solid var(--smooth);
-}
-
-html.light-theme .dash-content {
-    color: var(--graf);
-}
-
-html.light-theme .linha-divisoria {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-html.light-theme .form-box,
-html.light-theme .card-agenda,
-html.light-theme .item-postado,
-html.light-theme .item-postado-video,
-html.light-theme .mailbox-container {
-    background-color: var(--base);
-    border-color: var(--smooth);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-
-html.light-theme .card-agenda h4 {
-    color: var(--caramelo);
-}
-
-html.light-theme .card-agenda p {
-    color: var(--graf);
-}
-
-html.light-theme .form-box input,
-html.light-theme .form-box textarea,
-html.light-theme .categorias,
-html.light-theme .lista-alunos-chat,
-html.light-theme .input-chat-box input,
-html.light-theme .msg.recebida {
-    background-color: var(--light);
-    color: var(--graf);
-    border-color: var(--smooth);
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-}
-
-html.light-theme .aluno-chat-item {
-    color: var(--graf);
-    border-bottom-color: var(--smooth);
-}
-
-html.light-theme .aluno-chat-item.active {
-    background: var(--base);
-    color: var(--caramelo);
-}
-
-html.light-theme .menu-hamburger {
-    background-color: var(--base);
-}
-
-/* ==========================================================================
-   9. ANIMAÇÕES (FADE-IN)
+   8. ANIMAÇÕES (FADE-IN)
    ========================================================================== */
 
 .fade-in { 

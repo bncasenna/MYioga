@@ -47,68 +47,12 @@ app-sidebar {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-.wrapper-switch-fixo {
-    position: fixed;
-    top: 20px;
-    right: 50px;
-    z-index: 1001; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.theme-switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 30px;
-    user-select: none;
-}
-
-.theme-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.theme-switch .slider {
-    position: absolute;
-    cursor: pointer;
-    inset: 0;
-    background-color: var(--graf); 
-    border: 1.7px solid var(--queimado);
-    border-radius: 34px;
-    transition: 0.4s ease;
-}
-
-.theme-switch .slider::before {
-    position: absolute;
-    content: "";
-    height: 22px;
-    width: 22px;
-    left: 3.5px;
-    bottom: 2.5px;
-    background-color: var(--sand);
-    border-radius: 50%;
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: var(--sombra);
-}
-
-.theme-switch input:checked + .slider {
-    background-color: var(--caramelo);
-}
-
-.theme-switch input:checked + .slider::before {
-    transform: translateX(30px);
-    background-color: var(--light);
-}
 
 /* --- CONTAINER E CONTEÚDO BASE --- */
 .dash-container {
     display: flex;
     min-height: 100vh;
     background-color: var(--smooth); 
-    font-family: sans-serif;
     transition: background-color 0.3s ease;
     overflow-x: hidden;
 }
@@ -256,7 +200,8 @@ app-sidebar {
     border-radius: 6px;
     font-size: 1rem;
     outline: none;
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-acao {
@@ -284,7 +229,8 @@ app-sidebar {
     border-radius: 12px;
     border: 1px solid var(--sand);
     overflow: hidden;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease;
 }
 
 .janela-chat {
@@ -316,7 +262,8 @@ app-sidebar {
     color: var(--sand);
     align-self: flex-start;
     border-bottom-left-radius: 2px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, 
+    color 0.3s ease;
 }
 
 .msg.enviada {
@@ -332,7 +279,8 @@ app-sidebar {
     background-color: var(--queimado);
     border-top: 1px solid var(--sand);
     gap: 10px;
-    transition: background-color 0.3s ease, border-top-color 0.3s ease;
+    transition: background-color 0.3s ease, 
+    border-top-color 0.3s ease;
 }
 
 .input-chat-box input {
@@ -363,57 +311,9 @@ app-sidebar {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
 .aviso-vazio { 
     color: var(--sand); 
     font-style: italic; 
-    margin-top: 20px; }
-
-
-/* ==========================================================================
-   🆕 INCREMENTADO: CHAVEAMENTO COMPLETO DO MODO CLARO DO ALUNO 
-   ========================================================================== */
-html.light-theme .dash-container {
-    background-color: var(--light);
-}
-
-html.light-theme .dash-content {
-    color: var(--graf);
-}
-
-html.light-theme .menu-hamburger {
-    background-color: var(--base);
-}
-
-html.light-theme .card-recado,
-html.light-theme .card-video,
-html.light-theme .form-box,
-html.light-theme .mailbox-container,
-html.light-theme .input-chat-box {
-    background-color: var(--base);
-    border-color: var(--smooth);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-
-html.light-theme .video-placeholder {
-    background-color: var(--light);
-    color: var(--caramelo);
-}
-
-html.light-theme .video-info h4,
-html.light-theme .form-box label {
-    color: var(--graf);
-}
-
-html.light-theme .video-info small,
-html.light-theme .data-postagem {
-    color: var(--smooth);
-}
-
-html.light-theme .form-box input, 
-html.light-theme .form-box select,
-html.light-theme .input-chat-box input,
-html.light-theme .msg.recebida {
-    background-color: var(--light);
-    color: var(--graf);
-    border-color: var(--smooth);
+    margin-top: 20px; 
 }

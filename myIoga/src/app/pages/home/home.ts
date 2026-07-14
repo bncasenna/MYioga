@@ -69,6 +69,10 @@ export class Home implements OnInit, OnDestroy {
   irParaSlide(index: number) {
     this.slideAtual = index;
   }
+  
+  alert(mensagem: string) {
+    window.alert(mensagem);
+  }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
