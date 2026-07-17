@@ -54,7 +54,7 @@ export class DashboardAlunoComponent implements OnInit {
   }
 
   /* ==========================================================================
-     LÓGICA DE GERENCIAMENTO DE PERFIL (MODAL COMPARTILHADO)
+     LÓGICA DE GERENCIAMENTO DE PERFIL
      ========================================================================== */
 
   abrirModalPerfil(): void {
@@ -86,9 +86,35 @@ export class DashboardAlunoComponent implements OnInit {
 
   carregarDados() {
     const dadosVideos = localStorage.getItem('@myioga:videos');
-    const dadosRecados = localStorage.getItem('@myioga:recados');
     if (dadosVideos) this.videos = JSON.parse(dadosVideos);
-    if (dadosRecados) this.recados = JSON.parse(dadosRecados);
+
+    const dadosRecados = localStorage.getItem('@myioga:recados');
+    if (dadosRecados) {
+      this.recados = JSON.parse(dadosRecados);
+    } else {
+      this.recados = [
+        {
+          texto: 'Olá, pessoal! Lembrem-se de que nosso aulão ao ar livre de alinhamento de chakras será nesta sexta-feira, no Porto da Barra ás 06:30. Tragam suas toalhas e garrafas de água! 🧘‍♀️✨',
+          data: '14/07/2026 às 05:30',
+          midiaUrl: [],
+          tipoMidia: '',
+          autor: {
+            nome: 'Indra Carvalho',
+            foto: '/img/indra.png'
+          }
+        },
+        {
+          texto: 'Registro da nossa aula de hoje!! O encontro foi incrivel, pessoal. Namastê!🧘🏾‍♀️',
+          data: '12/07/2026 às 08:15',
+          midiaUrl: ['/img/alunos1.svg', '/img/alunos2.svg'],
+          tipoMidia: 'image',
+          autor: {
+            nome: 'Bianca Senna',
+            foto: '/img/biancaSenna.jpg'
+          }
+        }
+      ];
+    }
 
     const dadosAgendamentos = localStorage.getItem('@myioga:agendamentos-aluno');
     if (dadosAgendamentos) {
@@ -118,8 +144,7 @@ export class DashboardAlunoComponent implements OnInit {
     this.aulasAgendadas.unshift(novoAgendamento);
     localStorage.setItem('@myioga:agendamentos-aluno', JSON.stringify(this.aulasAgendadas));
 
-    alert(`🧘 Perfeito! Sua aula de "${estilo}" foi agendada para o dia ${dataFormatada} às ${hora}.\n
-      O professor foi notificado.`);
+    alert(`🧘 Perfeito! Sua aula de "${estilo}" foi agendada para o dia ${dataFormatada} às ${hora}.\n\nO professor foi notificado.`);
   }
 
   sair() {

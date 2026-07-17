@@ -41,7 +41,7 @@ export class DashboardProfComponent implements OnInit {
   
   recadosPostados: any[] = [
     {
-      texto: 'Olá, pessoal! Lembrem-se de que nossa aulão ao ar livre de alinhamento de chakras será nesta sexta-feira, no Porto da Barra ás 06:30. Tragam suas toalhas e garrafas de água! 🧘‍♀️✨',
+      texto: 'Olá, pessoal! Lembrem-se de que nosso aulão ao ar livre de alinhamento de chakras será nesta sexta-feira, no Porto da Barra ás 06:30. Tragam suas toalhas e garrafas de água! 🧘‍♀️✨',
       data: '14/07/2026 às 05:30',
       midiaUrl: [],
       tipoMidia: '',

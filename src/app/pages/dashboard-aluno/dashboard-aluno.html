@@ -23,44 +23,9 @@
   <main class="dash-content">
     
     <section *ngIf="abaAtiva === 'mural'" class="fade-in">
-      <h3>Mural de Avisos</h3>
+      <h3>Mural de Recados</h3>
       <div class="lista-itens">
         
-        <div class="item-postado">
-          <div class="recado-autor-header">
-            <img src="/img/indra.png" alt="Foto de Indra" class="recado-autor-foto">
-            <div class="recado-autor-info">
-              <span class="recado-autor-nome">Indra Carvalho</span>
-              <small class="texto-secundario">🕒 14/07/2026 às 05:30</small>
-            </div>
-          </div>
-          <p class="recado-texto">
-            Olá, pessoal! Lembrem-se de que nossa aulão ao ar livre de alinhamento de chakras será nesta sexta-feira, no Porto da Barra às 06:30. Tragam suas toalhas e garrafas de água! 🧘‍♂️✨
-          </p>
-        </div>
-
-        <div class="item-postado">
-          <div class="recado-autor-header">
-            <img src="/img/biancaSenna.jpg" alt="Foto de Bianca" class="recado-autor-foto">
-            <div class="recado-autor-info">
-              <span class="recado-autor-nome">Bianca Senna</span>
-              <small class="texto-secundario">🕒 12/07/2026 às 08:15</small>
-            </div>
-          </div>
-          <p class="recado-texto">
-            Registro da nossa aula de hoje!! O encontro foi incrível, pessoal. Namastê!🧘‍♀️
-          </p>
-          
-          <div class="midia-galeria">
-            <div class="midia-container">
-              <img src="/img/alunos1.svg" alt="Aula Prática 1" class="midia-preview">
-            </div>
-            <div class="midia-container">
-              <img src="/img/alunos2.svg" alt="Aula Prática 2" class="midia-preview">
-            </div>
-          </div>
-        </div>
-
         <div class="item-postado" *ngFor="let r of recados">
           <div class="recado-autor-header">
             <img [src]="r.autor?.foto || '/img/indra.png'" alt="Foto do Autor" class="recado-autor-foto">
@@ -81,6 +46,10 @@
           <div *ngIf="r.midiaUrl && r.midiaUrl.length > 0 && r.tipoMidia === 'video'" class="midia-container">
             <video [src]="r.midiaUrl[0]" controls class="midia-preview"></video>
           </div>
+        </div>
+
+        <div *ngIf="recados.length === 0" class="mensagem-vazia">
+          Nenhum recado publicado.
         </div>
 
       </div>
@@ -157,7 +126,7 @@
     </section>
 
     <section *ngIf="abaAtiva === 'mensagens'" class="fade-in">
-      <h3>Mensagem Direta com o Professor</h3>
+      <h3>Mensagens Privadas</h3>
       <div class="mailbox-container">
         <div class="janela-chat">
           <div class="historico-chat">
