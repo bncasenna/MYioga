@@ -1,180 +1,26 @@
 /* ==========================================================================
    1. CONFIGURAÇÕES GERAIS E CONTAINER PRINCIPAL
    ========================================================================== */
-
 .dash-container {
     display: flex;
+    width: 100%;
     min-height: 100vh;
+    position: relative;
     background-color: var(--smooth); 
-    font-family: sans-serif;
     transition: background-color 0.3s ease;
-    overflow-x: hidden;
-}
-
-/* ==========================================================================
-   2. SIDEBAR E PERFIL (ESTRUTURA E NAVEGAÇÃO)
-   ========================================================================== */
-
-.dash-sidebar {
-    width: 0;
-    background-color: var(--sand); 
-    color: var(--base);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 30px 0;
-    box-shadow: var(--sombra);
-    flex-shrink: 0;
     overflow: hidden;
-    z-index: 999;
-    transition: left 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
-
-.dash-sidebar.active {
-    width: 260px;
-    padding: 30px 20px;
-    box-shadow: var(--sombra);
-}
-
-.sidebar-topo {
-    display: flex;
-    flex-direction: column;
-    width: 220px;
-}
-
-.logo-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 25px;
-    margin-top: 40px;
-}
-
-.logo-sidebar {
-    width: 60px;
-    height: auto;
-}
-
-.logo-area h2 {
-    color: var(--graf);
-    font-size: 1.6rem;
-    text-align: center;
-    margin: 0;
-}
-
-.logo-area h2 span {
-    color: var(--smooth);
-    font-size: 0.9rem;
-    display: block;
-}
-
-.profile-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 0 20px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    margin-bottom: 20px;
-}
-
-.avatar-container {
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid var(--caramelo);
-    margin-bottom: 10px;
-    background-color: var(--light);
-}
-
-.avatar-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.prof-name {
-    color: var(--graf);
-    font-size: 0.95rem;
-    font-weight: bold;
-    text-align: center;
-}
-
-.linha-divisoria {
-    width: 100%;
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    margin: 5px 0 15px 0;
-}
-
-.menu-itens {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.side-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.side-menu button {
-    background: none;
-    border: none;
-    color: var(--smooth);
-    text-align: left;
-    padding: 14px 18px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: 0.3s ease;
-}
-
-.side-menu button:hover, 
-.side-menu button.ativo {
-    background-color: var(--caramelo);
-    color: var(--base);
-    font-weight: bold;
-}
-
-.sidebar-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 220px;
-}
-
-.btn-sair {
-    width: 100%;
-    max-width: 220px;
-    padding: 14px;
-    background-color: var(--caramelo);
-    color: var(--base);
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.4s ease;
-}
-
-.btn-sair:hover {
-    background-color: var(--green);
-    transform: translateY(-2px);
-}
-
-/* ==========================================================================
-   3. ÁREA DE CONTEÚDO PRINCIPAL (DASH-CONTENT)
-   ========================================================================== */
 
 .dash-content {
     flex-grow: 1;
-    padding: 40px 40px 40px 80px; 
+    padding: 80px 40px 40px 40px; 
+    height: 100vh;
     overflow-y: auto;
     color: var(--base);
     transition: padding 0.3s ease;
+    background-color: 0.3s ease;
+    box-sizing: border-box;
+
 }
 
 .dash-content h3 {
@@ -192,16 +38,90 @@
 }
 
 /* ==========================================================================
-   4. FORMULÁRIOS, BOTÕES E SELETORES
+   2. BOTÃO HAMBÚRGUER (MENU MOBILE)
    ========================================================================== */
+.menu-hamburger {
+    display: flex; 
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 42px;
+    height: 42px;
+    background-color: var(--smooth);
+    border: 1px solid var(--caramelo);
+    border-radius: 8px;
+    z-index: 1002;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    transition: all 0.3s ease-in-out;
 
+}
+
+.menu-hamburger span {
+    width: 24px;
+    height: 3px;
+    background-color: var(--caramelo);
+    transition: 0.3s ease;
+    border-radius: 2px;
+}
+
+.menu-hamburger.aberto span:nth-child(1) { 
+    transform: translateY(8px) rotate(45deg); 
+}
+
+.menu-hamburger.aberto span:nth-child(2) { 
+    opacity: 0; 
+}
+
+.menu-hamburger.aberto span:nth-child(3) { 
+    transform: translateY(-8px) rotate(-45deg); 
+}
+
+/* ==========================================================================
+   2.1 ESTILIZAÇÃO DO MENU PROJETADO (BOTÕES)
+   ========================================================================== */
+.menu-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.menu-itens button {
+    background: transparent ;
+    border: none ;
+    color: var(--smooth);
+    text-align: left;
+    padding: 14px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    width: 100%;
+    box-shadow: none;
+}
+
+.menu-itens button:hover, 
+.menu-itens button.ativo {
+    background-color: var(--caramelo);
+    color: var(--base);
+    font-weight: bold;
+}
+/* ==========================================================================
+   3. FORMULÁRIOS, ENVIOS DE MÍDIA E BOTÕES
+   ========================================================================== */
 .form-box {
     background-color: var(--queimado);
     padding: 25px;
     border-radius: 12px;
     border: 1px solid var(--sand);
     box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease;
 }
 
 .form-box label { 
@@ -233,12 +153,8 @@
     background-color: var(--graf); 
     color: var(--base);
     outline: none;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.input-file-video {
-    margin-bottom: 18px;
-    display: block;
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease;
 }
 
 .btn-acao {
@@ -257,21 +173,20 @@
     background-color: var(--green); 
 }
 
-.upload-file-wrapper {
-    position: relative;
-    margin-bottom: 18px;
-    width: 100%;
+.upload-file-wrapper { 
+    position: relative; 
+    margin-bottom: 18px; width: 100%; 
 }
 
-.input-file-hidden {
+.input-file-hidden { 
     position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+    width: 1px; 
+    height: 1px; 
+    padding: 0; 
+    margin: -1px; 
+    overflow: hidden; 
+    clip: rect(0, 0, 0, 0); 
+    border: 0; 
 }
 
 .btn-file-custom {
@@ -291,20 +206,19 @@
     box-sizing: border-box;
 }
 
-.btn-file-custom:hover {
-    background-color: var(--queimado);
-    border-color: var(--caramelo);
-    color: var(--caramelo);
+.btn-file-custom:hover { 
+    background-color: var(--queimado); 
+    border-color: var(--caramelo); 
+    color: var(--caramelo); 
 }
 
 /* ==========================================================================
-   5. AGENDAMENTOS, LISTAS E BADGES
+   4. GESTÃO DE AGENDAMENTOS E BADGES
    ========================================================================== */
-
-.grid-cards {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+.grid-cards { 
+    display: flex; 
+    gap: 20px; 
+    flex-wrap: wrap; 
 }
 
 .card-agenda {
@@ -315,32 +229,8 @@
     width: 280px;
     position: relative;
     box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Status Badge Dinâmico Geral */
-.status-badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 0.75rem;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* 🟢 Estilo Confirmado */
-.status-badge.status-confirmado {
-    background-color: var(--green) !important;
-    color: var(--base) !important;
-}
-
-/* 🔴 Estilo Cancelado */
-.status-badge.status-cancelado {
-    background-color: #dc3545 !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 8px rgba(220, 53, 69, 0.4);
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease;
 }
 
 .card-agenda h4 { 
@@ -352,7 +242,7 @@
 .card-agenda p { 
     margin: 6px 0; 
     font-size: 0.95rem; 
-    color: var(--smooth);
+    color: var(--smooth); 
 }
 
 .sub-titulo { 
@@ -360,15 +250,36 @@
     color: var(--sand); 
 }
 
+.status-badge { 
+    position: absolute; 
+    top: 15px; 
+    right: 15px; 
+    font-size: 0.75rem; 
+    padding: 4px 10px; 
+    border-radius: 20px; 
+    font-weight: bold; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.status-badge.status-confirmado { 
+    background-color: var(--green) !important; 
+    color: var(--base) !important; 
+}
+
+.status-badge.status-cancelado { 
+    background-color: #dc3545 !important; 
+    color: #ffffff !important; 
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.4); 
+}
+
+/* ==========================================================================
+   5. MURAL DE RECADOS (VISÃO DO PROFESSOR)
+   ========================================================================== */
 .lista-itens { 
     display: flex; 
     flex-direction: column; 
     gap: 10px; 
 }
-
-/* ==========================================================================
-   5.1 MURAL DE RECADOS (Comportamentos e Layout Avançado)
-   ========================================================================== */
 
 .item-postado { 
     background: var(--queimado); 
@@ -382,72 +293,67 @@
     gap: 10px;
 }
 
-/* Cabeçalho do Autor no Recado */
-.recado-autor-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding-bottom: 10px;
+.recado-autor-header { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+    padding-bottom: 10px; 
 }
 
-html.light-theme .recado-autor-header {
-    border-bottom-color: rgba(0, 0, 0, 0.06);
+html.light-theme .recado-autor-header { 
+    border-bottom-color: rgba(0, 0, 0, 0.06); 
 }
 
-.recado-autor-foto {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--caramelo);
+.recado-autor-foto { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 2px solid var(--caramelo); 
 }
 
-.recado-autor-info {
-    display: flex;
-    flex-direction: column;
+.recado-autor-info { 
+    display: flex; 
+    flex-direction: column; 
 }
 
-.recado-autor-nome {
-    font-weight: bold;
-    font-size: 0.95rem;
-    color: var(--caramelo);
+.recado-autor-nome { 
+    font-weight: bold; 
+    font-size: 0.95rem; 
+    color: var(--caramelo); 
 }
 
-.recado-texto {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin: 0;
-    color: var(--base);
+.recado-texto { 
+    font-size: 0.95rem; 
+    line-height: 1.6; 
+    margin: 0; color: var(--base); 
 }
 
-/* Suporte para múltiplas imagens em Galeria/Grid */
-.midia-galeria {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    width: 70%;
+.midia-galeria { 
+    display: flex; 
+    gap: 12px; 
+    flex-wrap: wrap; 
+    margin-top: 10px; 
+    width: 70%; 
 }
 
-.midia-galeria .midia-container {
+.midia-galeria .midia-container { 
     flex: 1 1 calc(50% - 16px); 
     min-width: 250px; 
     max-width: calc(50% - 8px); 
-    margin-top: 0;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: transparent;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    margin-top: 0; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    background-color: transparent; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
 }
 
-/* Contêiner e Preview de Mídia */
-
-.midia-preview {
-    width: 100%;
-    height: 250px;
+.midia-preview { 
+    width: 100%; 
+    height: 250px; 
     object-fit: cover; 
-    display: block;
+    display: block; 
 }
 
 .item-postado-video {
@@ -461,48 +367,44 @@ html.light-theme .recado-autor-header {
     color: var(--base);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: background-color 0.3s ease, color 0.3s ease;
-
-
 }
 
-.texto-secundario {
-    color: var(--smooth);
-    font-size: 0.85rem;
+.texto-secundario { 
+    color: var(--smooth); 
+    font-size: 0.85rem; 
 }
 
-.badge-categoria {
+.badge-categoria { 
     padding: 4px 10px; 
     border-radius: 12px; 
     font-size: 11px; 
-    font-weight: bold;
+    font-weight: bold; 
 }
 
-.badge-iniciante {
-    background-color: #28a745 !important;
-    color: white !important;
+.badge-iniciante { 
+    background-color: #28a745 !important; 
+    color: white !important; 
+}
+.badge-intermediario { 
+    background-color: #ffc107 !important; 
+    color: #212529 !important; 
 }
 
-.badge-intermediario {
-    background-color: #ffc107 !important;
-    color: #212529 !important;
+.badge-avancado { 
+    background-color: #dc3545 !important; 
+    color: white !important; 
 }
 
-.badge-avancado {
-    background-color: #dc3545 !important;
-    color: white !important;
-}
-
-.mensagem-vazia {
+.mensagem-vazia { 
     padding: 15px; 
     text-align: center; 
-    color: var(--smooth);
-    font-style: italic;
+    color: var(--smooth); 
+    font-style: italic; 
 }
 
 /* ==========================================================================
-   6. SEÇÃO DE MENSAGENS / MAILBOX
+   6. SEÇÃO DE MENSAGENS / MAILBOX CENTRALIZADA
    ========================================================================== */
-
 .mailbox-container { 
     display: flex; 
     height: 400px; 
@@ -510,7 +412,8 @@ html.light-theme .recado-autor-header {
     border-radius: 12px; 
     border: 1px solid var(--sand); 
     overflow: hidden;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease;
 }
 
 .lista-alunos-chat { 
@@ -523,14 +426,14 @@ html.light-theme .recado-autor-header {
     padding: 15px; 
     border-bottom: 1px solid var(--sand); 
     cursor: pointer; 
-    color: var(--smooth);
+    color: var(--smooth); 
 }
 
 .aluno-chat-item.active { 
     background: var(--queimado); 
     border-left: 4px solid var(--caramelo); 
     font-weight: bold; 
-    color: var(--base);
+    color: var(--base); 
 }
 
 .janela-chat { 
@@ -553,24 +456,23 @@ html.light-theme .recado-autor-header {
     padding: 10px 16px; 
     border-radius: 12px; 
     max-width: 70%; 
-    font-size: 0.95rem;
-    line-height: 1.4;
+    font-size: 0.95rem; 
+    line-height: 1.4; 
 }
 
 .msg.recebida { 
     background: var(--smooth); 
-    color: var(--sand);
-    align-self: flex-start;
-    border-bottom-left-radius: 2px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    color: var(--sand); 
+    align-self: flex-start; 
+    border-bottom-left-radius: 2px; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
 }
-
 .msg.enviada { 
     background: var(--green); 
     color: var(--base); 
-    align-self: flex-end;
-    border-bottom-left-radius: 2px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    align-self: flex-end; 
+    border-bottom-left-radius: 2px; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 .input-chat-box { 
@@ -584,8 +486,8 @@ html.light-theme .recado-autor-header {
     padding: 12px; 
     border-radius: 8px; 
     border: 1px solid var(--sand); 
-    background-color: var(--graf);
-    color: var(--base);
+    background-color: var(--graf); 
+    color: var(--base); 
 }
 
 .input-chat-box button { 
@@ -598,55 +500,20 @@ html.light-theme .recado-autor-header {
 }
 
 /* ==========================================================================
-   7. COMPONENTES DE INTERFACE 
+   7. ANIMAÇÕES (FADE-IN)
    ========================================================================== */
 
-.menu-hamburger {
-    display: flex; 
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    width: 42px;
-    height: 42px;
-    background-color: var(--graf);
-    border: 1px solid var(--caramelo);
-    border-radius: 8px;
-    z-index: 1000;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    padding: 0;
+.wrapper-switch-fixo {
+    position: absolute !important;
+    top: 10px;
+    right: 20px;
+    z-index: 10;
+    margin: 0;
+    display: flex;
 }
-
-.menu-hamburger span {
-    width: 24px;
-    height: 3px;
-    background-color: var(--caramelo);
-    transition: 0.3s ease;
-    border-radius: 2px;
-}
-
-.menu-hamburger.aberto span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
-
-.menu-hamburger.aberto span:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-hamburger.aberto span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-}
-
-
-/* ==========================================================================
-   8. ANIMAÇÕES (FADE-IN)
-   ========================================================================== */
 
 .fade-in { 
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.3s ease; 
 }
 
 @keyframes fadeIn { 

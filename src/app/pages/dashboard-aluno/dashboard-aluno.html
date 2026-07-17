@@ -10,11 +10,12 @@
     [class.active]="sidebarAtiva" 
     [usuario]="alunoLogado" 
     prefixo="" 
-    (aoSair)="sair()">
+    (aoSair)="sair()"
+    (aoClicarFoto)="abrirModalPerfil()">
     
     <div menu-itens class="menu-itens">
       <button [class.ativo]="abaAtiva === 'mural'" (click)="mudarAba('mural')">Mural de Recados</button>
-      <button [class.ativo]="abaAtiva === 'agendar'" (click)="mudarAba('agendar')">Minha Agenda</button>
+      <button [class.ativo]="abaAtiva === 'agenda'" (click)="mudarAba('agenda')">Minha Agenda</button>
       <button [class.ativo]="abaAtiva === 'aulas'" (click)="mudarAba('aulas')">Minhas Aulas</button>
       <button [class.ativo]="abaAtiva === 'mensagens'" (click)="mudarAba('mensagens')">Mail-Box</button>
     </div>
@@ -83,7 +84,7 @@
       </ng-template>
     </section>
 
-    <section *ngIf="abaAtiva === 'agendar'" class="fade-in">
+    <section *ngIf="abaAtiva === 'agenda'" class="fade-in">
       <h3>Agendamento</h3>
       <div class="form-box">
         <label for="data-aula">Escolha a Data:</label>

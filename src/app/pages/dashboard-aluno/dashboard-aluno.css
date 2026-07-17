@@ -1,26 +1,49 @@
-app-sidebar {
+/* ==========================================================================
+   1. CONFIGURAÇÕES GERAIS E CONTAINER PRINCIPAL
+   ========================================================================== */
+.dash-container {
     display: flex;
-    flex-shrink: 0;
-    transition: all 0.3s ease-in-out;
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+    background-color: var(--smooth); 
+    transition: background-color 0.3s ease;
+    overflow: hidden;
 }
 
-.menu-itens {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.dash-content {
+    flex-grow: 1;
+    padding: 80px 40px 40px 40px; 
+    height: 100vh;
+    overflow-y: auto;
+    color: var(--base); 
+    transition: padding 0.3s ease, 
+    background-color 0.3s ease;
+    box-sizing: border-box;
 }
 
+.dash-content h3 {
+    font-size: 2rem;
+    color: var(--caramelo);
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--queimado);
+    padding-bottom: 10px;
+}
+
+/* ==========================================================================
+   2. BOTÃO HAMBÚRGUER (MENU MOBILE)
+   ========================================================================== */
 .menu-hamburger {
     display: flex; 
-    position: fixed;
-    top: 15px;
-    left: 15px;
+    position: absolute !important;
+    top: 20px;
+    left: 20px;
     width: 42px;
     height: 42px;
-    background-color: var(--graf);
+    background-color: var(--smooth);
     border: 1px solid var(--caramelo);
     border-radius: 8px;
-    z-index: 1000;
+    z-index: 1002;
     cursor: pointer;
     flex-direction: column;
     justify-content: center;
@@ -38,50 +61,58 @@ app-sidebar {
     border-radius: 2px;
 }
 
-.menu-hamburger.aberto span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
-.menu-hamburger.aberto span:nth-child(2) {
-    opacity: 0;
-}
-.menu-hamburger.aberto span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+.menu-hamburger.aberto span:nth-child(1) { 
+    transform: translateY(8px) rotate(45deg); 
 }
 
-/* --- CONTAINER E CONTEÚDO BASE --- */
-.dash-container {
+.menu-hamburger.aberto span:nth-child(2) { 
+    opacity: 0; 
+}
+.menu-hamburger.aberto span:nth-child(3) { 
+    transform: translateY(-8px) rotate(-45deg); 
+}
+
+/* ==========================================================================
+   2.1 ESTILIZAÇÃO DO MENU PROJETADO (BOTÕES)
+   ========================================================================== */
+.menu-itens {
     display: flex;
-    min-height: 100vh;
-    background-color: var(--smooth); 
-    transition: background-color 0.3s ease;
-    overflow-x: hidden;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
 }
 
-.dash-content {
-    flex-grow: 1;
-    padding: 40px 40px 40px 80px; 
-    overflow-y: auto;
-    color: var(--base); 
-    transition: padding 0.3s ease, 
-    background-color 0.3s ease;
+.menu-itens button {
+    background-color: var(--peaches) ;
+    border: none;
+    color: var(--smooth);
+    text-align: left;
+    padding: 14px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    width: 100%;
+    box-shadow: none;
 }
 
-.dash-content h3 {
-    font-size: 2rem;
-    color: var(--caramelo);
-    margin-bottom: 30px;
-    border-bottom: 2px solid var(--queimado);
-    padding-bottom: 10px;
+.menu-itens button:hover, 
+.menu-itens button.ativo {
+    background-color: var(--queimado);
+    color: var(--base);
+    font-weight: bold;
 }
-
-/* --- MURAL DE RECADOS --- */
+/* ==========================================================================
+   3. MURAL DE RECADOS
+   ========================================================================== */
 .item-postado { 
     background: var(--queimado); 
     padding: 20px; 
     border-radius: 12px; 
     border-left: 5px solid var(--caramelo); 
     color: var(--base);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, 
+    color 0.3s ease;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -104,30 +135,30 @@ app-sidebar {
     border: 2px solid var(--caramelo);
 }
 
-.recado-autor-info {
-    display: flex;
-    flex-direction: column;
+.recado-autor-info { 
+    display: flex; 
+    flex-direction: column; 
 }
 
-.recado-autor-nome {
-    font-weight: bold;
-    font-size: 0.95rem;
-    color: var(--caramelo);
+.recado-autor-nome { 
+    font-weight: bold; 
+    font-size: 0.95rem; 
+    color: var(--caramelo); 
 }
 
-.recado-texto {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin: 0;
-    color: var(--base);
+.recado-texto { 
+    font-size: 0.95rem; 
+    line-height: 1.6; 
+    margin: 0; 
+    color: var(--base); 
 }
 
-.texto-secundario {
-    color: var(--smooth);
-    font-size: 0.85rem;
+.texto-secundario { 
+    color: var(--smooth); 
+    font-size: 0.85rem; 
 }
 
-/* Galeria de Imagens */
+/* Galeria de Imagens do Mural */
 .midia-galeria {
     display: flex;
     gap: 16px;
@@ -155,14 +186,16 @@ app-sidebar {
     background-color: rgba(0,0,0,0.15);
 }
 
-.midia-preview {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
+.midia-preview { 
+    width: 100%; 
+    height: 250px; 
+    object-fit: cover; 
+    display: block; 
 }
 
-/* --- GRID DE VÍDEOS --- */
+/* ==========================================================================
+   4. GRID DE VÍDEOS (AULAS PRÁTICAS)
+   ========================================================================== */
 .grid-videos {
     display: grid;
     grid-template-columns: repeat(auto-fill, 
@@ -192,42 +225,41 @@ app-sidebar {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.video-info {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.video-info { 
+    padding: 15px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
 }
 
-.video-info h4 {
-    margin: 4px 0 0 0;
-    color: var(--base);
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
+.video-info h4 { 
+    margin: 4px 0 0 0; 
+    color: var(--base); 
+    font-size: 1.1rem; 
+    transition: color 0.3s ease; 
 }
 
-/* 🏷️ Badges de Categorias de Vídeo */
-.badge-categoria {
-    align-self: flex-start;
+.badge-categoria { 
+    align-self: flex-start; 
     padding: 4px 10px; 
     border-radius: 12px; 
     font-size: 11px; 
-    font-weight: bold;
+    font-weight: bold; 
 }
 
-.badge-iniciante {
-    background-color: #28a745 !important;
-    color: white !important;
+.badge-iniciante { 
+    background-color: #28a745 !important; 
+    color: white !important; 
 }
 
-.badge-intermediario {
-    background-color: #ffc107 !important;
-    color: #212529 !important;
+.badge-intermediario { 
+    background-color: #ffc107 !important; 
+    color: #212529 !important; 
 }
 
-.badge-avancado {
-    background-color: #dc3545 !important;
-    color: white !important;
+.badge-avancado { 
+    background-color: #dc3545 !important; 
+    color: white !important; 
 }
 
 .btn-assistir {
@@ -241,12 +273,13 @@ app-sidebar {
     transition: background-color 0.3s ease;
     margin-top: 5px;
 }
-
-.btn-assistir:hover {
-    background-color: var(--green);
+.btn-assistir:hover { 
+    background-color: var(--green); 
 }
 
-/* --- FORMULÁRIO E CARDS DE AGENDAMENTO --- */
+/* ==========================================================================
+   5. FORMULÁRIO E CARDS DE AGENDAMENTO
+   ========================================================================== */
 .form-box {
     background-color: var(--queimado);
     padding: 25px;
@@ -261,11 +294,11 @@ app-sidebar {
     border-color 0.3s ease;
 }
 
-.form-box label {
-    font-weight: bold;
-    color: var(--sand);
-    font-size: 0.9rem;
-    transition: color 0.3s ease;
+.form-box label { 
+    font-weight: bold; 
+    color: var(--sand); 
+    font-size: 0.9rem; 
+    transition: color 0.3s ease; 
 }
 
 .form-box input, .form-box select {
@@ -285,13 +318,12 @@ app-sidebar {
     color: var(--sand); 
 }
 
-.grid-cards {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 20px;
+.grid-cards { 
+    display: flex; 
+    gap: 20px; 
+    flex-wrap: wrap; 
+    margin-top: 20px; 
 }
-
 .card-agenda {
     background-color: var(--caramelo); 
     border: 1px solid var(--queimado);
@@ -300,7 +332,8 @@ app-sidebar {
     width: 280px;
     position: relative;
     box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease;
 }
 
 .card-agenda h4 { 
@@ -312,29 +345,28 @@ app-sidebar {
 .card-agenda p { 
     margin: 6px 0; 
     font-size: 0.95rem; 
-    color: var(--smooth);
+    color: var(--smooth); 
 }
 
-/* Status Badges dos Cards */
-.status-badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 0.75rem;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-weight: bold;
+.status-badge { 
+    position: absolute; 
+    top: 15px; 
+    right: 15px; 
+    font-size: 0.75rem; 
+    padding: 4px 10px; 
+    border-radius: 20px; 
+    font-weight: bold; 
 }
 
-.status-badge.status-confirmado {
-    background-color: var(--green) !important;
-    color: var(--base) !important;
+.status-badge.status-confirmado { 
+    background-color: var(--green) !important; 
+    color: var(--base) !important; 
 }
 
-.status-badge.status-cancelado {
-    background-color: #dc3545 !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 8px rgba(220, 53, 69, 0.4);
+.status-badge.status-cancelado { 
+    background-color: #dc3545 !important; 
+    color: #ffffff !important; 
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.4); 
 }
 
 .btn-acao {
@@ -349,12 +381,13 @@ app-sidebar {
     margin-top: 10px;
     transition: background-color 0.3s ease;
 }
-
-.btn-acao:hover {
-    background-color: var(--green);
+.btn-acao:hover { 
+    background-color: var(--green); 
 }
 
-/* --- MAILBOX / CHAT DIRETO --- */
+/* ==========================================================================
+   6. MAILBOX (CHAT PRIVADO)
+   ========================================================================== */
 .mailbox-container {
     display: flex;
     height: 400px;
@@ -362,89 +395,107 @@ app-sidebar {
     border-radius: 12px;
     border: 1px solid var(--sand);
     overflow: hidden;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease;
 }
 
-.janela-chat {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.1);
+.janela-chat { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    background-color: rgba(0, 0, 0, 0.1); 
 }
 
-.historico-chat {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.historico-chat { flex: 1; 
+    padding: 20px; 
+    overflow-y: auto; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
 }
 
-.msg {
-    max-width: 70%;
-    padding: 12px 16px;
-    border-radius: 12px;
+.msg { 
+    max-width: 70%; 
+    padding: 12px 16px; 
+    border-radius: 12px; 
     font-size: 0.95rem;
-    line-height: 1.4;
+    line-height: 1.4; 
 }
 
-.msg.recebida {
-    background-color: var(--smooth);
-    color: var(--sand);
-    align-self: flex-start;
-    border-bottom-left-radius: 2px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+.msg.recebida { 
+    background-color: var(--smooth); 
+    color: var(--sand); 
+    align-self: flex-start; 
+    border-bottom-left-radius: 2px; 
+    transition: background-color 0.3s ease, 
+    color 0.3s ease; 
 }
 
-.msg.enviada {
-    background-color: var(--green);
+.msg.enviada { 
+    background-color: var(--green); 
+    color: var(--base); 
+    align-self: flex-end; 
+    border-bottom-left-radius: 2px; 
+    transition: background-color 0.3s ease, 
+    color 0.3s ease; 
+}
+
+.input-chat-box { 
+    display: flex; 
+    padding: 15px; 
+    background-color: var(--queimado); 
+    border-top: 1px solid var(--sand); 
+    gap: 10px; 
+    transition: background-color 0.3s ease, 
+    border-top-color 0.3s ease; 
+}
+
+.input-chat-box input { 
+    flex: 1; 
+    background-color: var(--graf); 
+    border: 1px solid var(--sand); 
+    color: var(--base); 
+    padding: 12px; 
+    border-radius: 6px; 
+    outline: none; 
+    transition: background-color 0.3s ease, 
+    border-color 0.3s ease, color 0.3s ease; 
+}
+
+.input-chat-box button { 
+    background-color: var(--green); 
     color: var(--base);
-    align-self: flex-end;
-    border-bottom-left-radius: 2px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    border: none; 
+    padding: 0 20px; 
+    border-radius: 6px; 
+    font-weight: bold; 
+    cursor: pointer; 
 }
 
-.input-chat-box {
+/* ==========================================================================
+   7. ANIMAÇÕES, SWITCH DE TEMA E UTILS
+   ========================================================================== */
+
+.wrapper-switch-fixo {
+    position: absolute !important;
+    top: 10px;
+    right: 20px;
+    z-index: 10;
+    margin: 0;
     display: flex;
-    padding: 15px;
-    background-color: var(--queimado);
-    border-top: 1px solid var(--sand);
-    gap: 10px;
-    transition: background-color 0.3s ease, border-top-color 0.3s ease;
 }
 
-.input-chat-box input {
-    flex: 1;
-    background-color: var(--graf);
-    border: 1px solid var(--sand);
-    color: var(--base);
-    padding: 12px;
-    border-radius: 6px;
-    outline: none;
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+.fade-in { 
+    animation: fadeIn 0.3s ease; 
 }
 
-.input-chat-box button {
-    background-color: var(--green);
-    color: var(--base);
-    border: none;
-    padding: 0 20px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* --- ANIMAÇÃO E AVISOS --- */
-.fade-in { animation: fadeIn 0.3s ease; }
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.mensagem-vazia {
+.mensagem-vazia { 
     padding: 15px; 
     text-align: center; 
-    color: var(--base);
-    font-style: italic;
-}
+    color: var(--base); 
+    font-style: italic; }

@@ -1,5 +1,12 @@
+/* ==========================================================================
+   1. ESTRUTURA DO HOST (CONTAINER DA SIDEBAR)
+   ========================================================================== */
 :host {
     width: 0; 
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
     padding: 30px 0; 
     background-color: var(--caramelo); 
     color: var(--base);
@@ -8,29 +15,23 @@
     justify-content: space-between;
     box-shadow: none;
     flex-shrink: 0;
-    overflow: hidden; 
+    overflow-y: auto;
+    overflow-x: hidden; 
     z-index: 999;
-    transition: width 0.3s ease-in-out, padding 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out, 
+    padding 0.3s ease-in-out;
+    box-sizing: border-box;
 }
 
-:host(.active) {
+:host(.active), :host-context(.active) {
     width: 260px;
     padding: 30px 20px;
     box-shadow: var(--sombra);
 }
 
-.linha-divisoria {
-    width: 100%;
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    margin: 5px 0 15px 0;
-}
-
-html.light-theme .linha-divisoria {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* --- SIDEBAR --- */
+/* ==========================================================================
+   2. TOPO DA SIDEBAR E LOGO
+   ========================================================================== */
 .sidebar-topo {
     display: flex;
     flex-direction: column;
@@ -58,7 +59,9 @@ html.light-theme .linha-divisoria {
     margin: 0;
 }
 
-/* --- ÁREA DO PERFIL --- */
+/* ==========================================================================
+   3. ÁREA DE PERFIL (AVATAR)
+   ========================================================================== */
 .profile-area {
     display: flex;
     flex-direction: column;
@@ -73,10 +76,10 @@ html.light-theme .linha-divisoria {
     height: 75px;
     border-radius: 50%;
     overflow: hidden;
-    border: 5px solid var(--graf);
+    border: 5px solid var(--smooth);
     margin-bottom: 10px;
     background-color: var(--light);
-    
+
 }
 
 .avatar-container img {
@@ -92,34 +95,7 @@ html.light-theme .linha-divisoria {
     text-align: center;
 }
 
-/* --- MENU DE BOTÕES --- */
-.side-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    
-}
-
-.side-menu ::ng-deep button {
-    background: var(--peaches);
-    border: none;
-    color: var(--smooth);
-    text-align: left;
-    padding: 14px 18px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: 0.3s ease;
-    width: 100%;
-}
-
-.side-menu ::ng-deep button:hover, 
-.side-menu ::ng-deep button.ativo {
-    background-color: var(--queimado);
-    color: var(--base);
-    font-weight: bold;
-}
-/* --- MOLDAL PERFIL --- */
+/* Interação com o Perfil */
 .avatar-container.clickable {
     position: relative;
     cursor: pointer;
@@ -148,7 +124,21 @@ html.light-theme .linha-divisoria {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-/* --- RODAPÉ --- */
+
+/* ==========================================================================
+   ELEMENTOS E RODAPÉ
+   ========================================================================== */
+.linha-divisoria {
+    width: 100%;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 5px 0 15px 0;
+}
+
+html.light-theme .linha-divisoria {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .sidebar-footer {
     display: flex;
     flex-direction: column;
@@ -161,7 +151,7 @@ html.light-theme .linha-divisoria {
     max-width: 220px;
     padding: 14px;
     background-color: var(--graf);
-    color: var(--base);
+    color: var(--caramelo);
     border: none;
     border-radius: 8px;
     font-weight: bold;
@@ -172,6 +162,7 @@ html.light-theme .linha-divisoria {
 }
 
 .btn-sair:hover {
-    background-color: var(--green);
+    background-color: #dc3545;
+    color: white;
     transform: translateY(-2px);
 }

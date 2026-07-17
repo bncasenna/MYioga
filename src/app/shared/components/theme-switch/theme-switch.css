@@ -1,5 +1,5 @@
 .wrapper-switch-fixo {
-    position: absolute;
+    position: absolute !important;
     top: 35px;
     right: 40px;
     z-index: 1001;

@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 html, :root {
-     --base: #000000;
+    --base: #000000;
+    --rebase: #fffff1; 
     --smooth: #24292e;
     --graf: #333333;
     --caramelo: #a96c2ff8;
@@ -23,6 +24,7 @@ html.light-theme {
     --caramelo: #CD853F;
     --sand: #a96c2f;
     --graf: #333333;
+    --rebase: #000001; 
     --green: #2d6a4f;
 }
 
