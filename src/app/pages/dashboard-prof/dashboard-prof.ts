@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+
 import { SidebarSharedComponent } from '../../shared/components/sidebar/sidebar';
 import { Theme } from '../../shared/service/theme';
-import { ThemeSwitch } from "../../shared/components/theme-switch/theme-switch";
+import { ThemeSwitch } from '../../shared/components/theme-switch/theme-switch';
 import { PerfilComponent } from '../../shared/components/perfil/perfil';
 
 @Component({
@@ -18,6 +19,7 @@ import { PerfilComponent } from '../../shared/components/perfil/perfil';
   templateUrl: './dashboard-prof.html',
   styleUrl: './dashboard-prof.css'
 })
+
 export class DashboardProfComponent implements OnInit {
   abaAtiva: string = 'agenda';
   sidebarAtiva: boolean = false; 
@@ -127,7 +129,6 @@ export class DashboardProfComponent implements OnInit {
       return alert('Digite alguma mensagem ou anexe um arquivo antes de postar!');
     }
 
-    //  Correção feita aqui: Declarando a variável 'midias' corretamente como array de strings
     let midias: string[] = [];
     let tipoMidia = '';
 

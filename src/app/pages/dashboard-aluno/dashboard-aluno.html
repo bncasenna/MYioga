@@ -115,7 +115,7 @@
     </section>
 
     <section *ngIf="abaAtiva === 'agendar'" class="fade-in">
-      <h3>Agendar Nova Aula Individual</h3>
+      <h3>Agendamento</h3>
       <div class="form-box">
         <label for="data-aula">Escolha a Data:</label>
         <input type="date" id="data-aula" #dataAula>
@@ -132,7 +132,7 @@
         <input type="text" id="estilo-yoga" #estiloYoga placeholder="Ex: Hatha, Vinyasa, Yin Yoga">
         
         <button class="btn-acao" (click)="solicitarAgendamento(dataAula.value, horaAula.value, estiloYoga.value)">
-          Confirmar Agendamento com o Professor
+          Confirmar Agendamento
         </button>
       </div>
 

@@ -118,7 +118,8 @@ export class DashboardAlunoComponent implements OnInit {
     this.aulasAgendadas.unshift(novoAgendamento);
     localStorage.setItem('@myioga:agendamentos-aluno', JSON.stringify(this.aulasAgendadas));
 
-    alert(`🧘 Perfeito! Sua aula de "${estilo}" foi agendada para o dia ${dataFormatada} às ${hora}.\nO professor foi notificado.`);
+    alert(`🧘 Perfeito! Sua aula de "${estilo}" foi agendada para o dia ${dataFormatada} às ${hora}.\n
+      O professor foi notificado.`);
   }
 
   sair() {

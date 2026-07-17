@@ -102,3 +102,27 @@ h1, h2, h3, h4, h5, h6 {
 .notificacao-toast .swal2-success-line-long {
     background-color: var(--green) !important;
 }
+
+/* ==========================================================================
+     CALENDARIO
+   ========================================================================== */
+
+input[type="date"] {
+  color-scheme: dark; 
+  background-color: var(--graf); 
+  color: var(--caramelo); 
+  border: 1px solid var(--sand);
+  padding: 12px;
+  border-radius: 6px;
+  outline: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23e0a96d" viewBox="0 0 16 16"><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/></svg>');
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  transform: scale(1.1);
+}
