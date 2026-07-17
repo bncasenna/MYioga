@@ -18,11 +18,13 @@
     color: var(--peaches);
     font-size: 2.2rem;
     margin-bottom: 15px;
+
 }
 
 .conteudo-contato p {
     color: var(--sand);
     margin-bottom: 40px;
+    text-shadow: 2px 2px 5px var(--caramelo);
 }
 
 .info-contato {
@@ -33,8 +35,8 @@
 }
 
 .cartao-contato {
-    background-color: var(--peaches);
-    border: 1px solid var(--smooth);
+    background-color: #d09254;
+    border: 1px solid #dfc3a8;;
     padding: 25px 40px;
     border-radius: 8px;
     min-width: 260px;
@@ -44,19 +46,23 @@
 
 .cartao-contato:hover {
     transform: translateY(-5px);
+    color: var(--base);
+    margin-bottom: 2px;
 }
 
 .cartao-contato span {
     font-weight: bold;
-    color: var(--sand);
+    color: var(--caramelo);
     display: block;
     margin-bottom: 8px;
     font-size: 1.1rem;
-    text-shadow: 1px 1px 1px var(--smooth);
+    text-shadow: 1px 1px 2px #dfc3a8;;
 }
 
 .cartao-contato p {
     margin: 0;
     font-size: 1rem;
     color: var(--graf);
+    text-shadow: 2px 2px 5px var(--graf);
 }
+

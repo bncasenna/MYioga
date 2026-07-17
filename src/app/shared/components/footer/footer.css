@@ -13,7 +13,7 @@
     color: var(--base);
     text-decoration: none;
     transition: color 0.3s ease;
-    text-shadow: 0.6px 0.4px 0.5px var(--smooth);
+    text-shadow: 2px 2px 5px var(--caramelo);
 }
 
 .assinatura {
