@@ -23,7 +23,10 @@
             <input type="date" id="data-nascimento" formControlName="dataNascimento">
 
             <label for="senha">Senha:</label>
-            <input type="password" id="senha" formControlName="senha" placeholder="Sua senha">
+            <div class="input-senha-container">
+                <input [type]="esconderSenha ? 'password' : 'text'" id="senha" formControlName="senha" placeholder="Sua senha">
+                <button type="button" class="btn-olho" [class.visivel]="!esconderSenha" (click)="esconderSenha = !esconderSenha"></button>
+            </div>
 
             <div class="radio-group">
                 <label class="radio-label">

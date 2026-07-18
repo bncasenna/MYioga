@@ -20,12 +20,10 @@
             </div>
 
             <label for="senha">Senha</label>
-            <input 
-                type="password" 
-                id="senha" 
-                formControlName="senha" 
-                placeholder="Digite sua senha" 
-                required>
+            <div class="input-senha-container">
+                <input [type]="esconderSenha ? 'password' : 'text'" id="senha" formControlName="senha" placeholder="Digite sua senha" required>
+                <button type="button" class="btn-olho" [class.visivel]="!esconderSenha" (click)="esconderSenha = !esconderSenha"></button>
+            </div>
             
             <div *ngIf="loginForm.get('senha')?.touched && loginForm.get('senha')?.invalid" class="erro-validacao">
                 <small *ngIf="loginForm.get('senha')?.errors?.['required']">A senha é obrigatória.</small>

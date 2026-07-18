@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+
 import { Login } from '../login/login';
 import { Cadastro } from "../cadastro/cadastro";
 import { ThemeSwitch } from '../theme-switch/theme-switch'; 
@@ -15,10 +16,14 @@ import { ThemeSwitch } from '../theme-switch/theme-switch';
 export class Header {
   mostrarLogin = false;
   mostrarCadastro = false;
+  menuAberto = false; 
 
-  constructor() {}
+  toggleMenu() {
+    this.menuAberto = !this.menuAberto;
+  }
 
   abrirModalLogin() {
+    this.menuAberto = false;
     this.mostrarCadastro = false;
     this.mostrarLogin = true;
   }

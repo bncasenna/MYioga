@@ -15,6 +15,8 @@ export class Login {
   @Output() fecharModal = new EventEmitter<void>();
   @Output() alternarParaCadastro = new EventEmitter<void>();
 
+  esconderSenha: boolean = true;
+
   loginForm = new FormGroup({
     email: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
     senha: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.minLength(6)] })

@@ -15,6 +15,7 @@ export class Cadastro implements OnInit {
   @Output() alternarParaLogin = new EventEmitter<void>();
 
   exibirModalLGPD = false;
+  esconderSenha: boolean = true;
 
   private authService = inject(AuthService);
 

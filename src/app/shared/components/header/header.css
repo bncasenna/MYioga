@@ -157,3 +157,93 @@
 .theme-switch input:not(:checked) + .slider .icon-moon {
     opacity: 0.2;
 }
+
+/* ... Mantenha as suas regras originais de desktop idênticas aqui em cima ... */
+
+/* ==========================================================================
+   RESPONSIVIDADE DA HEADER (CORRIGIDA)
+   ========================================================================== */
+
+.btn-menu-toggle {
+    display: none; 
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 20px;
+        position: relative;
+    }
+
+    .navMid {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--smooth);
+        border-bottom: 4px double var(--caramelo);
+        flex-direction: column;
+        gap: 20px;
+        padding: 0;
+        max-height: 0; 
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        z-index: 1000;
+    }
+
+    .navMid.aberto {
+        max-height: 250px;
+        padding: 20px 0;
+    }
+
+    .navMid .divisor {
+        display: none !important;
+    }
+
+    .navMid a {
+        font-size: 1.1rem;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn-menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 26px;
+        height: 18px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        order: 0; 
+    }
+
+    .btn-menu-toggle span {
+        width: 100%;
+        height: 2.5px;
+        background-color: var(--caramelo);
+        border-radius: 2px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .navbar.menu-ativo .btn-menu-toggle span:nth-child(1) {
+        transform: translateY(7.5px) rotate(45deg);
+    }
+    .navbar.menu-ativo .btn-menu-toggle span:nth-child(2) {
+        opacity: 0;
+    }
+    .navbar.menu-ativo .btn-menu-toggle span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .navLeft {
+        flex: 1;
+        justify-content: flex-start;
+    }
+
+    .navRight {
+        flex: 1;
+        justify-content: flex-end;
+    }
+}
