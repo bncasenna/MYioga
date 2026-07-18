@@ -39,7 +39,9 @@
             <div class="lgpd-group">
                 <input type="checkbox" id="lgpd-check" formControlName="aceitaLGPD">
                 <label for="lgpd-check">
-                    Estou ciente e concordo com o processamento dos meus dados para fins de cadastro na plataforma MYIOGA, em conformidade com a <strong>LGPD</strong>.
+                    Estou ciente e concordo com o processamento dos meus dados para fins 
+                    de cadastro na plataforma MYIOGA, em conformidade com a 
+                    <a href="#" (click)="abrirLGPD($event)"><strong>LGPD</strong></a>.
                 </label>
             </div>
 
@@ -48,4 +50,7 @@
 
         <h1>Já tem uma conta? <a (click)="irParaLogin()">Faça Login</a>.</h1>
     </div>
+
+    <app-lgpd *ngIf="exibirModalLGPD" (fecharModal)="fecharLGPD()"></app-lgpd>
+    
 </div>

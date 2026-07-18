@@ -22,7 +22,6 @@ export class Login {
 
   constructor(private router: Router, private auth: AuthService) {}
 
-  // Permite que o template HTML chame alert('mensagem') sem quebrar a compilação
   alert(mensagem: string): void {
     window.alert(mensagem);
   }
@@ -43,9 +42,14 @@ export class Login {
       }; 
 
       this.auth.login(formData).subscribe({
-        next: (response) => {
-          this.fechar(); // Fecha o modal se o login for bem-sucedido
-          this.router.navigate(["/dashboard-prof"]);
+        next: (usuarioLogado) => {
+          this.fechar(); 
+          
+          if (usuarioLogado && usuarioLogado.tipo === 'professor') {
+            this.router.navigate(["/dashboard-prof"]);
+          } else {
+            this.router.navigate(["/dashboard-aluno"]);
+          }
         },
         error: (err) => {
           this.alert('Email ou senha inválidos!');

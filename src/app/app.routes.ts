@@ -3,6 +3,7 @@ import { Home } from './pages/home/home';
 import { DashboardAlunoComponent } from './pages/dashboard-aluno/dashboard-aluno';
 import { DashboardProfComponent } from './pages/dashboard-prof/dashboard-prof';
 import { authGuard } from './guards/auth-guard';
+import { LGPD } from './pages/lgpd/lgpd';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -18,6 +19,11 @@ export const routes: Routes = [
     canActivate: [authGuard], 
     data: { roles: ['professor'] }, 
     component: DashboardProfComponent 
+  },
+
+  {
+    path: 'lgpd',
+    component: LGPD
   },
   
   { path: '**', redirectTo: '' }

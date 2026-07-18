@@ -1,17 +1,22 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { AuthService } from '../../service/auth-service'; 
+import { LGPD } from '../../../pages/lgpd/lgpd';
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LGPD],
   templateUrl: './cadastro.html',
   styleUrl: './cadastro.css'
 })
 export class Cadastro implements OnInit {
   @Output() fecharModal = new EventEmitter<void>();
   @Output() alternarParaLogin = new EventEmitter<void>();
+
+  exibirModalLGPD = false;
+
+  private authService = inject(AuthService);
 
   cadastroForm!: FormGroup;
 
@@ -24,7 +29,7 @@ export class Cadastro implements OnInit {
       dataNascimento: new FormControl(''),
       senha: new FormControl('', [Validators.required, Validators.minLength(6)]),
       perfil: new FormControl('', [Validators.required]),
-      aceitaLGPD: new FormControl(false, [Validators.requiredTrue]) // Garante conformidade com a LGPD
+      aceitaLGPD: new FormControl(false, [Validators.requiredTrue])
     });
   }
 
@@ -61,11 +66,36 @@ export class Cadastro implements OnInit {
 
   submeterCadastro() {
     if (this.cadastroForm.valid) {
-      console.log('Dados do cadastro enviados com sucesso:', this.cadastroForm.value);
-      alert('Cadastro realizado com sucesso!');
-      this.fechar();
+      const novosDadosUsuario = this.cadastroForm.value;
+
+      const usuariosExistentes = JSON.parse(localStorage.getItem('users-myIoga') || '[]');
+
+      const usuarioJaExiste = usuariosExistentes.some(
+        (u: any) => u.email === novosDadosUsuario.email || u.cpf === novosDadosUsuario.cpf
+      );
+
+      if (usuarioJaExiste) {
+        alert('Atenção: Este e-mail ou CPF já está cadastrado em nosso sistema!');
+        return;
+      }
+
+      this.authService.cadastrar(novosDadosUsuario);
+
+      console.log('Dados salvos via AuthService com sucesso:', novosDadosUsuario);
+      alert(`Cadastro de ${novosDadosUsuario.nome} realizado com sucesso!`);
+      
+      this.irParaLogin(); 
     } else {
       alert('Por favor, preencha todos os campos obrigatórios corretamente e aceite os termos da LGPD.');
     }
+  }
+
+  abrirLGPD(event: Event) {
+    event.preventDefault(); 
+    this.exibirModalLGPD = true; 
+  }
+
+  fecharLGPD() {
+    this.exibirModalLGPD = false;
   }
 }

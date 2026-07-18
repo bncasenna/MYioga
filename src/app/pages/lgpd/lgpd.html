@@ -1,0 +1,52 @@
+<div class="modal-overlay" (click)="fechar()">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    
+    <header class="lgpd-header">
+      <h2>Termos da LGPD — Plataforma MYIOGA</h2>
+      <button class="btn-fechar-topo" (click)="fechar()">&times;</button>
+    </header>
+
+    <main class="lgpd-content">
+      <section>
+        <h3>1. Compromisso com a sua Privacidade</h3>
+        <p>
+          A MYIOGA protege a privacidade e os dados pessoais de seus Alunos e 
+          Professores em conformidade estrita com a Lei Geral de Proteção de 
+          Dados Pessoais (Lei nº 13.709/2018).
+        </p>
+      </section>
+
+      <section>
+        <h3>2. Dados Coletados e Finalidade</h3>
+        <ul>
+          <li><strong>Nome e Sobrenome:</strong> Identificação na plataforma.</li>
+          <li><strong>CPF:</strong> Validação de identidade e segurança contra fraudes.</li>
+          <li><strong>E-mail:</strong> Autenticação de login e notificações do sistema.</li>
+          <li><strong>Perfil (Aluno/Professor):</strong> Direcionamento ao painel correto.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h3>3. Armazenamento Local seguro</h3>
+        <p>
+          Em nosso ambiente atual, seus dados de login são armazenados de forma 100% segura e 
+          privada diretamente no <em>LocalStorage</em> do seu próprio navegador na chave 
+          <code>users-myIoga</code>.
+        </p>
+      </section>
+
+      <section>
+        <h3>4. Seus Direitos</h3>
+        <p>
+          Você possui total direito de acessar, corrigir ou solicitar a exclusão definitiva 
+          dos seus dados armazenados na plataforma a qualquer momento.
+        </p>
+      </section>
+    </main>
+
+    <footer class="lgpd-footer">
+      <button class="botao-entrar" (click)="fechar()">Entendi e Fechar</button>
+    </footer>
+
+  </div>
+</div>
