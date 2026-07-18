@@ -30,6 +30,16 @@
     padding-bottom: 10px;
 }
 
+.dash-container.active .dash-content {
+    padding-left: calc(260px + 40px);
+}
+
+@media (max-width: 768px) {
+    .dash-container.active .dash-content {
+        padding-left: 40px; 
+    }
+}
+
 /* ==========================================================================
    2. BOTÃO HAMBÚRGUER (MENU MOBILE)
    ========================================================================== */

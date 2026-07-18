@@ -4,10 +4,9 @@
   <span></span>
 </button>
 
-<div class="dash-container">
+<div class="dash-container" [class.active]="sidebarAtiva">
   
   <app-sidebar 
-    [class.active]="sidebarAtiva" 
     [usuario]="alunoLogado" 
     prefixo="" 
     (aoSair)="sair()"

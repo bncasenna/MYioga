@@ -4,158 +4,118 @@
   <span></span>
 </button>
 
-<div class="dash-container">
+<div class="dash-container" [class.active]="sidebarAtiva">
   
   <app-sidebar 
-    [class.active]="sidebarAtiva" 
     [usuario]="professorLogado" 
     prefixo="Prof." 
     (aoSair)="sair()"
     (aoClicarFoto)="abrirModalPerfil()">
     
+    
     <div menu-itens class="menu-itens">
-      <button [class.ativo]="abaAtiva === 'mural'" (click)="mudarAba('recados')">Mural de Recados</button>
+      <button [class.ativo]="abaAtiva === 'mural'" (click)="mudarAba('mural')">Mural de Recados</button>
       <button [class.ativo]="abaAtiva === 'agenda'" (click)="mudarAba('agenda')">Minha Agenda</button>
-      <button [class.ativo]="abaAtiva === 'upload'" (click)="mudarAba('upload')">Upload de Aulas</button>
+      <button [class.ativo]="abaAtiva === 'videos'" (click)="mudarAba('videos')">Upload de Aulas</button>
       <button [class.ativo]="abaAtiva === 'mensagens'" (click)="mudarAba('mensagens')">Mail-Box</button>
     </div>
   </app-sidebar>
 
   <main class="dash-content">
     
-    <section *ngIf="abaAtiva === 'agenda'" class="fade-in">
-      <h3>Minha Agenda</h3>
-      <div class="grid-cards">
-        <div class="card-agenda" *ngFor="let aula of aulasAgendadas">
-          <div class="status-badge" [ngClass]="{
-            'status-confirmado': aula.status === 'confirmado' || !aula.status,
-            'status-cancelado': aula.status === 'cancelado'
-          }">
-            {{ aula.status === 'cancelado' ? 'Cancelado' : 'Confirmado' }}
+    <!-- Seção Mural -->
+    <section *ngIf="abaAtiva === 'mural'" class="fade-in">
+      <h3>Mural de Recados</h3>
+      <div class="form-box" style="max-width: 100%; margin-bottom: 25px;">
+        <label for="novo-recado">Publicar um novo comunicado aos alunos:</label>
+        <textarea id="novo-recado" #textoRecado placeholder="Digite o recado aqui..." rows="3" style="width: 100%; padding: 12px; border-radius: 6px; background: var(--smooth); color: var(--sand); border: 1px solid var(--sand); outline: none; font-family: inherit; resize: vertical;"></textarea>
+        <button class="btn-acao" (click)="publicarRecado(textoRecado.value); textoRecado.value = ''" style="align-self: flex-end;">Publicar no Mural</button>
+      </div>
+
+      <div class="lista-itens">
+        <div class="item-postado" *ngFor="let r of recados">
+          <div class="recado-autor-header">
+            <img [src]="r.autor?.foto || '/img/indra.png'" alt="Foto do Autor" class="recado-autor-foto">
+            <div class="recado-autor-info">
+              <span class="recado-autor-nome">{{ r.autor?.nome || 'Professor' }}</span>
+              <small class="texto-secundario">🕒 {{ r.data }}</small>
+            </div>
           </div>
-          <h4>{{aula.aluno}}</h4>
-          <p><strong>Data:</strong> {{aula.data}}</p>
-          <p><strong>Horário:</strong> {{aula.horario}}</p>
-          <p><strong>Estilo:</strong> {{aula.estilo}}</p>
+          <p class="recado-texto">{{ r.texto }}</p>
+          <div *ngIf="r.midiaUrl && r.midiaUrl.length > 0 && r.tipoMidia === 'image'" class="midia-galeria">
+            <div *ngFor="let img of r.midiaUrl" class="midia-container">
+              <img [src]="img" alt="Mídia do recado" class="midia-preview">
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section *ngIf="abaAtiva === 'upload'" class="fade-in">
-      <h3>Upload Video-Aula</h3>
+    <!-- Seção Agenda (Gerenciamento de solicitações) -->
+    <section *ngIf="abaAtiva === 'agenda'" class="fade-in">
+      <h3>Gerenciamento de Agenda</h3>
+      <div class="grid-cards" *ngIf="aulasAgendadas && aulasAgendadas.length > 0; else semAgendamentos">
+        <div class="card-agenda" *ngFor="let aula of aulasAgendadas; let i = index">
+          <span class="status-badge" [ngClass]="{'status-confirmado': aula.status === 'confirmado', 'status-cancelado': aula.status === 'cancelado'}">
+            {{ aula.status | titlecase }}
+          </span>
+          <h4>{{ aula.estilo }}</h4>
+          <p><strong>Aluno:</strong> Marcello Dias</p>
+          <p>🕒 {{ aula.data }} às {{ aula.horario }}</p>
+          <div style="display: flex; gap: 8px; margin-top: 15px;">
+            <button *ngIf="aula.status !== 'confirmado'" (click)="alterarStatusAula(i, 'confirmado')" style="flex: 1; background: #28a745; color: white; border: none; padding: 6px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; font-weight: bold;">Aceitar</button>
+            <button *ngIf="aula.status !== 'cancelado'" (click)="alterarStatusAula(i, 'cancelado')" style="flex: 1; background: #dc3545; color: white; border: none; padding: 6px; border-radius: 4px; cursor: pointer; font-size: 0.85rem; font-weight: bold;">Cancelar</button>
+          </div>
+        </div>
+      </div>
+      <ng-template #semAgendamentos>
+        <p class="mensagem-vazia">Nenhum agendamento pendente no sistema.</p>
+      </ng-template>
+    </section>
+
+    <!-- Seção Upload de Aulas -->
+    <section *ngIf="abaAtiva === 'videos'" class="fade-in">
+      <h3>Upload de Video-Aulas</h3>
       <div class="form-box">
-        <label>Título da Aula:</label>
-        <input type="text" #tituloVideo placeholder="Ex: Yoga para Iniciantes">
+        <label for="titulo-video">Título da Aula:</label>
+        <input type="text" id="titulo-video" #tituloVideo placeholder="Ex: Pranayamas para Ansiedade">
         
-        <label>Nível da Categoria:</label>
-        <select class="categorias" #categoriaVideo>
+        <label for="categoria-video">Nível/Categoria:</label>
+        <select id="categoria-video" #catVideo>
           <option value="Iniciante">Iniciante</option>
           <option value="Intermediário">Intermediário</option>
           <option value="Avançado">Avançado</option>
         </select>
         
-        <label>Selecione o Arquivo de Vídeo:</label>
-        <div class="upload-file-wrapper">
-          <input type="file" #arquivoVideo accept="video/*" class="input-file-hidden" id="file-upload-video">
-          <label for="file-upload-video" class="btn-file-custom">
-            <span>📁 Escolher Arquivo</span>
-          </label>
-        </div>
-        <button class="btn-acao" 
-                (click)="postarVideo(tituloVideo.value, categoriaVideo.value, arquivoVideo.files); 
-                         tituloVideo.value=''; categoriaVideo.value='Iniciante'; arquivoVideo.value=''">
-          Publicar Aula
-        </button>
+        <button class="btn-acao" (click)="publicarVideo(tituloVideo.value, catVideo.value); tituloVideo.value = ''">Liberar Aula</button>
       </div>
 
-      <h4 class="sub-titulo">Aulas Publicadas</h4>
-      <div class="lista-itens">
-        <div class="item-postado-video" *ngFor="let v of videosPostados">
+      <h4 class="sub-titulo">Aulas já publicadas</h4>
+      <div class="grid-videos">
+        <div class="card-video" *ngFor="let v of videos">
+          <div class="video-placeholder"><span>📹 Vídeo Ativo</span></div>
           <div class="video-info">
-            <span>📹 <strong>{{v.titulo}}</strong></span>
-            <br>
-            <small class="texto-secundario">Arquivo: {{v.nomeArquivo}} | Postado em: {{v.data}}</small>
+            <span class="badge-categoria" [ngClass]="{'badge-iniciante': v.categoria === 'Iniciante', 'badge-intermediario': v.categoria === 'Intermediário', 'badge-avancado': v.categoria === 'Avançado'}">
+              {{ v.categoria }}
+            </span>
+            <h4>{{ v.titulo }}</h4>
+            <small class="texto-secundario">Postado em: {{ v.data }}</small>
           </div>
-          
-          <span class="badge-categoria" [ngClass]="{
-            'badge-iniciante': v.categoria === 'Iniciante',
-            'badge-intermediario': v.categoria === 'Intermediário',
-            'badge-avancado': v.categoria === 'Avançado'
-          }">
-            {{ v.categoria || 'Iniciante' }}
-          </span>
-        </div>
-        <div *ngIf="videosPostados.length === 0" class="mensagem-vazia">
-          Nenhum vídeo publicado ainda.
         </div>
       </div>
     </section>
 
-    <section *ngIf="abaAtiva === 'recados'" class="fade-in">
-  <h3>Mural de Recados</h3>
-  <div class="form-box">
-    <label>Mensagem / Aviso Importante:</label>
-    <textarea #textoRecado placeholder="Digite o aviso para os alunos..."></textarea>
-    
-    <div class="upload-file-wrapper">
-      <input type="file" #arquivoMídia accept="video/*,image/*" class="input-file-hidden" id="file-upload-recado" (change)="onArquivoSelecionado($event)">
-      <label for="file-upload-recado" class="btn-file-custom">
-        <i class="fas fa-paperclip"></i> {{ nomeArquivoSelecionado || 'Anexar Imagem ou Vídeo' }}
-      </label>
-    </div>
-
-    <button class="btn-acao" (click)="postarRecado(textoRecado)">
-      Postar no Mural
-    </button>
-  </div>
-
-  <h4 class="sub-titulo">Recados Recentes</h4>
-  <div class="lista-itens">
-    <div class="item-postado" *ngFor="let r of recadosPostados">
-      
-      <div class="recado-autor-header">
-        <img [src]="r.autor?.foto || '/img/indra.png'" alt="Foto do Professor" class="recado-autor-foto">
-        <div class="recado-autor-info">
-          <span class="recado-autor-nome">{{ r.autor?.nome || 'Professor' }}</span>
-          <small class="texto-secundario">🕒 {{ r.data }}</small>
-        </div>
-      </div>
-
-      <p class="recado-texto">{{ r.texto }}</p>
-      
-      <div *ngIf="r.midiaUrl && r.midiaUrl.length > 0 && r.tipoMidia === 'image'" class="midia-galeria">
-        <div *ngFor="let img of r.midiaUrl" class="midia-container">
-          <img [src]="img" alt="Mídia do recado" class="midia-preview">
-        </div>
-      </div>
-
-      <div *ngIf="r.midiaUrl && r.midiaUrl.length > 0 && r.tipoMidia === 'video'" class="midia-container">
-        <video [src]="r.midiaUrl[0]" controls class="midia-preview"></video>
-      </div>
-    </div>
-    
-    <div *ngIf="recadosPostados.length === 0" class="mensagem-vazia">
-      Nenhum recado publicado.
-    </div>
-  </div>
-</section>
-
+    <!-- Seção Chat -->
     <section *ngIf="abaAtiva === 'mensagens'" class="fade-in">
-      <h3>Mensagens Privadas</h3>
+      <h3>Menssagens Privadas</h3>
       <div class="mailbox-container">
-        <div class="lista-alunos-chat">
-          <div class="aluno-chat-item active">Nicholas O.</div>
-          <div class="aluno-chat-item active">Marcello Dias</div>
-          <div class="aluno-chat-item active">Gabriel Beer</div>
-          <div class="aluno-chat-item active">Coaty</div>
-        </div>
         <div class="janela-chat">
           <div class="historico-chat">
-            <div class="msg recebida">Professor, Tenho compromisso e vou precisar desmarcar nosso encontro.</div>
-            <div class="msg enviada">Tranquilo Nicholas! Quando podemos remarcar nosso encontro? </div>
+            <div class="msg enviada">Olá! Use este espaço para tirar dúvidas sobre suas práticas de Yoga.</div>
+            <div class="msg recebida">Professor, tive dúvidas no alinhamento das posturas de ontem.</div>
           </div>
           <div class="input-chat-box">
-            <input type="text" placeholder="Escreva uma mensagem...">
+            <input type="text" placeholder="Responder para o aluno...">
             <button>Enviar</button>
           </div>
         </div>

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+
 import { SidebarSharedComponent } from '../../shared/components/sidebar/sidebar';
 import { Theme } from '../../shared/service/theme';
 import { ThemeSwitch } from "../../shared/components/theme-switch/theme-switch";
 import { PerfilComponent } from '../../shared/components/perfil/perfil';
+import { AuthService } from '../../shared/service/auth-service';
 
 @Component({
   selector: 'app-dashboard-aluno',
@@ -14,10 +16,12 @@ import { PerfilComponent } from '../../shared/components/perfil/perfil';
   styleUrl: './dashboard-aluno.css'
 })
 export class DashboardAlunoComponent implements OnInit {
+  private authService = inject(AuthService); 
+
   abaAtiva: string = 'mural'; 
   sidebarAtiva: boolean = false; 
 
-  alunoLogado = {
+  alunoLogado: any = {
     nome: 'Marcello', 
     sobrenome: 'Dias', 
     foto: '/img/marcelo.svg',
@@ -26,12 +30,7 @@ export class DashboardAlunoComponent implements OnInit {
   
   videos: any[] = [];
   recados: any[] = [];
-  
-  aulasAgendadas: any[] = [
-    { estilo: 'Vinyasa Flow', data: '14/07/2026', horario: '15:00', status: 'confirmado' },
-    { estilo: 'Meditação Guiada', data: '20/07/2026', horario: '13:00', status: 'cancelado' }
-  ];
-
+  aulasAgendadas: any[] = [];
   mostrarModalPerfil: boolean = false;
 
   constructor(private router: Router, public themeService: Theme) {}
@@ -53,10 +52,6 @@ export class DashboardAlunoComponent implements OnInit {
     this.sidebarAtiva = false; 
   }
 
-  /* ==========================================================================
-     LÓGICA DE GERENCIAMENTO DE PERFIL
-     ========================================================================== */
-
   abrirModalPerfil(): void {
     this.mostrarModalPerfil = true;
   }
@@ -66,6 +61,9 @@ export class DashboardAlunoComponent implements OnInit {
   }
 
   salvarPerfil(dadosAtualizados: any): void {
+    const usuarioSessao = this.authService.getUsuarioAtual();
+    const emailChave = usuarioSessao?.email || 'aluno@myioga.com';
+
     this.alunoLogado = {
       ...this.alunoLogado,
       nome: dadosAtualizados.nome,
@@ -74,80 +72,69 @@ export class DashboardAlunoComponent implements OnInit {
       foto: dadosAtualizados.foto
     };
 
-    localStorage.setItem('@myioga:aluno', JSON.stringify(this.alunoLogado));
-    
+    localStorage.setItem(`@myioga:aluno:${emailChave}`, JSON.stringify(this.alunoLogado));
     this.fecharModalPerfil();
-    alert('Perfil updated com sucesso!');
+    alert('Perfil atualizado com sucesso!');
   }
-
-  /* ==========================================================================
-     PERSISTÊNCIA E AUXILIARES
-     ========================================================================== */
 
   carregarDados() {
     const dadosVideos = localStorage.getItem('@myioga:videos');
     if (dadosVideos) this.videos = JSON.parse(dadosVideos);
 
     const dadosRecados = localStorage.getItem('@myioga:recados');
-    if (dadosRecados) {
-      this.recados = JSON.parse(dadosRecados);
-    } else {
-      this.recados = [
-        {
-          texto: 'Olá, pessoal! Lembrem-se de que nosso aulão ao ar livre de alinhamento de chakras será nesta sexta-feira, no Porto da Barra ás 06:30. Tragam suas toalhas e garrafas de água! 🧘‍♀️✨',
-          data: '14/07/2026 às 05:30',
-          midiaUrl: [],
-          tipoMidia: '',
-          autor: {
-            nome: 'Indra Carvalho',
-            foto: '/img/indra.png'
-          }
-        },
-        {
-          texto: 'Registro da nossa aula de hoje!! O encontro foi incrivel, pessoal. Namastê!🧘🏾‍♀️',
-          data: '12/07/2026 às 08:15',
-          midiaUrl: ['/img/alunos1.svg', '/img/alunos2.svg'],
-          tipoMidia: 'image',
-          autor: {
-            nome: 'Bianca Senna',
-            foto: '/img/biancaSenna.jpg'
-          }
-        }
-      ];
-    }
+    if (dadosRecados) this.recados = JSON.parse(dadosRecados);
 
     const dadosAgendamentos = localStorage.getItem('@myioga:agendamentos-aluno');
-    if (dadosAgendamentos) {
-      this.aulasAgendadas = JSON.parse(dadosAgendamentos);
-    }
+    if (dadosAgendamentos) this.aulasAgendadas = JSON.parse(dadosAgendamentos);
 
-    const dadosPerfil = localStorage.getItem('@myioga:aluno');
-    if (dadosPerfil) {
-      this.alunoLogado = JSON.parse(dadosPerfil);
+    // ==========================================
+    // LÓGICA DE AUTENTICAÇÃO FIEL POR E-MAIL (ALUNO)
+    // ==========================================
+    const usuarioSessao = this.authService.getUsuarioAtual();
+
+    if (usuarioSessao) {
+      const emailLogado = usuarioSessao.email;
+
+      if (emailLogado === 'aluno@myioga.com' || emailLogado === 'aluno@myioga.com') {
+        const dadosPerfilMarcello = localStorage.getItem(`@myioga:aluno:${emailLogado}`);
+        if (dadosPerfilMarcello) {
+          this.alunoLogado = JSON.parse(dadosPerfilMarcello);
+        } else {
+          this.alunoLogado = {
+            nome: 'Marcello', 
+            sobrenome: 'Dias', 
+            foto: '/img/marcelo.svg',
+            bio: '' 
+          };
+        }
+      } 
+      else {
+        const dadosPerfilOutro = localStorage.getItem(`@myioga:aluno:${emailLogado}`);
+        if (dadosPerfilOutro) {
+          this.alunoLogado = JSON.parse(dadosPerfilOutro);
+        } else {
+          this.alunoLogado = {
+            nome: (usuarioSessao as any).nome || emailLogado.split('@')[0],
+            sobrenome: (usuarioSessao as any).sobrenome || '',
+            foto: (usuarioSessao as any).foto || '/img/none.svg',
+            bio: ''
+          };
+        }
+      }
     }
   }
 
   solicitarAgendamento(data: string, hora: string, estilo: string) {
-    if (!data || !hora || !estilo.trim()) {
-      return alert('Por favor, preencha todos os campos do agendamento.');
-    }
-
+    if (!data || !hora || !estilo.trim()) return alert('Preencha todos os campos.');
     const dataFormatada = data.split('-').reverse().join('/');
-
-    const novoAgendamento = {
-      estilo: estilo,
-      data: dataFormatada,
-      horario: hora,
-      status: 'confirmado' 
-    };
-
+    const novoAgendamento = { estilo: estilo, data: dataFormatada, horario: hora, status: 'confirmado' };
     this.aulasAgendadas.unshift(novoAgendamento);
     localStorage.setItem('@myioga:agendamentos-aluno', JSON.stringify(this.aulasAgendadas));
-
-    alert(`🧘 Perfeito! Sua aula de "${estilo}" foi agendada para o dia ${dataFormatada} às ${hora}.\n\nO professor foi notificado.`);
+    alert('Aula agendada com sucesso!');
   }
 
   sair() {
+    this.authService.logout(); 
     this.router.navigate(['/']); 
   }
 }

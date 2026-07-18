@@ -4,7 +4,7 @@ import { IUsuario } from '../interfaces/iusuario';
 import { map, Observable, tap } from 'rxjs';
 
 const usuarioKey = 'auth-user';
-const usuariosCadastradosKey = 'users-myIoga'; // Alterado para a nova Key sem "_"
+const usuariosCadastradosKey = 'users-myIoga'; 
 
 export type UserRole = 'professor' | 'aluno' | 'convidado';
 
@@ -20,6 +20,11 @@ export class AuthService {
   private getUsuarioFromStorage(): IUsuario | null {
     const localData = localStorage.getItem(usuarioKey);
     return localData ? JSON.parse(localData) : null;
+  }
+
+  // NOVO MÉTODO AUXILIAR: Permite que os dashboards peguem os dados do usuário atual a qualquer momento
+  getUsuarioAtual(): IUsuario | null {
+    return this.currentUser();
   }
 
   cadastrar(novoUsuario: any): void {
@@ -55,7 +60,6 @@ export class AuthService {
         return usuarioEncontrado;
       }),
       tap((usuarioAut: IUsuario) => {
-        // Salva a sessão ativa e atualiza o estado reativo do Signal
         localStorage.setItem(usuarioKey, JSON.stringify(usuarioAut));
         this.currentUser.set(usuarioAut);
       })

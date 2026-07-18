@@ -14,9 +14,12 @@ export class SidebarSharedComponent {
   @Input() prefixo: string = ''; 
   
   @Output() aoSair = new EventEmitter<void>();
-  @Output() aoClicarFoto = new EventEmitter<void>(); // ⚙️ NOVO: Emissor do clique na foto
+  @Output() aoClicarFoto = new EventEmitter<void>(); 
 
-  avatarPadrao() {
-    if (this.usuario) this.usuario.foto = 'img/none.svg';
+  avatarPadrao(event: Event) {
+    const elementoHtml = event.target as HTMLImageElement;
+    if (elementoHtml) {
+      elementoHtml.src = 'img/none.svg';
+    }
   }
 }

@@ -8,12 +8,12 @@
 
   <div class="profile-area">
     <div class="avatar-container clickable" (click)="aoClicarFoto.emit()">
-      <img [src]="usuario?.foto" alt="Foto de Perfil" (error)="avatarPadrao()">
+      <img [src]="usuario?.foto" alt="Foto de Perfil" (error)="avatarPadrao($event)">
       <div class="avatar-overlay">
         <span>Editar</span>
       </div>
     </div>
-    <span class="name">{{ prefixo }} {{ usuario?.nome }}</span>
+    <span class="name">{{ prefixo }} {{ usuario?.nome }} {{ usuario?.sobrenome || '' }}</span>
   </div>
 
   <nav class="side-menu">
